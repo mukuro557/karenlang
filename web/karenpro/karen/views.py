@@ -52,6 +52,8 @@ def mainpage(request):
         uploaded_file_url = fs.url(filename)
 
         if word.objects.filter(Word_th = word_th).exists() :
+            word.objects.filter(Word_th = word_th).update(Word_th = word_th,Sound = filename)
+            data = word.objects.all()
             return render(request, 'mainpage.html', {
             'uploaded_file_url': 'มีคำนี้แล้ว','allword': data
         })
