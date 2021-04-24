@@ -1,0 +1,179 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+{% load static %}
+<link href="{% static 'addanswersty.css'%}" rel="stylesheet">
+
+
+
+<!-- <script>
+    $(document).ready(function () {
+        var dataSet = [
+            {
+                "question": "เริ่มปวดเมื่อไหร่",
+                "choice": "วัน / สัปดาห์ / เดือน / ปี",
+            },
+            {
+                "question": "หลังปวดรักษาอย่างไร",
+                "choice": "กินยา / นวด ",
+            },
+            {
+                "question": "หลังตื่นแล้วมีอาการไหม",
+                "choice": "ตอนลุก / ตอนตื่น ",
+            },
+            {
+                "question": "เคยเกิดอุบัติเหตุเมื่อไห่",
+                "choice": "เดือน / ปี",
+            },
+
+
+
+        ];
+
+
+        var table = $("#myTable").DataTable({
+            data: dataSet,
+            columns: [
+                { data: "question", title: "คำถาม" },
+                { title: "เสียง", defaultContent: "<button class='btn1' style='background-color: grey;width: 40px;'><i class='fa fa-play'></i></button>", orderable: false },
+                { data: "choice", title: "ตัวเลือกตอบ" },
+                { title: "การกระทำ", defaultContent: "<a> <button id='btnEdit' class='btn ' style = 'background-color: #A8DADC;color:white' data-toggle='modal' data-target='#exampleModal'>แก้ไข</button> </a> <a> <button id='btnEdit' class='btn ' style = 'background-color: #FFA69E;color:white' >ลบ</button> </a>", orderable: false }
+            ],
+            responsive: true
+        });
+
+
+        //Edit
+        $("#myTable tbody").on("click", "#btnEdit", function () {
+
+            var record = table.row($(this).parents("tr")).data();
+            //    alert(record.id);
+            $("#txtID").val(record.group);
+            $("#txtName").val(record.member);
+            $("#txtMajor").val(record.advsor);
+            $("#txtSchool").val(record.committee);
+            $("#modalId").modal("show");
+
+        });
+
+
+    });
+</script> -->
+
+<div class="row">
+
+
+    <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+        <div
+            class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+            <h1 class="h2">คำถาม-ตอบ</h1>
+            <div class="btn-toolbar mb-2 mb-md-0">
+                <button type="button" class="btn btn-sm btn-outline-secondary">
+                    <span data-feather="plus" data-toggle="modal" data-target="#exampleModal"></span>
+                    เพิ่ม
+                </button>
+            </div>
+        </div>
+
+        <!-- table -->
+
+        <div class="card-body">
+            <table id="myTable" class="table table-striped table-bordered" style="width: 100%">
+                <thead>
+                    <tr>
+                        <th>คำถาม</th>
+                        <th>เสียง</th>
+                        <th>ตัวเลือกถามตอบ</th>
+                        <th>การกระทำ</th>
+                    </tr>
+                </thead>
+                {% for word in allword %}
+                <tr>
+                    <td>{{word.question}}</td>
+                    <td> <button class='btn1' style='background-color: grey;width: 40px;'><i class='fa fa-play'></i></button></td>
+                    <td>{{word.choice}}</td>
+                    <td><a> <button id='btnEdit' class='btn ' style = 'background-color: #A8DADC;color:white' data-toggle='modal' data-target='#exampleModal'>แก้ไข</button> </a> <a> <button id='btnEdit' class='btn ' style = 'background-color: #FFA69E;color:white' >ลบ</button> </a></td>
+                    
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
+
+        <!-- end Table -->
+
+
+        <!-- modal -->
+        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">คำถาม</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form>
+                            <div class="form-group">
+                                <label for="recipient-name" class="col-form-label">คำศัพท์:</label>
+                                <input type="text" class="form-control" id="recipient-name">
+                            </div>
+                            <div class="form-group">
+                                <label for="message-text" class="col-form-label">อัพโหลดเสียง</label>
+                                <div class="custom-file">
+                                    <input type="file" class="custom-file-input" id="customFileLang" lang="es">
+                                    <label class="custom-file-label" for="customFileLang">Select Voice</label>
+                                </div>
+                            </div>
+                            <!-- คำตอบที่ 1 -->
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    <label for="inputCity">คำตอบที่ 1</label>
+                                    <input type="text" class="form-control" id="inputCity">
+                                </div>
+                                <div class="form-group col-md-3">
+                                    <label for="inputState">เสียงคำตอบที่ 1</label>
+                                    <div class="custom-file">
+                                        <input type="file" class="custom-file-input" id="customFileLang" lang="es">
+                                        <label class="custom-file-label" for="customFileLang"></label>
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-3">
+                                    <label for="inputZip">เพิ่มไอคอน</label>
+                                    <button class='btn' style='background-color: #00AF54;width: 60px;height: 35px;'><i
+                                            class='far fa-smile' style="color: white;"></i></button>
+                                </div>
+                            </div>
+                            <!-- คำตอบที่ 2 -->
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    <label for="inputCity">คำตอบที่ 1</label>
+                                    <input type="text" class="form-control" id="inputCity">
+                                </div>
+                                <div class="form-group col-md-3">
+                                    <label for="inputState">เสียงคำตอบที่ 1</label>
+                                    <div class="custom-file">
+                                        <input type="file" class="custom-file-input" id="customFileLang" lang="es">
+                                        <label class="custom-file-label" for="customFileLang"></label>
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-3">
+                                    <label for="inputZip">เพิ่มไอคอน</label>
+                                    <button class='btn' style='background-color: #00AF54;width: 60px;height: 35px;'><i
+                                            class='far fa-smile' style="color: white;"></i></button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn border" style="background-color: white;color: black;"
+                            data-dismiss="modal">ยกเลิก</button>
+                        <button type="button" class="btn "
+                            style="background-color: #457B9D;color: white;">ยืนยัน</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        {% endblock%}
