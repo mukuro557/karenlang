@@ -26,7 +26,9 @@ urlpatterns = [
     path('addquestion/', views.addanswer),
     path('username_pass', views.username_pass),
     path('logout/', views.logout),
-    path('test/', views.simple_upload),
+    path('delete/<int:pk>', views.delete,name = 'delete'),
+    path('adduser', views.adduser)
+    
     
 
     # path('url',views.get_context_data)

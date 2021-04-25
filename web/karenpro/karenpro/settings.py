@@ -78,7 +78,7 @@ WSGI_APPLICATION = 'karenpro.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'karenlan',
+        'NAME': 'seniorkaren',
         'USER':'root',
         'PASSWORD':'',
         'HOST':'localhost',

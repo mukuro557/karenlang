@@ -41,7 +41,7 @@ dataSet = [
 def login(request):
     return render(request, 'login.html')
 
-@login_required(login_url="/")
+# @login_required(login_url="/")
 def mainpage(request):
     data = word.objects.all()
     if request.method == 'POST' and request.FILES['myfile'] and request.POST['wordth']:
@@ -63,8 +63,9 @@ def mainpage(request):
         return render(request, 'mainpage.html', {
             'uploaded_file_url': uploaded_file_url,'allword': data
         })
-    
-    return render(request, 'mainpage.html', {'allword': data})
+    else:
+        data = word.objects.all()
+        return render(request, 'mainpage.html', {'allword': data})
 
 @login_required(login_url="/")
 def addanswer(request):
@@ -77,8 +78,9 @@ def username_pass(request):
     user = auth.authenticate(username = username,password = password)
     
     if user is not None :
+        data = word.objects.all()
         auth.login(request,user)
-        return redirect('/mainpage', {'allword': dataSet})
+        return redirect('/mainpage', {'allword': data})
 
     else :
         return render(request, 'login.html', {'user': 'nouser'})
@@ -88,16 +90,18 @@ def logout( request):
     return redirect('/')
 
 
-def simple_upload(request):
-    if request.method == 'POST' and request.FILES['myfile']:
-        myfile = request.FILES['myfile']
-        fs = FileSystemStorage()
-        filename = fs.save(myfile.name, myfile)
-        uploaded_file_url = fs.url(filename)
-        return render(request, 'test.html', {
-            'uploaded_file_url': uploaded_file_url
-        })
+def adduser(request):
+    username = 'admin'
+    password = '1234'
+    user = User.objects.create_user(
+        username=username,
+        password=password
+    )
+    user.save()
     return render(request, 'test.html')
 
-def test(request):
-    return render(request, 'test.html')
+def delete(request,pk):
+    print(pk)
+    word.objects.filter(pk = pk).delete()
+    data = word.objects.all()
+    return render(request, 'mainpage.html', {'allword': data})

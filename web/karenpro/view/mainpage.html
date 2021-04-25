@@ -20,6 +20,7 @@
                 </button>
             </div>
         </div>
+        <a href="/adduser">ggg</a>
 
         <!-- table -->
 
@@ -43,9 +44,12 @@
                     </td>
                     <td> <button id='buttonEdit' class='btn btn_edit' style='background-color: #A8DADC;color:white'
                             target='{{word.Word_th}}' data-toggle="modal" data-target=".modal">แก้ไข</button>
-
-                        <a> <button id='btnEdit' class='btn btn_delete'
-                                style='background-color: #FFA69E;color:white'>ลบ</button>
+                        <form class="" action="/delete/{{word.pk}}" method="POST">
+                            {% csrf_token %}
+                            <button type="submit" id="deletebut" class='btn btn_delete' name="submit"
+                                style='background-color: #FFA69E;color:white' value="{{word.pk}}">ลบ</button>
+                        </form>
+                        <a>
                         </a>
                     </td>
 
@@ -73,7 +77,8 @@
                             {% csrf_token %}
                             <div class="form-group">
                                 <label for="recipient-name" class="col-form-label">คำศัพท์:</label>
-                                <input type="text" class="form-control" id="recipient-name" placeholder="คำภาษาไทย" name="wordth">
+                                <input type="text" class="form-control" id="recipient-name" placeholder="คำภาษาไทย"
+                                    name="wordth">
                             </div>
                             <div class="form-group">
                                 <label for="message-text" class="col-form-label">อัพโหลดเสียง</label>
@@ -88,7 +93,7 @@
                             <button type="submit" class="btn btncon "
                                 style="background-color: #457B9D;color: white;">ยืนยัน</button>
                         </form>
-                        
+
                     </div>
 
                 </div>
@@ -106,33 +111,7 @@
             $('.custom-file-label').val(x)
         });
 
-        $(".btncon").on("click", function () {
-            var x = document.getElementById("files");
-            var txt = "";
-            if ('files' in x) {
-                if (x.files.length == 0) {
-                    txt = "Select one or more files.";
-                } else {
-                    for (var i = 0; i < x.files.length; i++) {
-                        txt += "<br><strong>" + (i + 1) + ". file</strong><br>";
-                        var file = x.files[i];
-                        if ('name' in file) {
-                            txt += "name: " + file.name + "<br>";
-                        }
 
-                    }
-                }
-            }
-            else {
-                if (x.value == "") {
-                    txt += "Select one or more files.";
-                } else {
-                    txt += "The files property is not supported by your browser!";
-                    txt += "<br>The path of the selected file: " + x.value; // If the browser does not support the files property, it will return the path of the selected file instead. 
-                }
-            }
-            document.getElementById("explain").innerHTML = txt;
-        });
         $("#add_but").on("click", function () {
 
             $('#exampleModalLabel').text('เพิ่ม')
@@ -149,7 +128,7 @@
             document.getElementById(y).innerHTML += '<source id="sound" src="/static/sound/' + y + '" type="audio/mpeg">';
             audio.play();
         });
-        
+
     });
 </script>
 
