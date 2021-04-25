@@ -20,7 +20,9 @@
                 </button>
             </div>
         </div>
-
+        {% if uploaded_file_url %}
+        <p>File uploaded at: <a href="{{ uploaded_file_url }}">{{ uploaded_file_url }}</a></p>
+        {% endif %}
         <!-- table -->
 
         <div class="card-body">
@@ -41,7 +43,7 @@
                         <audio id="{{word.Sound}}">
                         </audio>
                     </td>
-                    <td> <button id='buttonEdit' class='btn btn_edit' style='background-color: #A8DADC;color:white'
+                    <td> <button id='{{word.pk}}' class='btn btn_edit' style='background-color: #A8DADC;color:white'
                             target='{{word.Word_th}}' data-toggle="modal" data-target=".modal">แก้ไข</button>
                         <form class="" action="/delete/{{word.pk}}" method="POST">
                             {% csrf_token %}
@@ -69,9 +71,7 @@
                 {% endfor %}
             </table>
         </div>
-        {% if uploaded_file_url %}
-        <p>File uploaded at: <a href="{{ uploaded_file_url }}">{{ uploaded_file_url }}</a></p>
-        {% endif %}
+
         <!-- end table -->
 
         <!-- modal -->
@@ -148,8 +148,9 @@
             $('#exampleModalLabel').text('แก้ไข')
             $('#exampleModalLabel').val('แก้ไข')
             $("#recipient-name").val(x)
-            var agree = confirm("คุณต้องการลบคำว่า '" + word + "' ใช่หรือไม่?"); var agree = confirm("คุณต้องการลบคำว่า '" + word + "' ใช่หรือไม่?"); var agree = confirm("คุณต้องการลบคำว่า '" + word + "' ใช่หรือไม่?");
-            document.getElementById('formcheck').action = '/editword'
+            document.getElementById('formcheck').action = '/editword/'+id
+            var i = document.getElementById('formcheck').getAttribute("action");
+            alert(i)
 
         });
 

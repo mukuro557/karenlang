@@ -87,7 +87,6 @@ def adduser(request):
 
 
 def delete(request, pk):
-    print(pk)
     word.objects.filter(pk=pk).delete()
     data = word.objects.all()
     return render(request, 'mainpage.html', {'allword': data})
@@ -103,24 +102,21 @@ def addword(request):
         uploaded_file_url = fs.url(filename)
 
         if word.objects.filter(Word_th=word_th).exists():
-            word.objects.filter(Word_th=word_th).update(
-                Word_th=word_th, Sound=filename)
-            data = word.objects.all()
             return render(request, 'mainpage.html', {
                 'uploaded_file_url': 'มีคำนี้แล้ว', 'allword': data
             })
 
         else:
             word_thai = word.objects.create(Word_th=word_th, Sound=filename)
-            return render(request, 'mainpage.html', {
-                'uploaded_file_url': uploaded_file_url, 'allword': data
-            })
+            data = word.objects.all()
+            return render(request, 'mainpage.html', {'allword': data})
     else:
         data = word.objects.all()
         return render(request, 'mainpage.html', {'allword': data})
 
 
-def editword(request):
+def editword(request,pk):
+    print(pk)
     if request.method == 'POST' and request.FILES['myfile'] and request.POST['wordth']:
         word_th = request.POST['wordth']
         myfile = request.FILES['myfile']
@@ -128,16 +124,11 @@ def editword(request):
         filename = fs.save(myfile.name, myfile)
         uploaded_file_url = fs.url(filename)
 
-        if word.objects.filter(Word_th=word_th).exists():
-            word.objects.filter(Word_th=word_th).update(
-                Word_th=word_th, Sound=filename)
-            data = word.objects.all()
-            return render(request, 'mainpage.html', {
-                'uploaded_file_url': 'มีคำนี้แล้ว', 'allword': data
-            })
+        word.objects.filter(pk=pk).update(
+            Word_th=word_th, Sound=filename)
+        data = word.objects.all()
+        return render(request, 'mainpage.html', {'allword': data})
 
-        else:
-            word_thai = word.objects.create(Word_th=word_th, Sound=filename)
-        return render(request, 'mainpage.html', {
-            'uploaded_file_url': uploaded_file_url, 'allword': data
-        })
+    else:
+        data = word.objects.all()
+        return render(request, 'mainpage.html', {'allword': data})
