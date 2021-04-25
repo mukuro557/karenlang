@@ -26,14 +26,15 @@ urlpatterns = [
     path('addquestion/', views.addanswer),
     path('username_pass', views.username_pass),
     path('logout/', views.logout),
-    path('delete/<int:pk>', views.delete,name = 'delete'),
+    path('delete/<int:pk>', views.delete, name='delete'),
     path('addword', views.addword),
-    path('editword/<int:pk>', views.editword,name = 'editword'),
-    
-    
+    path('editword/<int:pk>', views.editword, name='editword'),
+
+
 
     # path('url',views.get_context_data)
 ]
 
 if settings.DEBUG:
-    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+    urlpatterns += static(settings.MEDIA_URL,
+                          document_root=settings.MEDIA_ROOT)

@@ -115,7 +115,7 @@ def addword(request):
         return render(request, 'mainpage.html', {'allword': data})
 
 
-def editword(request,pk):
+def editword(request, pk):
     print(pk)
     if request.method == 'POST' and request.FILES['myfile'] and request.POST['wordth']:
         word_th = request.POST['wordth']

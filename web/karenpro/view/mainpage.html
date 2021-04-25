@@ -148,15 +148,12 @@
             $('#exampleModalLabel').text('แก้ไข')
             $('#exampleModalLabel').val('แก้ไข')
             $("#recipient-name").val(x)
-            document.getElementById('formcheck').action = '/editword/'+id
+            document.getElementById('formcheck').action = '/editword/' + id
             var i = document.getElementById('formcheck').getAttribute("action");
-            alert(i)
-
         });
 
 
         $("#add_but").on("click", function () {
-
             $('#exampleModalLabel').text('เพิ่ม')
             $('#exampleModalLabel').val('เพิ่ม')
             $("#recipient-name").val('')
