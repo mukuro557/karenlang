@@ -46,8 +46,21 @@
                             target='{{word.Word_th}}' data-toggle="modal" data-target=".modal">แก้ไข</button>
                         <form class="" action="/delete/{{word.pk}}" method="POST">
                             {% csrf_token %}
+                            <script LANGUAGE="JavaScript">
+                                
+                                function confirmSubmit(word)
+                                {
+                                var agree=confirm("คุณต้องการลบคำว่า '"+word+"' ใช่หรือไม่?");
+                                if (agree)
+                                 return true ;
+                                else
+                                 return false ;
+                                }
+                                
+                                </script>
+                                
                             <button type="submit" id="deletebut" class='btn btn_delete' name="submit"
-                                style='background-color: #FFA69E;color:white' value="{{word.pk}}">ลบ</button>
+                                style='background-color: #FFA69E;color:white' value="{{word.pk}}" onclick="return confirmSubmit('{{word.Word_th}}')">ลบ</button>
                         </form>
                         <a>
                         </a>
@@ -107,16 +120,21 @@
             var id = this.id;
             var x = document.getElementById(id).getAttribute("target");
             $('#exampleModalLabel').text('แก้ไข')
+            $('#exampleModalLabel').val('แก้ไข')
             $("#recipient-name").val(x)
             $('.custom-file-label').val(x)
+            document.getElementById('recipient-name').readOnly = true
+            alert($('#exampleModalLabel').val())
         });
 
 
         $("#add_but").on("click", function () {
 
             $('#exampleModalLabel').text('เพิ่ม')
+            $('#exampleModalLabel').val('เพิ่ม')
             $("#recipient-name").val('')
             $('.custom-file-label').val('')
+            alert($('#exampleModalLabel').val())
         });
 
         $(".btn1").on("click", function () {

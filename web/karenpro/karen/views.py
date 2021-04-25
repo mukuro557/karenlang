@@ -41,7 +41,7 @@ dataSet = [
 def login(request):
     return render(request, 'login.html')
 
-# @login_required(login_url="/")
+@login_required(login_url="/")
 def mainpage(request):
     data = word.objects.all()
     if request.method == 'POST' and request.FILES['myfile'] and request.POST['wordth']:
@@ -105,3 +105,4 @@ def delete(request,pk):
     word.objects.filter(pk = pk).delete()
     data = word.objects.all()
     return render(request, 'mainpage.html', {'allword': data})
+
