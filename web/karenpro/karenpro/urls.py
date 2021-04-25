@@ -27,7 +27,8 @@ urlpatterns = [
     path('username_pass', views.username_pass),
     path('logout/', views.logout),
     path('delete/<int:pk>', views.delete,name = 'delete'),
-    path('adduser', views.adduser)
+    path('addword', views.addword),
+    path('editword', views.editword),
     
     
 

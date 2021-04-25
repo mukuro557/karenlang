@@ -20,7 +20,6 @@
                 </button>
             </div>
         </div>
-        <a href="/adduser">ggg</a>
 
         <!-- table -->
 
@@ -47,20 +46,20 @@
                         <form class="" action="/delete/{{word.pk}}" method="POST">
                             {% csrf_token %}
                             <script LANGUAGE="JavaScript">
-                                
-                                function confirmSubmit(word)
-                                {
-                                var agree=confirm("คุณต้องการลบคำว่า '"+word+"' ใช่หรือไม่?");
-                                if (agree)
-                                 return true ;
-                                else
-                                 return false ;
+
+                                function confirmSubmit(word) {
+                                    var agree = confirm("คุณต้องการลบคำว่า '" + word + "' ใช่หรือไม่?");
+                                    if (agree)
+                                        return true;
+                                    else
+                                        return false;
                                 }
-                                
-                                </script>
-                                
+
+                            </script>
+
                             <button type="submit" id="deletebut" class='btn btn_delete' name="submit"
-                                style='background-color: #FFA69E;color:white' value="{{word.pk}}" onclick="return confirmSubmit('{{word.Word_th}}')">ลบ</button>
+                                style='background-color: #FFA69E;color:white' value="{{word.pk}}"
+                                onclick="return confirmSubmit('{{word.Word_th}}')">ลบ</button>
                         </form>
                         <a>
                         </a>
@@ -86,8 +85,35 @@
                         </button>
                     </div>
                     <div class="modal-body">
-                        <form method="post" enctype="multipart/form-data">
+                        <form action="" method="post" enctype="multipart/form-data" id="formcheck">
                             {% csrf_token %}
+                            <script LANGUAGE="JavaScript">
+
+                                function confirmadd() {
+                                    let word
+                                    let fileInput = document.getElementById('file');
+                                    var fileName = fileInput.value.split(/(\\|\/)/g).pop();
+
+                                    if (fileName == '' || fileName == null || fileName == undefined) {
+                                        var agree = confirm("กรุณาใส่ข้อมูลให้ครบ");
+                                        return false;
+                                    } else {
+                                        if ($('#exampleModalLabel').val() == 'เพิ่ม') {
+                                            word = $("#recipient-name").val()
+                                            var agree = confirm("คุณต้องการเพิ่มคำว่า '" + word + "' ใช่หรือไม่?");
+                                        } else {
+                                            word = $("#recipient-name").val()
+                                            var agree = confirm("คุณต้องการแก้คำว่า '" + word + "' ใช่หรือไม่?");
+                                        }
+
+                                        if (agree)
+                                            return true;
+                                        else
+                                            return false;
+                                    }
+                                }
+
+                            </script>
                             <div class="form-group">
                                 <label for="recipient-name" class="col-form-label">คำศัพท์:</label>
                                 <input type="text" class="form-control" id="recipient-name" placeholder="คำภาษาไทย"
@@ -96,14 +122,14 @@
                             <div class="form-group">
                                 <label for="message-text" class="col-form-label">อัพโหลดเสียง</label>
                                 <div class="custom-file">
-                                    <input type="file" name="myfile">
+                                    <input type="file" name="myfile" id="file">
                                     <br><br>
                                 </div>
                             </div>
                             <div id="explain"></div>
                             <button type="button" class="btn border" style="background-color: white;color: black;"
                                 data-dismiss="modal">ยกเลิก</button>
-                            <button type="submit" class="btn btncon "
+                            <button type="submit" class="btn btncon " onclick="return confirmadd()"
                                 style="background-color: #457B9D;color: white;">ยืนยัน</button>
                         </form>
 
@@ -122,9 +148,9 @@
             $('#exampleModalLabel').text('แก้ไข')
             $('#exampleModalLabel').val('แก้ไข')
             $("#recipient-name").val(x)
-            $('.custom-file-label').val(x)
-            document.getElementById('recipient-name').readOnly = true
-            alert($('#exampleModalLabel').val())
+            var agree = confirm("คุณต้องการลบคำว่า '" + word + "' ใช่หรือไม่?"); var agree = confirm("คุณต้องการลบคำว่า '" + word + "' ใช่หรือไม่?"); var agree = confirm("คุณต้องการลบคำว่า '" + word + "' ใช่หรือไม่?");
+            document.getElementById('formcheck').action = '/editword'
+
         });
 
 
@@ -134,7 +160,7 @@
             $('#exampleModalLabel').val('เพิ่ม')
             $("#recipient-name").val('')
             $('.custom-file-label').val('')
-            alert($('#exampleModalLabel').val())
+            document.getElementById('formcheck').action = '/addword'
         });
 
         $(".btn1").on("click", function () {
