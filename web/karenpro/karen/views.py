@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from .models import word
 from django.contrib.auth.models import User, auth
 from django.contrib import messages
-from .models import word
+from .models import word, questions, choice
 from django.conf import settings
 from django.contrib.auth.decorators import login_required
 from django.core.files.storage import FileSystemStorage
@@ -117,7 +117,7 @@ def addword(request):
 
 def editword(request, pk):
     print(pk)
-    if request.method == 'POST' and request.FILES['myfile'] and request.POST['wordth']:
+    if request.method == 'POST' and request.FILES['myfile'] and request.POST['wordth'] and request.POST['answer'] and request.FILES['ansfile1']:
         word_th = request.POST['wordth']
         myfile = request.FILES['myfile']
         fs = FileSystemStorage()
@@ -127,8 +127,16 @@ def editword(request, pk):
         word.objects.filter(pk=pk).update(
             Word_th=word_th, Sound=filename)
         data = word.objects.all()
-        return render(request, 'mainpage.html', {'allword': data})
+        return render(request, 'addanswer.html', {'allword': data})
 
     else:
         data = word.objects.all()
-        return render(request, 'mainpage.html', {'allword': data})
+        return render(request, 'addanswer.html', {'allword': data})
+
+def addquestion(request,number):
+    
+    if request.method == 'POST' and request.FILES['myfile'] and request.POST['wordth']:
+        word_th = request.POST['wordth']
+        print(word_th)
+        return render(request, 'addanswer.html', {'allword': dataSet})
+    return render(request, 'addanswer.html', {'allword': dataSet})
