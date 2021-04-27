@@ -29,6 +29,7 @@ urlpatterns = [
     path('delete/<int:pk>', views.delete, name='delete'),
     path('addword', views.addword),
     path('editword/<int:pk>', views.editword, name='editword'),
+    path('addques/<int:number>', views.addquestion, name='addques'),
 
 
 
