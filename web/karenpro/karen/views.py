@@ -134,9 +134,42 @@ def editword(request, pk):
         return render(request, 'addanswer.html', {'allword': data})
 
 def addquestion(request,number):
-    
-    if request.method == 'POST' and request.FILES['myfile'] and request.POST['wordth']:
+    # findimg = (request.POST or None,request.FILES)
+    if request.method == 'POST' and request.FILES['myfile'] and request.POST['wordth'] and request.POST['answer1']:
+        # checkdata = findimg.save(commit=False)
         word_th = request.POST['wordth']
-        print(word_th)
-        return render(request, 'addanswer.html', {'allword': dataSet})
+        mysound = request.FILES['myfile']
+        fs = FileSystemStorage() 
+        filenameQ = fs.save(mysound.name, mysound)
+        
+        # fs = FileSystemStorage()
+        # filename1 = fs.save(anssound.name, anssound)
+
+        uploaded_file_url = fs.url(filenameQ)
+        print(uploaded_file_url)
+        
+        if questions.objects.filter(Question=word_th).exists():
+            print('มีคำนี้แล้ว')
+            return render(request, 'addanswer.html', {
+                'uploaded_file_url': 'มีคำนี้แล้ว', 'allword': dataSet
+            })
+
+        else:
+            question_thai = questions.objects.create(Question=word_th, Sound=filenameQ)
+            question_thai.save()
+            data = word.objects.all()
+            
+            for i in range(1,number+1):
+                findimg = request.FILES['ansfile%s' %i]
+                findicon = request.FILES['icon%s' %i]
+                iconic = fs.save(findicon.name, findicon)
+                filenameC = fs.save(findimg.name, findimg)
+                uploaded_file_url = fs.url(filenameC)
+                choicef = request.POST['answer1']
+                choicework = choice.objects.create(Choice = choicef,Question_id = question_thai.id,Sound =filenameC,Icon = iconic)
+                choicework.save()
+                data1 = choice.objects.all()
+
+            return render(request, 'addanswer.html', {'allword': dataSet})
+        
     return render(request, 'addanswer.html', {'allword': dataSet})

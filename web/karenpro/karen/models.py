@@ -11,7 +11,7 @@ class questions(models.Model):
     
 class choice(models.Model):
     Choice = models.CharField(max_length = 50)
-    Icon = models.CharField(max_length = 60)
+    Icon = models.CharField(max_length = 60,null=True)
     Sound = models.CharField(max_length = 100)
     Question_id = models.IntegerField()
 
