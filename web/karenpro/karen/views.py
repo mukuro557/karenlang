@@ -132,10 +132,8 @@ def addquestion(request, number):
         filenameQ = fs.save(mysound.name, mysound)
 
         uploaded_file_url = fs.url(filenameQ)
-        print(uploaded_file_url)
 
         if questions.objects.filter(Question=word_th).exists():
-            print('มีคำนี้แล้ว')
             return render(request, 'addanswer.html', {
                 'uploaded_file_url': 'มีคำนี้แล้ว', 'allword': dataSet
             })
