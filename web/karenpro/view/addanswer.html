@@ -100,7 +100,7 @@
                     <td>{{word.choice}}</td>
                     <td> <button id='{{word.id}}' class='btn btn_edit' style='background-color: #A8DADC;color:white'
                             target='{{word.question}}' data-toggle="modal" data-target=".modal">แก้ไข</button>
-                        <form class="" action="/delete/{{word.pk}}" method="POST">
+                        <form class="" action="/deleteques/{{word.id}}" method="POST">
                             {% csrf_token %}
                             <script LANGUAGE="JavaScript">
 
@@ -262,7 +262,7 @@
                 $('#addans').on('click', function () {
                     num++;
                     var container = document.getElementById("newanswer");
-                    $('#newanswer').append('<div class="form-row"><div class="form-group col-md-6"><label for="inputCity">คำตอบที่ ' + num + ' </label><input type="text" class="form-control" id="inputCity' + num + '"> </div ><div class="form-group col-md-3"><label for="inputState">เสียงคำตอบที่ ' + num + '</label><div class="custom-file"><input type="file" name="ansfile' + num + '" id="file"><br><br></div></div><div class="form-group col-md-3"><label for="inputZip">เพิ่มไอคอน</label><input type="file" name="icon' + num + '" id="file2"></div></div>')
+                    $('#newanswer').append('<div class="form-row"><div class="form-group col-md-6"><label for="inputCity">คำตอบที่ ' + num + ' </label><input type="text" class="form-control" id="inputCity" name="answer'+num+'"> </div ><div class="form-group col-md-3"><label for="inputState">เสียงคำตอบที่ ' + num + '</label><div class="custom-file"><input type="file" name="ansfile' + num + '" id="file"><br><br></div></div><div class="form-group col-md-3"><label for="inputZip">เพิ่มไอคอน</label><input type="file" name="icon' + num + '" id="file2"></div></div>')
                     if (edit == 0) {
                         document.getElementById('formcheck').action = '/addques/' + num
                     } else {

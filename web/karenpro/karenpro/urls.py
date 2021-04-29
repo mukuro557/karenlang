@@ -30,6 +30,7 @@ urlpatterns = [
     path('addword', views.addword),
     path('editword/<int:pk>', views.editword, name='editword'),
     path('addques/<int:number>', views.addquestion, name='addques'),
+    path('deleteques/<int:id>', views.deleteques, name='deleteques'),
 
 
 

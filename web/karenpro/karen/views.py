@@ -11,7 +11,6 @@ dataSet = [
 ]
 
 
-
 def login(request):
     return render(request, 'login.html')
 
@@ -25,16 +24,14 @@ def mainpage(request):
 
 @login_required(login_url="/")
 def addanswer(request):
-   
+    dataSet.clear()
     ques = questions.objects.all()
-    choices = choice.objects.all()
-   
     for i in ques:
         num = 0
         cho = choice.objects.all().filter(Question_id=i.pk)
         allchoice = ''
         for j in cho:
-            print(j.Choice)
+
             if num == 0:
                 allchoice = j.Choice
                 num = 1
@@ -42,7 +39,6 @@ def addanswer(request):
                 allchoice = allchoice+'/'+j.Choice
         dataSet.append({'id': i.pk, 'question': i.Question,
                         'Sound': i.Sound, 'choice': allchoice})
-
     return render(request, 'addanswer.html', {'allword': dataSet})
 
 
@@ -127,16 +123,13 @@ def editword(request, pk):
 
 
 def addquestion(request, number):
-    # findimg = (request.POST or None,request.FILES)
+    
     if request.method == 'POST' and request.FILES['myfile'] and request.POST['wordth'] and request.POST['answer1']:
-        # checkdata = findimg.save(commit=False)
+        
         word_th = request.POST['wordth']
         mysound = request.FILES['myfile']
         fs = FileSystemStorage()
         filenameQ = fs.save(mysound.name, mysound)
-
-        # fs = FileSystemStorage()
-        # filename1 = fs.save(anssound.name, anssound)
 
         uploaded_file_url = fs.url(filenameQ)
         print(uploaded_file_url)
@@ -159,12 +152,19 @@ def addquestion(request, number):
                 iconic = fs.save(findicon.name, findicon)
                 filenameC = fs.save(findimg.name, findimg)
                 uploaded_file_url = fs.url(filenameC)
-                choicef = request.POST['answer1']
+                choicef = request.POST['answer%s' % i]
                 choicework = choice.objects.create(
                     Choice=choicef, Question_id=question_thai.id, Sound=filenameC, Icon=iconic)
                 choicework.save()
                 data1 = choice.objects.all()
 
-            return render(request, 'addanswer.html', {'allword': dataSet})
+            return redirect('/addquestion')
 
-    return render(request, 'addanswer.html', {'allword': dataSet})
+    return redirect('/addquestion')
+
+
+def deleteques(request, id):
+    questions.objects.filter(pk=id).delete()
+    choice.objects.filter(Question_id=id).delete()
+
+    return redirect('/addquestion')
