@@ -4,62 +4,6 @@
 {% load static %}
 <link href="{% static 'addanswersty.css'%}" rel="stylesheet">
 
-
-
-<!-- <script>
-    $(document).ready(function () {
-        var dataSet = [
-            {
-                "question": "เริ่มปวดเมื่อไหร่",
-                "choice": "วัน / สัปดาห์ / เดือน / ปี",
-            },
-            {
-                "question": "หลังปวดรักษาอย่างไร",
-                "choice": "กินยา / นวด ",
-            },
-            {
-                "question": "หลังตื่นแล้วมีอาการไหม",
-                "choice": "ตอนลุก / ตอนตื่น ",
-            },
-            {
-                "question": "เคยเกิดอุบัติเหตุเมื่อไห่",
-                "choice": "เดือน / ปี",
-            },
-
-
-
-        ];
-
-
-        var table = $("#myTable").DataTable({
-            data: dataSet,
-            columns: [
-                { data: "question", title: "คำถาม" },
-                { title: "เสียง", defaultContent: "<button class='btn1' style='background-color: grey;width: 40px;'><i class='fa fa-play'></i></button>", orderable: false },
-                { data: "choice", title: "ตัวเลือกตอบ" },
-                { title: "การกระทำ", defaultContent: "<a> <button id='btnEdit' class='btn ' style = 'background-color: #A8DADC;color:white' data-toggle='modal' data-target='#exampleModal'>แก้ไข</button> </a> <a> <button id='btnEdit' class='btn ' style = 'background-color: #FFA69E;color:white' >ลบ</button> </a>", orderable: false }
-            ],
-            responsive: true
-        });
-
-
-        //Edit
-        $("#myTable tbody").on("click", "#btnEdit", function () {
-
-            var record = table.row($(this).parents("tr")).data();
-            //    alert(record.id);
-            $("#txtID").val(record.group);
-            $("#txtName").val(record.member);
-            $("#txtMajor").val(record.advsor);
-            $("#txtSchool").val(record.committee);
-            $("#modalId").modal("show");
-
-        });
-
-
-    });
-</script> -->
-
 <div class="row">
 
 
@@ -98,8 +42,8 @@
                         </audio>
                     </td>
                     <td>{{word.choice}}</td>
-                    <td> <button id='{{word.id}}' class='btn btn_edit' style='background-color: #A8DADC;color:white'
-                            target='{{word.question}}' data-toggle="modal" data-target=".modal">แก้ไข</button>
+                    <td> <button id='{{word.choice}}' class='btn btn_edit' style='background-color: #A8DADC;color:white'
+                            target='{{word.question}}'  data-toggle="modal" data-target=".modal">แก้ไข</button>
                         <form class="" action="/deleteques/{{word.id}}" method="POST">
                             {% csrf_token %}
                             <script LANGUAGE="JavaScript">
@@ -186,7 +130,7 @@
                                 <div class="form-row">
                                     <div class="form-group col-md-6">
                                         <label for="inputCity">คำตอบที่ 1</label>
-                                        <input type="text" class="form-control" id="inputCity" name="answer1">
+                                        <input type="text" class="form-control" id="inputCity1" name="answer1">
                                     </div>
                                     <div class="form-group col-md-3">
                                         <label for="inputState">เสียงคำตอบที่ 1</label>
@@ -223,11 +167,18 @@
                     var id = this.id;
                     edit = 1
                     var x = document.getElementById(id).getAttribute("target");
+                    var str = document.getElementById(id).getAttribute("id");
+                    var choice = str.split("/");
+                    $('#newanswer').empty()
                     $('#exampleModalLabel').text('แก้ไข')
                     $('#exampleModalLabel').val('แก้ไข')
                     $("#recipient-name").val(x)
-                    // document.getElementById('formcheck').action = '/editword/' + id
                     var i = document.getElementById('formcheck').getAttribute("action");
+                    $('#inputCity1').val(choice[0])
+                    for(let i =2;i <= choice.length; i++){
+                        $('#newanswer').append('<div class="form-row"><div class="form-group col-md-6"><label for="inputCity">คำตอบที่ ' + i + ' </label><input type="text" class="form-control" id="inputCity'+i+'" name="answer'+i+'"> </div ><div class="form-group col-md-3"><label for="inputState">เสียงคำตอบที่ ' + i + '</label><div class="custom-file"><input type="file" name="ansfile' + i + '" id="file"><br><br></div></div><div class="form-group col-md-3"><label for="inputZip">เพิ่มไอคอน</label><input type="file" name="icon' + i + '" id="file2"></div></div>')
+                        $('#inputCity2').val(choice[i-1])
+                    }
 
                 });
 
@@ -241,7 +192,6 @@
                     $('.custom-file-label').val('')
                     document.getElementById('formcheck').action = '/addques/' + num
                     var container = document.getElementById("newanswer");
-                    // Clear previous contents of the container
                     while (container.hasChildNodes()) {
                         container.removeChild(container.lastChild);
                     }
@@ -262,7 +212,7 @@
                 $('#addans').on('click', function () {
                     num++;
                     var container = document.getElementById("newanswer");
-                    $('#newanswer').append('<div class="form-row"><div class="form-group col-md-6"><label for="inputCity">คำตอบที่ ' + num + ' </label><input type="text" class="form-control" id="inputCity" name="answer'+num+'"> </div ><div class="form-group col-md-3"><label for="inputState">เสียงคำตอบที่ ' + num + '</label><div class="custom-file"><input type="file" name="ansfile' + num + '" id="file"><br><br></div></div><div class="form-group col-md-3"><label for="inputZip">เพิ่มไอคอน</label><input type="file" name="icon' + num + '" id="file2"></div></div>')
+                    $('#newanswer').append('<div class="form-row"><div class="form-group col-md-6"><label for="inputCity'+num+'">คำตอบที่ ' + num + ' </label><input type="text" class="form-control" id="inputCity" name="answer'+num+'"> </div ><div class="form-group col-md-3"><label for="inputState">เสียงคำตอบที่ ' + num + '</label><div class="custom-file"><input type="file" name="ansfile' + num + '" id="file"><br><br></div></div><div class="form-group col-md-3"><label for="inputZip">เพิ่มไอคอน</label><input type="file" name="icon' + num + '" id="file2"></div></div>')
                     if (edit == 0) {
                         document.getElementById('formcheck').action = '/addques/' + num
                     } else {
