@@ -91,10 +91,14 @@
                 {% for word in allword %}
                 <tr>
                     <td>{{word.question}}</td>
-                    <td> <button class='btn1' style='background-color: grey;width: 40px;'><i
-                                class='fa fa-play'></i></button></td>
+                    <td> <button id='{{word.question}}' data-target="{{word.Sound}}" class='btn1'
+                            style='background-color: grey;width: 40px;'><i class='fa fa-play'></i>
+                        </button>
+                        <audio id="{{word.Sound}}">
+                        </audio>
+                    </td>
                     <td>{{word.choice}}</td>
-                    <td> <button id='{{word.pk}}' class='btn btn_edit' style='background-color: #A8DADC;color:white'
+                    <td> <button id='{{word.id}}' class='btn btn_edit' style='background-color: #A8DADC;color:white'
                             target='{{word.question}}' data-toggle="modal" data-target=".modal">แก้ไข</button>
                         <form class="" action="/delete/{{word.pk}}" method="POST">
                             {% csrf_token %}
@@ -146,9 +150,6 @@
                                     var fileName = fileInput.value.split(/(\\|\/)/g).pop();
                                     let fil = document.getElementById('file1').value;
                                     var fileName2 = fil.value.split(/(\\|\/)/g).pop();
-                                    
-
-                                    
 
                                     if (fileName == '' || fileName == null || fileName == undefined || fileName2 == '' || fileName2 == undefined) {
                                         var agree = confirm("กรุณาใส่ข้อมูลให้ครบ");
@@ -252,6 +253,7 @@
                     var y = document.getElementById(this.id).getAttribute("data-target");
                     var audio = document.getElementById(y);
                     audio.currentTime = 0;
+                    alert(y)
                     $('#sound').remove();
                     document.getElementById(y).innerHTML += '<source id="sound" src="/static/sound/' + y + '" type="audio/mpeg">';
                     audio.play();
@@ -260,7 +262,7 @@
                 $('#addans').on('click', function () {
                     num++;
                     var container = document.getElementById("newanswer");
-                    $('#newanswer').append('<div class="form-row"><div class="form-group col-md-6"><label for="inputCity">คำตอบที่ ' + num + ' </label><input type="text" class="form-control" id="inputCity' + num + '"> </div ><div class="form-group col-md-3"><label for="inputState">เสียงคำตอบที่ ' + num + '</label><div class="custom-file"><input type="file" name="ansfile' + num + '" id="file"><br><br></div></div><div class="form-group col-md-3"><label for="inputZip">เพิ่มไอคอน</label><input type="file" name="icon'+num+'" id="file2"></div></div>')
+                    $('#newanswer').append('<div class="form-row"><div class="form-group col-md-6"><label for="inputCity">คำตอบที่ ' + num + ' </label><input type="text" class="form-control" id="inputCity' + num + '"> </div ><div class="form-group col-md-3"><label for="inputState">เสียงคำตอบที่ ' + num + '</label><div class="custom-file"><input type="file" name="ansfile' + num + '" id="file"><br><br></div></div><div class="form-group col-md-3"><label for="inputZip">เพิ่มไอคอน</label><input type="file" name="icon' + num + '" id="file2"></div></div>')
                     if (edit == 0) {
                         document.getElementById('formcheck').action = '/addques/' + num
                     } else {

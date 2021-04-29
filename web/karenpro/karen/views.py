@@ -7,35 +7,9 @@ from django.conf import settings
 from django.contrib.auth.decorators import login_required
 from django.core.files.storage import FileSystemStorage
 dataSet = [
-    {
-        "word": "กิน",
-        "question": "หลังตื่นมีอาการไหม",
-        "choice": "มี/ไม่มี",
-        "id": "1",
-        "sound": "karen.mp3"
-    },
-    {
-        "word": "ข้าว",
-        "question": "หลังปวดรักษาอย่างไร",
-        "choice": "หาหมอผี/ทายา/ไม่รักษา",
-        "id": "2",
-        "sound": "ipone.mp3"
-    },
-    {
-        "word": "ดื่ม",
-        "question": "เคยเกิดอุบัติเหตุไหม",
-        "choice": "เคย/ไม่เคย",
-        "id": "3",
-        "sound": "Karen.mp3"
-    },
-    {
-        "word": "น้ำ",
-        "question": "เริ่มปวดเมื่อไร", "choice": "ระบุวันที่",
-        "id": "4",
-        "sound": "Karen.mp3"
-    },
+
 ]
-# Create your views here.
+
 
 
 def login(request):
@@ -51,6 +25,24 @@ def mainpage(request):
 
 @login_required(login_url="/")
 def addanswer(request):
+   
+    ques = questions.objects.all()
+    choices = choice.objects.all()
+   
+    for i in ques:
+        num = 0
+        cho = choice.objects.all().filter(Question_id=i.pk)
+        allchoice = ''
+        for j in cho:
+            print(j.Choice)
+            if num == 0:
+                allchoice = j.Choice
+                num = 1
+            else:
+                allchoice = allchoice+'/'+j.Choice
+        dataSet.append({'id': i.pk, 'question': i.Question,
+                        'Sound': i.Sound, 'choice': allchoice})
+
     return render(request, 'addanswer.html', {'allword': dataSet})
 
 
@@ -116,7 +108,7 @@ def addword(request):
 
 
 def editword(request, pk):
-    print(pk)
+
     if request.method == 'POST' and request.FILES['myfile'] and request.POST['wordth'] and request.POST['answer'] and request.FILES['ansfile1']:
         word_th = request.POST['wordth']
         myfile = request.FILES['myfile']
@@ -133,21 +125,22 @@ def editword(request, pk):
         data = word.objects.all()
         return render(request, 'addanswer.html', {'allword': data})
 
-def addquestion(request,number):
+
+def addquestion(request, number):
     # findimg = (request.POST or None,request.FILES)
     if request.method == 'POST' and request.FILES['myfile'] and request.POST['wordth'] and request.POST['answer1']:
         # checkdata = findimg.save(commit=False)
         word_th = request.POST['wordth']
         mysound = request.FILES['myfile']
-        fs = FileSystemStorage() 
+        fs = FileSystemStorage()
         filenameQ = fs.save(mysound.name, mysound)
-        
+
         # fs = FileSystemStorage()
         # filename1 = fs.save(anssound.name, anssound)
 
         uploaded_file_url = fs.url(filenameQ)
         print(uploaded_file_url)
-        
+
         if questions.objects.filter(Question=word_th).exists():
             print('มีคำนี้แล้ว')
             return render(request, 'addanswer.html', {
@@ -155,21 +148,23 @@ def addquestion(request,number):
             })
 
         else:
-            question_thai = questions.objects.create(Question=word_th, Sound=filenameQ)
+            question_thai = questions.objects.create(
+                Question=word_th, Sound=filenameQ)
             question_thai.save()
             data = word.objects.all()
-            
-            for i in range(1,number+1):
-                findimg = request.FILES['ansfile%s' %i]
-                findicon = request.FILES['icon%s' %i]
+
+            for i in range(1, number+1):
+                findimg = request.FILES['ansfile%s' % i]
+                findicon = request.FILES['icon%s' % i]
                 iconic = fs.save(findicon.name, findicon)
                 filenameC = fs.save(findimg.name, findimg)
                 uploaded_file_url = fs.url(filenameC)
                 choicef = request.POST['answer1']
-                choicework = choice.objects.create(Choice = choicef,Question_id = question_thai.id,Sound =filenameC,Icon = iconic)
+                choicework = choice.objects.create(
+                    Choice=choicef, Question_id=question_thai.id, Sound=filenameC, Icon=iconic)
                 choicework.save()
                 data1 = choice.objects.all()
 
             return render(request, 'addanswer.html', {'allword': dataSet})
-        
+
     return render(request, 'addanswer.html', {'allword': dataSet})
