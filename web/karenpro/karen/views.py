@@ -123,9 +123,9 @@ def editword(request, pk):
 
 
 def addquestion(request, number):
-    
+
     if request.method == 'POST' and request.FILES['myfile'] and request.POST['wordth'] and request.POST['answer1']:
-        
+
         word_th = request.POST['wordth']
         mysound = request.FILES['myfile']
         fs = FileSystemStorage()
@@ -142,7 +142,7 @@ def addquestion(request, number):
             question_thai = questions.objects.create(
                 Question=word_th, Sound=filenameQ)
             question_thai.save()
-            data = word.objects.all()
+            data = questions.objects.all()
 
             for i in range(1, number+1):
                 findimg = request.FILES['ansfile%s' % i]
@@ -154,7 +154,6 @@ def addquestion(request, number):
                 choicework = choice.objects.create(
                     Choice=choicef, Question_id=question_thai.id, Sound=filenameC, Icon=iconic)
                 choicework.save()
-                data1 = choice.objects.all()
 
             return redirect('/addquestion')
 
@@ -164,5 +163,28 @@ def addquestion(request, number):
 def deleteques(request, id):
     questions.objects.filter(pk=id).delete()
     choice.objects.filter(Question_id=id).delete()
+
+    return redirect('/addquestion')
+
+
+def editques(request, id, number):
+    if request.method == 'POST':
+        word_th = request.POST['wordth']
+        mysound = request.FILES['myfile']
+        fs = FileSystemStorage()
+        filenameQ = fs.save(mysound.name, mysound)
+        questions.objects.filter(pk=id).update(
+            Question=word_th, Sound=filenameQ)
+        choice.objects.filter(Question_id=id).delete()
+        for i in range(1, number+1):
+            findimg = request.FILES['ansfile%s' % i]
+            findicon = request.FILES['icon%s' % i]
+            iconic = fs.save(findicon.name, findicon)
+            filenameC = fs.save(findimg.name, findimg)
+            uploaded_file_url = fs.url(filenameC)
+            choicef = request.POST['answer%s' % i]
+            choicework = choice.objects.create(
+                Choice=choicef, Question_id=id, Sound=filenameC, Icon=iconic)
+            choicework.save()
 
     return redirect('/addquestion')

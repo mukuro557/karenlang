@@ -31,6 +31,8 @@ urlpatterns = [
     path('editword/<int:pk>', views.editword, name='editword'),
     path('addques/<int:number>', views.addquestion, name='addques'),
     path('deleteques/<int:id>', views.deleteques, name='deleteques'),
+    path('editques/<int:id>/<int:number>', views.editques, name='editques'),
+
 
 
 
