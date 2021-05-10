@@ -135,7 +135,7 @@
                                     <div class="form-group col-md-3">
                                         <label for="inputState">เสียงคำตอบที่ 1</label>
                                         <div class="custom-file">
-                                            <input type="file" name="ansfile1" id="file1">
+                                            <input type="file" name="ansfile1" id="file1" src="../karen/static/sound/ipone.mp3">
                                             <br><br>
                                         </div>
                                     </div>
@@ -195,6 +195,7 @@
                     $('#exampleModalLabel').val('เพิ่ม')
                     $("#recipient-name").val('')
                     $('.custom-file-label').val('')
+                    document.getElementById('file1').file = '/static/sound/ipone.mp3'
                     document.getElementById('formcheck').action = '/addques/' + num
                     var container = document.getElementById("newanswer");
                     while (container.hasChildNodes()) {

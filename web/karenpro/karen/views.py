@@ -6,6 +6,13 @@ from .models import word, questions, choice
 from django.conf import settings
 from django.contrib.auth.decorators import login_required
 from django.core.files.storage import FileSystemStorage
+from django.http import HttpResponse
+
+from pythainlp import word_tokenize
+import speech_recognition as sr
+from wordcut import Wordcut
+import deepcut
+
 dataSet = [
 
 ]
@@ -188,3 +195,10 @@ def editques(request, id, number):
             choicework.save()
 
     return redirect('/addquestion')
+
+def cutkum(request):
+    word = "ดื่มสุราไหม"
+    proc = word_tokenize(word, engine='newmm')
+    print(proc)
+
+    return HttpResponse(proc)
