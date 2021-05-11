@@ -196,9 +196,19 @@ def editques(request, id, number):
 
     return redirect('/addquestion')
 
-def cutkum(request):
-    word = "ดื่มสุราไหม"
-    proc = word_tokenize(word, engine='newmm')
-    print(proc)
+from rest_framework.response import Response
+from rest_framework.decorators import api_view
+from rest_framework import status , generics, filters
+from .serializer import getquestion
 
-    return HttpResponse(proc)
+class cutkum(generics.ListCreateAPIView):
+    
+    search_field =['Question']
+    filter_backends = (filters.SearchFilter,)
+    serializer_class= getquestion
+    def get_queryset(self):
+        queryset = questions.objects.all()
+        word = self.request.query_params.get('word')
+        proc = word_tokenize(word, engine='newmm')
+        print(proc)
+        return proc

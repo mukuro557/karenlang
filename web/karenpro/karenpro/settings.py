@@ -26,19 +26,21 @@ SECRET_KEY = 'django-insecure-diaxi$@ah_89!z4*kg&6kd$ynl+1a-o7ykwuftlj)n)m$kair+
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['192.168.43.157', 'localhost', '127.0.0.1']
 
 
 # Application definition
 
 INSTALLED_APPS = [
+    'rest_framework',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'karen'
+    'karen',
+    
 ]
 
 MIDDLEWARE = [
