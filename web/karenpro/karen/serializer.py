@@ -4,4 +4,8 @@ from .models import questions
 class getquestion(serializers.ModelSerializer):
     class Meta():
         model = questions
-        fields = '__all__'
+        fields = (
+            'Question',
+            'Sound'
+            )
+        

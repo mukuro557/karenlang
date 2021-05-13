@@ -3,6 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:highlight_text/highlight_text.dart';
 import 'package:speech_to_text/speech_to_text.dart' as stt;
 import 'package:http/http.dart' as http;
+// import 'package:assets_audio_player/assets_audio_player.dart';
+import 'package:audioplayers/audio_cache.dart';
+import 'package:audioplayers/audioplayers.dart';
 
 void main() {
   runApp(MyApp());
@@ -70,6 +73,7 @@ class _SpeechScreenState extends State<SpeechScreen> {
   stt.SpeechToText _speech;
   bool _isListening = false;
   String _text = 'Press the button and start speaking';
+  String _sound = '';
   double _confidence = 1.0;
   var info;
 
@@ -113,7 +117,14 @@ class _SpeechScreenState extends State<SpeechScreen> {
                   fontWeight: FontWeight.w400,
                 ),
               ),
-              RaisedButton(onPressed: callpage)
+              RaisedButton(
+                onPressed: callpage,
+                child: Text('ส่ง'),
+              ),
+              RaisedButton(
+                onPressed: playmp3,
+                child: Text('เล่น'),
+              )
             ],
           ),
         ),
@@ -136,12 +147,12 @@ class _SpeechScreenState extends State<SpeechScreen> {
 
         var selectedLocale = locales[124];
         _speech.listen(
-          onResult: (val) => setState(() async {
+          onResult: (val) => setState(() {
             _text = val.recognizedWords;
 
-            // if (val.hasConfidenceRating && val.confidence > 0) {
-            //   _confidence = val.confidence;
-            // }
+            if (val.hasConfidenceRating && val.confidence > 0) {
+              _confidence = val.confidence;
+            }
           }),
           localeId: selectedLocale.localeId,
         );
@@ -154,11 +165,26 @@ class _SpeechScreenState extends State<SpeechScreen> {
 
   void callpage() async {
     // var url = Uri.parse();
-    print(_text);
-    String url = 'http://192.168.43.157:8000/cutkum?word=' + _text;
-    // Map<String, String> headers = {"Content-type": "application/json",'authorization':'Basic c3R1ZHlkb3RlOnN0dWR5ZG90ZTEyMw=='};
-    http.Response response = await http.get(Uri.encodeFull(url));
-    int res = response.statusCode;
-    _text = response.body;
+
+
+    var url = Uri.parse('http://10.255.60.102:8000/cutkum/' + _text);
+    Map<String, String> headers = {
+      "Content-type": "application/json",
+      'authorization': 'Basic c3R1ZHlkb3RlOnN0dWR5ZG90ZTEyMw=='
+    };
+    http.Response response = await http.get(url);
+
+    setState(() {
+      _sound = response.body;
+    });
+  }
+
+  void playmp3() async {
+    AudioPlayer audioPlayer = AudioPlayer();
+    AudioCache audioCache = new AudioCache();
+    AudioPlayer advancedPlayer = new AudioPlayer();
+    String localFilePath;
+    // audioCache.play('Karen.mp3');
+    int result = await audioPlayer.play('http://10.255.60.102:8000/static/sound/'+_sound);
   }
 }

@@ -23,7 +23,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.login),
     path('mainpage/', views.mainpage),
-    path('cutkum/', views.cutkum.as_view()),
+    path('cutkum/<str:word>', views.get_queryset, name='cutkum'),
     path('addquestion/', views.addanswer),
     path('username_pass', views.username_pass),
     path('logout/', views.logout),

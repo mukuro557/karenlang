@@ -7,11 +7,13 @@ from django.conf import settings
 from django.contrib.auth.decorators import login_required
 from django.core.files.storage import FileSystemStorage
 from django.http import HttpResponse
+from django.http import JsonResponse
 
 from pythainlp import word_tokenize
 import speech_recognition as sr
 from wordcut import Wordcut
 import deepcut
+import json
 
 dataSet = [
 
@@ -35,7 +37,7 @@ def addanswer(request):
     ques = questions.objects.all()
     for i in ques:
         num = 0
-        cho = choice.objects.all().filter(Question_id=i.pk)
+        cho = choice.objects.all().filter(Question_id = i.pk)
         allchoice = ''
         for j in cho:
 
@@ -204,11 +206,21 @@ from .serializer import getquestion
 class cutkum(generics.ListCreateAPIView):
     
     search_field =['Question']
+    all_athletes = questions.objects.all()
     filter_backends = (filters.SearchFilter,)
     serializer_class= getquestion
+    serializer = getquestion(all_athletes, many=True)
+    # sound = questions.objects.filter(Question=id)
     def get_queryset(self):
-        queryset = questions.objects.all()
+
         word = self.request.query_params.get('word')
         proc = word_tokenize(word, engine='newmm')
         print(proc)
-        return proc
+
+def get_queryset(request,word):
+
+    # proc = word_tokenize(word, engine='newmm')
+    sound = questions.objects.all().filter(Question= word)
+    for j in sound :
+        print(j.Sound)
+    return HttpResponse(sound[0].Sound, content_type='application/json')
