@@ -1,10 +1,10 @@
+import 'dart:io';
+import 'dart:async';
 import 'package:avatar_glow/avatar_glow.dart';
 import 'package:flutter/material.dart';
 import 'package:highlight_text/highlight_text.dart';
 import 'package:speech_to_text/speech_to_text.dart' as stt;
 import 'package:http/http.dart' as http;
-// import 'package:assets_audio_player/assets_audio_player.dart';
-// import 'package:audioplayers/audio_cache.dart';
 import 'package:audioplayers/audioplayers.dart';
 
 void main() {
@@ -32,44 +32,18 @@ class SpeechScreen extends StatefulWidget {
 }
 
 class _SpeechScreenState extends State<SpeechScreen> {
-  final Map<String, HighlightedWord> _highlights = {
-    'flutter': HighlightedWord(
-      onTap: () => print('flutter'),
-      textStyle: const TextStyle(
-        color: Colors.blue,
-        fontWeight: FontWeight.bold,
-      ),
-    ),
-    'voice': HighlightedWord(
-      onTap: () => print('voice'),
-      textStyle: const TextStyle(
-        color: Colors.green,
-        fontWeight: FontWeight.bold,
-      ),
-    ),
-    'subscribe': HighlightedWord(
-      onTap: () => print('subscribe'),
-      textStyle: const TextStyle(
-        color: Colors.red,
-        fontWeight: FontWeight.bold,
-      ),
-    ),
-    'like': HighlightedWord(
-      onTap: () => print('like'),
-      textStyle: const TextStyle(
-        color: Colors.blueAccent,
-        fontWeight: FontWeight.bold,
-      ),
-    ),
-    'comment': HighlightedWord(
-      onTap: () => print('comment'),
-      textStyle: const TextStyle(
-        color: Colors.green,
-        fontWeight: FontWeight.bold,
-      ),
-    ),
-  };
+  main() async {
+    // var server = await HttpServer.bind(InternetAddress.LOOPBACK_IP_V4, 8000);
+    try {
+      var server = await HttpServer.bind(InternetAddress.loopbackIPv4, 8000);
+      uri = server.address.host.toString();
+      print(server.address.host);
+    } catch (e) {
+      print("Something went wrong while creating a server...");
+    }
+  }
 
+  late String uri;
   late stt.SpeechToText _speech;
   bool _isListening = false;
   String _text = 'Press the button and start speaking';
@@ -80,6 +54,7 @@ class _SpeechScreenState extends State<SpeechScreen> {
   @override
   void initState() {
     super.initState();
+    main();
     _speech = stt.SpeechToText();
   }
 
@@ -109,15 +84,6 @@ class _SpeechScreenState extends State<SpeechScreen> {
           child: Column(
             children: [
               Text(_text),
-              // TextHighlight(
-              //   text: _text,
-              //   words: _highlights,
-              //   textStyle: const TextStyle(
-              //     fontSize: 32.0,
-              //     color: Colors.black,
-              //     fontWeight: FontWeight.w400,
-              //   ),
-              // ),
               RaisedButton(
                 onPressed: callpage,
                 child: Text('ส่ง'),
@@ -166,14 +132,14 @@ class _SpeechScreenState extends State<SpeechScreen> {
 
   void callpage() async {
     // var url = Uri.parse();
-
-    var url = Uri.parse('http://10.255.60.102:8000/cutkum/' + _text);
+    
+    var url = Uri.parse('http://127.0.0.1:8000/cutkum/' + _text);
     Map<String, String> headers = {
       "Content-type": "application/json",
       'authorization': 'Basic c3R1ZHlkb3RlOnN0dWR5ZG90ZTEyMw=='
     };
     http.Response response = await http.get(url);
-    print(response);
+
     setState(() {
       _sound = response.body;
     });
@@ -184,8 +150,8 @@ class _SpeechScreenState extends State<SpeechScreen> {
     AudioCache audioCache = new AudioCache();
     AudioPlayer advancedPlayer = new AudioPlayer();
     String localFilePath;
-    audioCache.play('Karen.mp3');
+    // audioCache.play('Karen.mp3');
     int result = await audioPlayer
-        .play('http://10.255.60.102:8000/static/sound/' + _sound);
+        .play('http://' + uri + '/:8000/static/sound/' + _sound);
   }
 }
