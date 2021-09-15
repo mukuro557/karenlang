@@ -3,11 +3,17 @@ import 'package:avatar_glow/avatar_glow.dart';
 import 'package:flutter/material.dart';
 import 'package:highlight_text/highlight_text.dart';
 import 'package:mobile/Translate.dart';
+import 'package:mobile/accident.dart';
+import 'package:mobile/afterwakeup.dart';
+import 'package:mobile/allday.dart';
 import 'package:mobile/history.dart';
 import 'package:mobile/home.dart';
+import 'package:mobile/lesspain.dart';
 import 'package:mobile/levelpain.dart';
+import 'package:mobile/mostpain.dart';
 import 'package:mobile/resultschoice.dart';
 import 'package:mobile/resultschoice1.dart';
+import 'package:mobile/smoke.dart';
 import 'package:mobile/time.dart';
 import 'package:mobile/timemonth.dart';
 import 'package:mobile/translatechoice.dart';
@@ -17,6 +23,7 @@ import 'package:mobile/translatechoice4.dart';
 import 'package:mobile/translatechoice5.dart';
 import 'package:mobile/translatechoice7.dart';
 import 'package:mobile/translatemutichoice.dart';
+import 'package:mobile/wisky.dart';
 import 'package:speech_to_text/speech_to_text.dart' as stt;
 import 'package:http/http.dart' as http;
 import 'package:audioplayers/audioplayers.dart';
@@ -44,6 +51,14 @@ void main() {
       GetPage(name: '/translatechoice5', page: () => translatechoice5()),
       GetPage(name: '/translatechoice6', page: () => translatechoice5()),
       GetPage(name: '/translatechoice7', page: () => translatechoice7()),
+      GetPage(name: '/afterwakeup', page: () => Afterwakup()),
+      GetPage(name: "/allday", page: ()=> Allday()),
+      GetPage(name: "/accident", page: ()=> Accident()),
+      GetPage(name: "/smoke", page: ()=> Smoke()),
+      GetPage(name: "/drink", page: ()=> Drink()),
+      GetPage(name: "/mostpain", page: ()=> Actmostpain()),
+      GetPage(name: "/lesspain", page: ()=> Actlesspain()),
+
     ],
   ));
 }
