@@ -1,4 +1,4 @@
-import 'dart:io';
+// import 'dart:io';
 import 'package:avatar_glow/avatar_glow.dart';
 import 'package:flutter/material.dart';
 import 'package:highlight_text/highlight_text.dart';
@@ -12,12 +12,14 @@ import 'package:get/get.dart';
 
 void main() {
   runApp(GetMaterialApp(
-    initialRoute: '/translate',
+    initialRoute: '/test',
     getPages: [
       GetPage(name: '/home', page: () => Home()),
       GetPage(name: '/translate', page: () => Translate()),
       // GetPage(name: '/translatevoice', page: () => Translatevoice()),
       GetPage(name: '/resultschoice', page: () => Resultschoice()),
+      GetPage(name: '/test', page: () => MyApp()),
+
       // GetPage(name: '/history', page: () => History()),
       // GetPage(name: '/translatemutichoice', page: () => TranslateMutiChoice()),
     ],
@@ -45,16 +47,16 @@ class SpeechScreen extends StatefulWidget {
 }
 
 class _SpeechScreenState extends State<SpeechScreen> {
-  main() async {
-    // var server = await HttpServer.bind(InternetAddress.LOOPBACK_IP_V4, 8000);
-    try {
-      var server = await HttpServer.bind(InternetAddress.loopbackIPv4, 8000);
-      uri = server.address.host.toString();
-      print(server.address.host);
-    } catch (e) {
-      print("Something went wrong while creating a server...");
-    }
-  }
+  // main() async {
+  //   // var server = await HttpServer.bind(InternetAddress.LOOPBACK_IP_V4, 8000);
+  //   try {
+  //     var server = await HttpServer.bind(InternetAddress.loopbackIPv4, 8000);
+  //     uri = server.address.host.toString();
+  //     print(server.address.host);
+  //   } catch (e) {
+  //     print("Something went wrong while creating a server...");
+  //   }
+  // }
 
   late String uri;
   late stt.SpeechToText _speech;
@@ -146,13 +148,13 @@ class _SpeechScreenState extends State<SpeechScreen> {
   void callpage() async {
     // var url = Uri.parse();
 
-    var url = Uri.parse('http://127.0.0.1:8000/cutkum/' + _text);
+    var url = Uri.parse('http://127.0.0.1:8000/cutkum/ขอบัตรประชาชนหน่อย');
     Map<String, String> headers = {
       "Content-type": "application/json",
       'authorization': 'Basic c3R1ZHlkb3RlOnN0dWR5ZG90ZTEyMw=='
     };
     http.Response response = await http.get(url);
-
+    print(response.body);
     setState(() {
       _sound = response.body;
     });
