@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class translatechoice5 extends StatefulWidget {
-  const translatechoice5({Key? key}) : super(key: key);
+class Translatechoice6 extends StatefulWidget {
+  const Translatechoice6({Key? key}) : super(key: key);
 
   @override
-  _translatechoice5State createState() => _translatechoice5State();
+  _Translatechoice6State createState() => _Translatechoice6State();
 }
 
-class _translatechoice5State extends State<translatechoice5> {
+class _Translatechoice6State extends State<Translatechoice6> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -72,7 +72,7 @@ class _translatechoice5State extends State<translatechoice5> {
                     child: Column(
                       children: [
                         Image.asset(
-                          'asset/images/walk.png',
+                          'asset/images/drug.png',
                           fit: BoxFit.fitWidth,
                         ),
                         Padding(
@@ -122,7 +122,7 @@ class _translatechoice5State extends State<translatechoice5> {
                     child: Column(
                       children: [
                         Image.asset(
-                          'asset/images/work.png',
+                          'asset/images/massage.png',
                           fit: BoxFit.fill,
                         ),
                         Padding(
@@ -131,7 +131,7 @@ class _translatechoice5State extends State<translatechoice5> {
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               SizedBox(
-                                width: 160,
+                                width: 110,
                               ),
                               Text('ทำงาน'),
                               Spacer(),
@@ -172,7 +172,7 @@ class _translatechoice5State extends State<translatechoice5> {
                     child: Column(
                       children: [
                         Image.asset(
-                          'asset/images/sleep.png',
+                          'asset/images/eyes.png',
                           fit: BoxFit.fill,
                         ),
                         Padding(
@@ -181,7 +181,7 @@ class _translatechoice5State extends State<translatechoice5> {
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               SizedBox(
-                                width: 160,
+                                width: 140,
                               ),
                               Text('นอน'),
                               Spacer(),
@@ -222,7 +222,7 @@ class _translatechoice5State extends State<translatechoice5> {
                     child: Column(
                       children: [
                         Image.asset(
-                          'asset/images/still.png',
+                          'asset/images/maoban.png',
                           fit: BoxFit.fill,
                         ),
                         Padding(
@@ -231,7 +231,7 @@ class _translatechoice5State extends State<translatechoice5> {
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               SizedBox(
-                                width: 170,
+                                width: 130,
                               ),
                               Text('นั่ง'),
                               Spacer(),
@@ -272,7 +272,7 @@ class _translatechoice5State extends State<translatechoice5> {
                     child: Column(
                       children: [
                         Image.asset(
-                          'asset/images/still1.png',
+                          'asset/images/maoban.png',
                           fit: BoxFit.fill,
                         ),
                         Padding(
@@ -281,7 +281,7 @@ class _translatechoice5State extends State<translatechoice5> {
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               SizedBox(
-                                width: 150,
+                                width: 130,
                               ),
                               Text('นั่งหยองๆ'),
                               Spacer(),
@@ -322,7 +322,7 @@ class _translatechoice5State extends State<translatechoice5> {
                     child: Column(
                       children: [
                         Image.asset(
-                          'asset/images/bent.png',
+                          'asset/images/maoban.png',
                           fit: BoxFit.fill,
                         ),
                         Padding(
@@ -331,7 +331,7 @@ class _translatechoice5State extends State<translatechoice5> {
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               SizedBox(
-                                width: 170,
+                                width: 130,
                               ),
                               Text('ก้ม'),
                               Spacer(),
@@ -372,7 +372,7 @@ class _translatechoice5State extends State<translatechoice5> {
                     child: Column(
                       children: [
                         Image.asset(
-                          'asset/images/up.png',
+                          'asset/images/maoban.png',
                           fit: BoxFit.fill,
                         ),
                         Padding(
@@ -381,7 +381,7 @@ class _translatechoice5State extends State<translatechoice5> {
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               SizedBox(
-                                width: 150,
+                                width: 130,
                               ),
                               Text('ยกของ'),
                               Spacer(),
@@ -422,7 +422,7 @@ class _translatechoice5State extends State<translatechoice5> {
                     child: Column(
                       children: [
                         Image.asset(
-                          'asset/images/stan.png',
+                          'asset/images/maoban.png',
                           fit: BoxFit.fill,
                         ),
                         Padding(
@@ -431,7 +431,7 @@ class _translatechoice5State extends State<translatechoice5> {
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               SizedBox(
-                                width: 160,
+                                width: 130,
                               ),
                               Text('ยืนขึ้น'),
                               Spacer(),
@@ -472,7 +472,7 @@ class _translatechoice5State extends State<translatechoice5> {
                     child: Column(
                       children: [
                         Image.asset(
-                          'asset/images/sleepground.png',
+                          'asset/images/maoban.png',
                           fit: BoxFit.fill,
                         ),
                         Padding(
@@ -481,7 +481,7 @@ class _translatechoice5State extends State<translatechoice5> {
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               SizedBox(
-                                width: 150,
+                                width: 130,
                               ),
                               Text('นอนราบ'),
                               Spacer(),

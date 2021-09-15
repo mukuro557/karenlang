@@ -15,6 +15,7 @@ import 'package:mobile/translatechoice2.dart';
 import 'package:mobile/translatechoice3.dart';
 import 'package:mobile/translatechoice4.dart';
 import 'package:mobile/translatechoice5.dart';
+import 'package:mobile/translatechoice7.dart';
 import 'package:mobile/translatemutichoice.dart';
 import 'package:speech_to_text/speech_to_text.dart' as stt;
 import 'package:http/http.dart' as http;
@@ -26,7 +27,7 @@ void main() {
     theme: ThemeData(
       primarySwatch: Colors.teal,
     ),
-    initialRoute: '/translatechoice5',
+    initialRoute: '/translatechoice7',
     getPages: [
       GetPage(name: '/home', page: () => Home()),
       GetPage(name: '/translate', page: () => Translate()),
@@ -41,6 +42,8 @@ void main() {
       GetPage(name: '/translatechoice3', page: () => Translatechoice3()),
       GetPage(name: '/translatechoice4', page: () => Translatechoice4()),
       GetPage(name: '/translatechoice5', page: () => translatechoice5()),
+      GetPage(name: '/translatechoice6', page: () => translatechoice5()),
+      GetPage(name: '/translatechoice7', page: () => translatechoice7()),
     ],
   ));
 }

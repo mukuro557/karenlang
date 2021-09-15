@@ -74,6 +74,17 @@ flutter:
     - asset/images/massage.png
     - asset/images/eyes.png
     - asset/images/maoban.png
+    - asset/images/walk.png
+    - asset/images/work.png
+    - asset/images/sleep.png
+    - asset/images/still.png
+    - asset/images/still1.png
+    - asset/images/bent.png
+    - asset/images/up.png
+    - asset/images/stan.png
+    - asset/images/sleepground.png
+    - asset/images/caona.png
+    - asset/images/job.png
   #   - images/a_dot_burr.jpeg
   #   - images/a_dot_ham.jpeg
 
