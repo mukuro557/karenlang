@@ -18,7 +18,10 @@ import 'package:get/get.dart';
 
 void main() {
   runApp(GetMaterialApp(
-    initialRoute: '/test',
+    theme: ThemeData(
+      primarySwatch: Colors.teal,
+    ),
+    initialRoute: '/translate',
     getPages: [
       GetPage(name: '/home', page: () => Home()),
       GetPage(name: '/translate', page: () => Translate()),
@@ -29,6 +32,7 @@ void main() {
     ],
   ));
 }
+
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {

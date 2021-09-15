@@ -21,13 +21,6 @@ class _TranslateState extends State<Translate> {
   final myController = TextEditingController();
 
   @override
-  void dispose() {
-    // Clean up the controller when the widget is disposed.
-    myController.dispose();
-    super.dispose();
-  }
-
-  @override
   void initState() {
     // TODO: implement initState
     super.initState();
@@ -43,7 +36,7 @@ class _TranslateState extends State<Translate> {
       if (available) {
         setState(() => _isListening = true);
         var locales = await _speech.locales();
-        print(locales[115].localeId);
+        print(locales[112].localeId);
 
         var selectedLocale = locales[115];
         _speech.listen(
@@ -57,6 +50,13 @@ class _TranslateState extends State<Translate> {
       setState(() => _isListening = false);
       _speech.stop();
     }
+  }
+
+  @override
+  void dispose() {
+    // Clean up the controller when the widget is disposed.
+    myController.dispose();
+    super.dispose();
   }
 
   @override
@@ -156,13 +156,13 @@ class _TranslateState extends State<Translate> {
                       ),
                     ),
                     Padding(
-                      padding: const EdgeInsets.only(bottom: 2),
+                      padding: const EdgeInsets.only(left: 15),
                       child: Row(
                         children: [
                           AvatarGlow(
                             animate: _isListening,
-                            glowColor: Colors.teal.shade600,
-                            endRadius: 75.0,
+                            glowColor: Theme.of(context).primaryColor,
+                            endRadius: 20.0,
                             duration: const Duration(milliseconds: 2000),
                             repeatPauseDuration:
                                 const Duration(milliseconds: 100),
@@ -170,8 +170,13 @@ class _TranslateState extends State<Translate> {
                             child: FloatingActionButton(
                               onPressed: _listen,
                               child: Icon(
-                                  _isListening ? Icons.mic : Icons.mic_none),
+                                _isListening ? Icons.mic : Icons.mic_none,
+                                color: Colors.white,
+                              ),
                             ),
+                          ),
+                          SizedBox(
+                            width: 10,
                           ),
                           Text(
                             'กดเพื่อพูด',
