@@ -6,6 +6,7 @@ import 'package:mobile/Translate.dart';
 import 'package:mobile/home.dart';
 import 'package:mobile/levelpain.dart';
 import 'package:mobile/resultschoice.dart';
+import 'package:mobile/translatechoice.dart';
 import 'package:mobile/translatemutichoice.dart';
 import 'package:speech_to_text/speech_to_text.dart' as stt;
 import 'package:http/http.dart' as http;
@@ -14,7 +15,7 @@ import 'package:get/get.dart';
 
 void main() {
   runApp(GetMaterialApp(
-    initialRoute: '/levelpain',
+    initialRoute: '/translatechoice',
     getPages: [
       GetPage(name: '/home', page: () => Home()),
       GetPage(name: '/translate', page: () => Translate()),
@@ -23,6 +24,7 @@ void main() {
       // GetPage(name: '/history', page: () => History()),
       GetPage(name: '/translatemutichoice', page: () => TranslateMutiChoice()),
       GetPage(name: '/levelpain', page: () => Levelpain()),
+      GetPage(name: '/translatechoice', page: () => Translatechoice()),
     ],
   ));
 }
