@@ -2,12 +2,26 @@ import 'dart:io';
 import 'package:avatar_glow/avatar_glow.dart';
 import 'package:flutter/material.dart';
 import 'package:highlight_text/highlight_text.dart';
+import 'package:mobile/Translate.dart';
+import 'package:mobile/home.dart';
+import 'package:mobile/resultschoice.dart';
 import 'package:speech_to_text/speech_to_text.dart' as stt;
 import 'package:http/http.dart' as http;
 import 'package:audioplayers/audioplayers.dart';
+import 'package:get/get.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(GetMaterialApp(
+    initialRoute: '/resultschoice',
+    getPages: [
+      GetPage(name: '/home', page: () => Home()),
+      GetPage(name: '/translate', page: () => Translate()),
+      // GetPage(name: '/translatevoice', page: () => Translatevoice()),
+      GetPage(name: '/resultschoice', page: () => Resultschoice()),
+      // GetPage(name: '/history', page: () => History()),
+      // GetPage(name: '/translatemutichoice', page: () => TranslateMutiChoice()),
+    ],
+  ));
 }
 
 class MyApp extends StatelessWidget {
@@ -131,7 +145,7 @@ class _SpeechScreenState extends State<SpeechScreen> {
 
   void callpage() async {
     // var url = Uri.parse();
-    
+
     var url = Uri.parse('http://127.0.0.1:8000/cutkum/' + _text);
     Map<String, String> headers = {
       "Content-type": "application/json",
