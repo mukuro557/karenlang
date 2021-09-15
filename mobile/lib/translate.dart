@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:avatar_glow/avatar_glow.dart';
-import 'package:cupertino_icons/cupertino_icons.dart';
-import 'package:provider/provider.dart';
-import 'package:highlight_text/highlight_text.dart';
-import 'package:speech_to_text/speech_to_text.dart';
-import 'package:http/http.dart';
+import 'package:speech_to_text/speech_to_text.dart' as stt;
+
 // import 'package:assets_audio_player/assets_audio_player.dart';
 
 class Translate extends StatefulWidget {
@@ -16,6 +13,52 @@ class Translate extends StatefulWidget {
 
 class _TranslateState extends State<Translate> {
   final maxLines = 5;
+  late String uri;
+  late stt.SpeechToText _speech;
+  bool _isListening = false;
+  String _text = 'Press mic button or type to tranlate';
+  var info;
+  final myController = TextEditingController();
+
+  @override
+  void dispose() {
+    // Clean up the controller when the widget is disposed.
+    myController.dispose();
+    super.dispose();
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    _speech = stt.SpeechToText();
+  }
+
+  void _listen() async {
+    if (!_isListening) {
+      bool available = await _speech.initialize(
+        onStatus: (val) => print('onStatus: $val'),
+        onError: (val) => print('onError: $val'),
+      );
+      if (available) {
+        setState(() => _isListening = true);
+        var locales = await _speech.locales();
+        print(locales[115].localeId);
+
+        var selectedLocale = locales[115];
+        _speech.listen(
+          onResult: (val) => setState(() {
+            myController.text = val.recognizedWords;
+          }),
+          localeId: selectedLocale.localeId,
+        );
+      }
+    } else {
+      setState(() => _isListening = false);
+      _speech.stop();
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -46,6 +89,7 @@ class _TranslateState extends State<Translate> {
         ],
         elevation: 0,
       ),
+      // floatingActionButtonLocation: FloatingActionButtonLocation,
       body: ListView(
         children: [
           Column(
@@ -102,6 +146,7 @@ class _TranslateState extends State<Translate> {
                       padding:
                           const EdgeInsets.only(left: 30, top: 10, right: 25),
                       child: TextFormField(
+                        controller: myController,
                         style: TextStyle(color: Colors.white),
                         maxLines: maxLines,
                         decoration: const InputDecoration(
@@ -114,17 +159,18 @@ class _TranslateState extends State<Translate> {
                       padding: const EdgeInsets.only(bottom: 2),
                       child: Row(
                         children: [
-                          SizedBox(
-                            width: 20,
-                          ),
-                          CircleAvatar(
-                            backgroundColor: Colors.teal[600],
-                            radius: 20,
-                            child: IconButton(
-                              padding: EdgeInsets.zero,
-                              icon: Icon(Icons.mic),
-                              color: Colors.white,
-                              onPressed: () {},
+                          AvatarGlow(
+                            animate: _isListening,
+                            glowColor: Colors.teal.shade600,
+                            endRadius: 75.0,
+                            duration: const Duration(milliseconds: 2000),
+                            repeatPauseDuration:
+                                const Duration(milliseconds: 100),
+                            repeat: true,
+                            child: FloatingActionButton(
+                              onPressed: _listen,
+                              child: Icon(
+                                  _isListening ? Icons.mic : Icons.mic_none),
                             ),
                           ),
                           Text(
@@ -139,7 +185,9 @@ class _TranslateState extends State<Translate> {
                             height: 30.0,
                             buttonColor: Colors.white,
                             child: RaisedButton(
-                              onPressed: () {},
+                              onPressed: () {
+                                print(myController.text);
+                              },
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(10),
                               ),
