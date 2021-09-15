@@ -21,12 +21,13 @@ void main() {
     theme: ThemeData(
       primarySwatch: Colors.teal,
     ),
-    initialRoute: '/translate',
+    initialRoute: '/test',
     getPages: [
       GetPage(name: '/home', page: () => Home()),
       GetPage(name: '/translate', page: () => Translate()),
       GetPage(name: '/resultschoice', page: () => Resultschoice()),
       GetPage(name: '/translatemutichoice', page: () => TranslateMutiChoice()),
+      GetPage(name: '/test', page: () => MyApp()),
       GetPage(name: '/levelpain', page: () => Levelpain()),
       GetPage(name: '/translatechoice', page: () => Translatechoice()),
     ],
@@ -68,7 +69,7 @@ class _SpeechScreenState extends State<SpeechScreen> {
   late String uri;
   late stt.SpeechToText _speech;
   bool _isListening = false;
-  String _text = 'Press the button and start speaking';
+  String _text = 'ขอบัตรประชาชนหน่อย';
   String _sound = '';
   double _confidence = 1.0;
   var info;
@@ -106,12 +107,13 @@ class _SpeechScreenState extends State<SpeechScreen> {
           child: Column(
             children: [
               Text(_text),
+              Text("เสียงที่ได้ : "+ _sound),
               RaisedButton(
                 onPressed: callpage,
                 child: Text('ส่ง'),
               ),
               RaisedButton(
-                onPressed: () {}, // playmp3
+                onPressed: playmp3, // playmp3
                 child: Text('เล่น'),
               )
             ],
@@ -155,7 +157,7 @@ class _SpeechScreenState extends State<SpeechScreen> {
   void callpage() async {
     // var url = Uri.parse();
 
-    var url = Uri.parse('http://127.0.0.1:8000/cutkum/ขอบัตรประชาชนหน่อย');
+    var url = Uri.parse('http://192.168.0.11:8000/cutkum/ขอบัตรประชาชนหน่อย');
     Map<String, String> headers = {
       "Content-type": "application/json",
       'authorization': 'Basic c3R1ZHlkb3RlOnN0dWR5ZG90ZTEyMw=='
@@ -174,6 +176,6 @@ class _SpeechScreenState extends State<SpeechScreen> {
     String localFilePath;
     // audioCache.play('Karen.mp3');
     int result = await audioPlayer
-        .play('http://' + uri + '/:8000/static/sound/' + _sound);
+        .play('http://192.168.0.11:8000/static/sound/'+_sound);
   }
 }

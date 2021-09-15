@@ -27,6 +27,13 @@ class _TranslateState extends State<Translate> {
     _speech = stt.SpeechToText();
   }
 
+  @override
+  void dispose() {
+    // Clean up the controller when the widget is disposed.
+    myController.dispose();
+    super.dispose();
+  }
+
   void _listen() async {
     if (!_isListening) {
       bool available = await _speech.initialize(
@@ -36,7 +43,7 @@ class _TranslateState extends State<Translate> {
       if (available) {
         setState(() => _isListening = true);
         var locales = await _speech.locales();
-        print(locales[112].localeId);
+        print(locales[115].localeId);
 
         var selectedLocale = locales[115];
         _speech.listen(
@@ -52,12 +59,7 @@ class _TranslateState extends State<Translate> {
     }
   }
 
-  @override
-  void dispose() {
-    // Clean up the controller when the widget is disposed.
-    myController.dispose();
-    super.dispose();
-  }
+  
 
   @override
   Widget build(BuildContext context) {
