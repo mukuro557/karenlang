@@ -66,6 +66,9 @@ flutter:
     - asset/images/eye.png
     - asset/images/blurry.png
     - asset/images/wrist.png
+    - asset/images/emoji1.png
+    - asset/images/emoji2.png
+    - asset/images/emoji3.png
   #   - images/a_dot_burr.jpeg
   #   - images/a_dot_ham.jpeg
 
