@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:avatar_glow/avatar_glow.dart';
+import 'package:get/get.dart';
+import 'package:mobile/translatechoice.dart';
 import 'package:speech_to_text/speech_to_text.dart' as stt;
 
 // import 'package:assets_audio_player/assets_audio_player.dart';
@@ -16,6 +18,7 @@ class _TranslateState extends State<Translate> {
   late String uri;
   late stt.SpeechToText _speech;
   bool _isListening = false;
+  bool _delete = false;
   String _text = 'Press mic button or type to tranlate';
   var info;
   final myController = TextEditingController();
@@ -27,6 +30,28 @@ class _TranslateState extends State<Translate> {
     _speech = stt.SpeechToText();
   }
 
+  void jumppage() {
+    if (myController.text == "หลังตื่นแล้วมีอาการไหม") {
+      Get.offNamed('/translatechoice');
+    } else if (myController.text == "อาการที่มาหาหมอคืออะไร") {
+      Get.offAllNamed('/translatemutichoice');
+    } else if (myController.text == "ระดับความเจ็บปวด") {
+      Get.offAllNamed('/levelpain');
+    } else if (myController.text == "เริ่มปวดเมื่อไหร่") {
+      Get.offAllNamed('/time');
+    } else if (myController.text == "ขอบัตรประชาชนหน่อย") {
+      Get.offAllNamed('/resultschoice');
+    } else if (myController.text == "อธิบายเหตุการณ์ว่าเกิดขึ้นได้อย่างไร") {
+      Get.offAllNamed('/resultschoice1');
+    } else if (myController.text == "กลางคืนเจ็บจนต้องตื่นมากินยาหรือทายาไหม") {
+      Get.offAllNamed('/translatechoice2');
+    } else if (myController.text == "เคยเอ็กเรย์ไหม") {
+      Get.offAllNamed('/translatechoice3');
+    } else if (myController.text == "หลังปวดรักษาอย่างไร") {
+      Get.offAllNamed('/translatechoice3');
+    }
+  }
+
   void _listen() async {
     if (!_isListening) {
       bool available = await _speech.initialize(
@@ -36,7 +61,7 @@ class _TranslateState extends State<Translate> {
       if (available) {
         setState(() => _isListening = true);
         var locales = await _speech.locales();
-        print(locales[112].localeId);
+        print(locales[110].localeId);
 
         var selectedLocale = locales[115];
         _speech.listen(
@@ -149,12 +174,23 @@ class _TranslateState extends State<Translate> {
                         controller: myController,
                         style: TextStyle(color: Colors.white),
                         maxLines: maxLines,
-                        decoration: const InputDecoration(
-                            border: InputBorder.none,
-                            hintText: 'แตะเพื่อพิมพ์',
-                            hintStyle: TextStyle(color: Colors.white)),
+                        decoration: InputDecoration(
+                          border: InputBorder.none,
+                          hintText: 'แตะเพื่อพิมพ์',
+                          hintStyle: TextStyle(color: Colors.white),
+                          suffixIcon: Padding(
+                            padding: const EdgeInsets.only(bottom: 70),
+                            child: IconButton(
+                              onPressed: myController.clear,
+                              icon: Icon(
+                                Icons.close,
+                              ),
+                            ),
+                          ),
+                        ),
                       ),
                     ),
+                    // Icon(Icons.cancel),
                     Padding(
                       padding: const EdgeInsets.only(left: 15),
                       child: Row(
@@ -191,7 +227,8 @@ class _TranslateState extends State<Translate> {
                             buttonColor: Colors.white,
                             child: RaisedButton(
                               onPressed: () {
-                                print(myController.text);
+                                jumppage();
+                                // print(myController);
                               },
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(10),
@@ -223,7 +260,9 @@ class _TranslateState extends State<Translate> {
                     height: 40.0,
                     buttonColor: Colors.teal[400],
                     child: RaisedButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        Get.offAllNamed('/translatemutichoice');
+                      },
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(10),
                       ),
@@ -238,7 +277,9 @@ class _TranslateState extends State<Translate> {
                     height: 40.0,
                     buttonColor: Colors.white,
                     child: RaisedButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        Get.offAllNamed('/resultschoice1');
+                      },
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(10),
                       ),
@@ -253,7 +294,9 @@ class _TranslateState extends State<Translate> {
                     height: 40.0,
                     buttonColor: Colors.teal[400],
                     child: RaisedButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        Get.offAllNamed('/translatechoice2');
+                      },
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(10),
                       ),
@@ -268,12 +311,14 @@ class _TranslateState extends State<Translate> {
                     height: 40.0,
                     buttonColor: Colors.white,
                     child: RaisedButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        Get.offAllNamed('/translatechoice3');
+                      },
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(10),
                       ),
                       child: Text(
-                        "อธิบายเหตุการณ์ว่าเกิดขึ้นได้อย่างไร",
+                        "เคยเอ็กเรย์ไหม",
                         style: TextStyle(fontSize: 13),
                       ),
                     ),
@@ -283,7 +328,9 @@ class _TranslateState extends State<Translate> {
                     height: 40.0,
                     buttonColor: Colors.teal[400],
                     child: RaisedButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        Get.offAllNamed('/translatechoice4');
+                      },
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(10),
                       ),

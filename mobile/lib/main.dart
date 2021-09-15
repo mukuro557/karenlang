@@ -7,9 +7,14 @@ import 'package:mobile/history.dart';
 import 'package:mobile/home.dart';
 import 'package:mobile/levelpain.dart';
 import 'package:mobile/resultschoice.dart';
+import 'package:mobile/resultschoice1.dart';
 import 'package:mobile/time.dart';
 import 'package:mobile/timemonth.dart';
 import 'package:mobile/translatechoice.dart';
+import 'package:mobile/translatechoice2.dart';
+import 'package:mobile/translatechoice3.dart';
+import 'package:mobile/translatechoice4.dart';
+import 'package:mobile/translatechoice5.dart';
 import 'package:mobile/translatemutichoice.dart';
 import 'package:speech_to_text/speech_to_text.dart' as stt;
 import 'package:http/http.dart' as http;
@@ -21,7 +26,7 @@ void main() {
     theme: ThemeData(
       primarySwatch: Colors.teal,
     ),
-    initialRoute: '/translate',
+    initialRoute: '/translatechoice5',
     getPages: [
       GetPage(name: '/home', page: () => Home()),
       GetPage(name: '/translate', page: () => Translate()),
@@ -29,6 +34,13 @@ void main() {
       GetPage(name: '/translatemutichoice', page: () => TranslateMutiChoice()),
       GetPage(name: '/levelpain', page: () => Levelpain()),
       GetPage(name: '/translatechoice', page: () => Translatechoice()),
+      GetPage(name: '/time', page: () => Time()),
+      GetPage(name: '/timemonth', page: () => Timemonth()),
+      GetPage(name: '/resultschoice1', page: () => Resultschoice1()),
+      GetPage(name: '/translatechoice2', page: () => translatechoice2()),
+      GetPage(name: '/translatechoice3', page: () => Translatechoice3()),
+      GetPage(name: '/translatechoice4', page: () => Translatechoice4()),
+      GetPage(name: '/translatechoice5', page: () => translatechoice5()),
     ],
   ));
 }

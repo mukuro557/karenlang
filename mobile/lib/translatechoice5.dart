@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class TranslateMutiChoice extends StatefulWidget {
-  const TranslateMutiChoice({Key? key}) : super(key: key);
+class translatechoice5 extends StatefulWidget {
+  const translatechoice5({Key? key}) : super(key: key);
 
   @override
-  _TranslateMutiChoiceState createState() => _TranslateMutiChoiceState();
+  _translatechoice5State createState() => _translatechoice5State();
 }
 
-class _TranslateMutiChoiceState extends State<TranslateMutiChoice> {
+class _translatechoice5State extends State<translatechoice5> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -35,9 +35,9 @@ class _TranslateMutiChoiceState extends State<TranslateMutiChoice> {
                       SizedBox(
                         width: 20,
                       ),
-                      Text('อาการที่มาหาหมอคืออะไร'),
+                      Text('ตอนปวดทำอะไรอยู่'),
                       SizedBox(
-                        width: 130,
+                        width: 150,
                       ),
                       CircleAvatar(
                         backgroundColor: Colors.teal[600],
@@ -72,58 +72,8 @@ class _TranslateMutiChoiceState extends State<TranslateMutiChoice> {
                     child: Column(
                       children: [
                         Image.asset(
-                          'asset/images/back.png',
+                          'asset/images/drug.png',
                           fit: BoxFit.fitWidth,
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(top: 15),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              SizedBox(
-                                width: 130,
-                              ),
-                              Text('ปวดหลังด้านล่าง'),
-                              Spacer(),
-                              CircleAvatar(
-                                backgroundColor: Colors.teal[600],
-                                radius: 15,
-                                child: IconButton(
-                                  padding: EdgeInsets.zero,
-                                  icon: Icon(
-                                    Icons.volume_up,
-                                    size: 15,
-                                  ),
-                                  color: Colors.white,
-                                  onPressed: () {},
-                                ),
-                              ),
-                              SizedBox(
-                                width: 30,
-                              )
-                            ],
-                          ),
-                        )
-                      ],
-                    ),
-                  ),
-                ),
-                SizedBox(
-                  height: 15,
-                ),
-                InkWell(
-                  onTap: () {},
-                  child: Container(
-                    width: 370,
-                    height: 220,
-                    decoration: BoxDecoration(
-                        border: Border.all(color: Colors.grey.shade300),
-                        borderRadius: BorderRadius.all(Radius.circular(20))),
-                    child: Column(
-                      children: [
-                        Image.asset(
-                          'asset/images/shoulder.png',
-                          fit: BoxFit.fill,
                         ),
                         Padding(
                           padding: const EdgeInsets.only(top: 15),
@@ -133,7 +83,7 @@ class _TranslateMutiChoiceState extends State<TranslateMutiChoice> {
                               SizedBox(
                                 width: 150,
                               ),
-                              Text('ปวดไหล่'),
+                              Text('เดิน'),
                               Spacer(),
                               CircleAvatar(
                                 backgroundColor: Colors.teal[600],
@@ -172,7 +122,7 @@ class _TranslateMutiChoiceState extends State<TranslateMutiChoice> {
                     child: Column(
                       children: [
                         Image.asset(
-                          'asset/images/knee.png',
+                          'asset/images/massage.png',
                           fit: BoxFit.fill,
                         ),
                         Padding(
@@ -181,9 +131,9 @@ class _TranslateMutiChoiceState extends State<TranslateMutiChoice> {
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               SizedBox(
-                                width: 160,
+                                width: 110,
                               ),
-                              Text('ปวดเข่า'),
+                              Text('ทำงาน'),
                               Spacer(),
                               CircleAvatar(
                                 backgroundColor: Colors.teal[600],
@@ -222,7 +172,7 @@ class _TranslateMutiChoiceState extends State<TranslateMutiChoice> {
                     child: Column(
                       children: [
                         Image.asset(
-                          'asset/images/hip.png',
+                          'asset/images/eyes.png',
                           fit: BoxFit.fill,
                         ),
                         Padding(
@@ -231,9 +181,9 @@ class _TranslateMutiChoiceState extends State<TranslateMutiChoice> {
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               SizedBox(
-                                width: 130,
+                                width: 140,
                               ),
-                              Text('ปวดสะโพกร้าวลงขา'),
+                              Text('นอน'),
                               Spacer(),
                               CircleAvatar(
                                 backgroundColor: Colors.teal[600],
@@ -272,257 +222,7 @@ class _TranslateMutiChoiceState extends State<TranslateMutiChoice> {
                     child: Column(
                       children: [
                         Image.asset(
-                          'asset/images/elbow.png',
-                          fit: BoxFit.fill,
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(top: 15),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              SizedBox(
-                                width: 130,
-                              ),
-                              Text('ปวดข้อศอก'),
-                              Spacer(),
-                              CircleAvatar(
-                                backgroundColor: Colors.teal[600],
-                                radius: 15,
-                                child: IconButton(
-                                  padding: EdgeInsets.zero,
-                                  icon: Icon(
-                                    Icons.volume_up,
-                                    size: 15,
-                                  ),
-                                  color: Colors.white,
-                                  onPressed: () {},
-                                ),
-                              ),
-                              SizedBox(
-                                width: 30,
-                              )
-                            ],
-                          ),
-                        )
-                      ],
-                    ),
-                  ),
-                ),
-                SizedBox(
-                  height: 15,
-                ),
-                InkWell(
-                  onTap: () {},
-                  child: Container(
-                    width: 370,
-                    height: 220,
-                    decoration: BoxDecoration(
-                        border: Border.all(color: Colors.grey.shade300),
-                        borderRadius: BorderRadius.all(Radius.circular(20))),
-                    child: Column(
-                      children: [
-                        Image.asset(
-                          'asset/images/abdomen.png',
-                          fit: BoxFit.fill,
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(top: 15),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              SizedBox(
-                                width: 160,
-                              ),
-                              Text('ปวดท้อง'),
-                              Spacer(),
-                              CircleAvatar(
-                                backgroundColor: Colors.teal[600],
-                                radius: 15,
-                                child: IconButton(
-                                  padding: EdgeInsets.zero,
-                                  icon: Icon(
-                                    Icons.volume_up,
-                                    size: 15,
-                                  ),
-                                  color: Colors.white,
-                                  onPressed: () {},
-                                ),
-                              ),
-                              SizedBox(
-                                width: 30,
-                              )
-                            ],
-                          ),
-                        )
-                      ],
-                    ),
-                  ),
-                ),
-                SizedBox(
-                  height: 15,
-                ),
-                InkWell(
-                  onTap: () {},
-                  child: Container(
-                    width: 370,
-                    height: 220,
-                    decoration: BoxDecoration(
-                        border: Border.all(color: Colors.grey.shade300),
-                        borderRadius: BorderRadius.all(Radius.circular(20))),
-                    child: Column(
-                      children: [
-                        Image.asset(
-                          'asset/images/head.png',
-                          fit: BoxFit.fill,
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(top: 15),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              SizedBox(
-                                width: 160,
-                              ),
-                              Text('ปวดหัว'),
-                              Spacer(),
-                              CircleAvatar(
-                                backgroundColor: Colors.teal[600],
-                                radius: 15,
-                                child: IconButton(
-                                  padding: EdgeInsets.zero,
-                                  icon: Icon(
-                                    Icons.volume_up,
-                                    size: 15,
-                                  ),
-                                  color: Colors.white,
-                                  onPressed: () {},
-                                ),
-                              ),
-                              SizedBox(
-                                width: 30,
-                              )
-                            ],
-                          ),
-                        )
-                      ],
-                    ),
-                  ),
-                ),
-                SizedBox(
-                  height: 15,
-                ),
-                InkWell(
-                  onTap: () {},
-                  child: Container(
-                    width: 370,
-                    height: 220,
-                    decoration: BoxDecoration(
-                        border: Border.all(color: Colors.grey.shade300),
-                        borderRadius: BorderRadius.all(Radius.circular(20))),
-                    child: Column(
-                      children: [
-                        Image.asset(
-                          'asset/images/neck.png',
-                          fit: BoxFit.fill,
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(top: 15),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              SizedBox(
-                                width: 160,
-                              ),
-                              Text('ปวดคอ'),
-                              Spacer(),
-                              CircleAvatar(
-                                backgroundColor: Colors.teal[600],
-                                radius: 15,
-                                child: IconButton(
-                                  padding: EdgeInsets.zero,
-                                  icon: Icon(
-                                    Icons.volume_up,
-                                    size: 15,
-                                  ),
-                                  color: Colors.white,
-                                  onPressed: () {},
-                                ),
-                              ),
-                              SizedBox(
-                                width: 30,
-                              )
-                            ],
-                          ),
-                        )
-                      ],
-                    ),
-                  ),
-                ),
-                SizedBox(
-                  height: 15,
-                ),
-                InkWell(
-                  onTap: () {},
-                  child: Container(
-                    width: 370,
-                    height: 220,
-                    decoration: BoxDecoration(
-                        border: Border.all(color: Colors.grey.shade300),
-                        borderRadius: BorderRadius.all(Radius.circular(20))),
-                    child: Column(
-                      children: [
-                        Image.asset(
-                          'asset/images/eye.png',
-                          fit: BoxFit.fill,
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(top: 15),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              SizedBox(
-                                width: 160,
-                              ),
-                              Text('ปวดตา'),
-                              Spacer(),
-                              CircleAvatar(
-                                backgroundColor: Colors.teal[600],
-                                radius: 15,
-                                child: IconButton(
-                                  padding: EdgeInsets.zero,
-                                  icon: Icon(
-                                    Icons.volume_up,
-                                    size: 15,
-                                  ),
-                                  color: Colors.white,
-                                  onPressed: () {},
-                                ),
-                              ),
-                              SizedBox(
-                                width: 30,
-                              )
-                            ],
-                          ),
-                        )
-                      ],
-                    ),
-                  ),
-                ),
-                SizedBox(
-                  height: 15,
-                ),
-                InkWell(
-                  onTap: () {},
-                  child: Container(
-                    width: 370,
-                    height: 220,
-                    decoration: BoxDecoration(
-                        border: Border.all(color: Colors.grey.shade300),
-                        borderRadius: BorderRadius.all(Radius.circular(20))),
-                    child: Column(
-                      children: [
-                        Image.asset(
-                          'asset/images/blurry.png',
+                          'asset/images/maoban.png',
                           fit: BoxFit.fill,
                         ),
                         Padding(
@@ -533,7 +233,7 @@ class _TranslateMutiChoiceState extends State<TranslateMutiChoice> {
                               SizedBox(
                                 width: 130,
                               ),
-                              Text('ตาพล่ามัว'),
+                              Text('นั่ง'),
                               Spacer(),
                               CircleAvatar(
                                 backgroundColor: Colors.teal[600],
@@ -572,7 +272,7 @@ class _TranslateMutiChoiceState extends State<TranslateMutiChoice> {
                     child: Column(
                       children: [
                         Image.asset(
-                          'asset/images/wrist.png',
+                          'asset/images/maoban.png',
                           fit: BoxFit.fill,
                         ),
                         Padding(
@@ -583,7 +283,7 @@ class _TranslateMutiChoiceState extends State<TranslateMutiChoice> {
                               SizedBox(
                                 width: 130,
                               ),
-                              Text('ปวดมือ'),
+                              Text('นั่งหยองๆ'),
                               Spacer(),
                               CircleAvatar(
                                 backgroundColor: Colors.teal[600],
@@ -610,6 +310,203 @@ class _TranslateMutiChoiceState extends State<TranslateMutiChoice> {
                 ),
                 SizedBox(
                   height: 15,
+                ),
+                InkWell(
+                  onTap: () {},
+                  child: Container(
+                    width: 370,
+                    height: 220,
+                    decoration: BoxDecoration(
+                        border: Border.all(color: Colors.grey.shade300),
+                        borderRadius: BorderRadius.all(Radius.circular(20))),
+                    child: Column(
+                      children: [
+                        Image.asset(
+                          'asset/images/maoban.png',
+                          fit: BoxFit.fill,
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(top: 15),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              SizedBox(
+                                width: 130,
+                              ),
+                              Text('ก้ม'),
+                              Spacer(),
+                              CircleAvatar(
+                                backgroundColor: Colors.teal[600],
+                                radius: 15,
+                                child: IconButton(
+                                  padding: EdgeInsets.zero,
+                                  icon: Icon(
+                                    Icons.volume_up,
+                                    size: 15,
+                                  ),
+                                  color: Colors.white,
+                                  onPressed: () {},
+                                ),
+                              ),
+                              SizedBox(
+                                width: 30,
+                              )
+                            ],
+                          ),
+                        )
+                      ],
+                    ),
+                  ),
+                ),
+                SizedBox(
+                  height: 15,
+                ),
+                InkWell(
+                  onTap: () {},
+                  child: Container(
+                    width: 370,
+                    height: 220,
+                    decoration: BoxDecoration(
+                        border: Border.all(color: Colors.grey.shade300),
+                        borderRadius: BorderRadius.all(Radius.circular(20))),
+                    child: Column(
+                      children: [
+                        Image.asset(
+                          'asset/images/maoban.png',
+                          fit: BoxFit.fill,
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(top: 15),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              SizedBox(
+                                width: 130,
+                              ),
+                              Text('ยกของ'),
+                              Spacer(),
+                              CircleAvatar(
+                                backgroundColor: Colors.teal[600],
+                                radius: 15,
+                                child: IconButton(
+                                  padding: EdgeInsets.zero,
+                                  icon: Icon(
+                                    Icons.volume_up,
+                                    size: 15,
+                                  ),
+                                  color: Colors.white,
+                                  onPressed: () {},
+                                ),
+                              ),
+                              SizedBox(
+                                width: 30,
+                              )
+                            ],
+                          ),
+                        )
+                      ],
+                    ),
+                  ),
+                ),
+                SizedBox(
+                  height: 15,
+                ),
+                InkWell(
+                  onTap: () {},
+                  child: Container(
+                    width: 370,
+                    height: 220,
+                    decoration: BoxDecoration(
+                        border: Border.all(color: Colors.grey.shade300),
+                        borderRadius: BorderRadius.all(Radius.circular(20))),
+                    child: Column(
+                      children: [
+                        Image.asset(
+                          'asset/images/maoban.png',
+                          fit: BoxFit.fill,
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(top: 15),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              SizedBox(
+                                width: 130,
+                              ),
+                              Text('ยืนขึ้น'),
+                              Spacer(),
+                              CircleAvatar(
+                                backgroundColor: Colors.teal[600],
+                                radius: 15,
+                                child: IconButton(
+                                  padding: EdgeInsets.zero,
+                                  icon: Icon(
+                                    Icons.volume_up,
+                                    size: 15,
+                                  ),
+                                  color: Colors.white,
+                                  onPressed: () {},
+                                ),
+                              ),
+                              SizedBox(
+                                width: 30,
+                              )
+                            ],
+                          ),
+                        )
+                      ],
+                    ),
+                  ),
+                ),
+                SizedBox(
+                  height: 15,
+                ),
+                InkWell(
+                  onTap: () {},
+                  child: Container(
+                    width: 370,
+                    height: 220,
+                    decoration: BoxDecoration(
+                        border: Border.all(color: Colors.grey.shade300),
+                        borderRadius: BorderRadius.all(Radius.circular(20))),
+                    child: Column(
+                      children: [
+                        Image.asset(
+                          'asset/images/maoban.png',
+                          fit: BoxFit.fill,
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(top: 15),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              SizedBox(
+                                width: 130,
+                              ),
+                              Text('นอนราบ'),
+                              Spacer(),
+                              CircleAvatar(
+                                backgroundColor: Colors.teal[600],
+                                radius: 15,
+                                child: IconButton(
+                                  padding: EdgeInsets.zero,
+                                  icon: Icon(
+                                    Icons.volume_up,
+                                    size: 15,
+                                  ),
+                                  color: Colors.white,
+                                  onPressed: () {},
+                                ),
+                              ),
+                              SizedBox(
+                                width: 30,
+                              )
+                            ],
+                          ),
+                        )
+                      ],
+                    ),
+                  ),
                 ),
               ],
             ),

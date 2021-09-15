@@ -1,5 +1,5 @@
 import 'dart:ui';
-
+import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 
 class Levelpain extends StatefulWidget {
@@ -15,7 +15,12 @@ class _LevelpainState extends State<Levelpain> {
     return Scaffold(
         appBar: AppBar(
           backgroundColor: Colors.teal[400],
-          title: Icon(Icons.close),
+          title: IconButton(
+            icon: const Icon(Icons.close),
+            onPressed: () {
+              Get.offAllNamed('/translate');
+            },
+          ),
         ),
         body: ListView(
           children: [
