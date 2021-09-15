@@ -41,7 +41,7 @@ class _TranslateState extends State<Translate> {
               padding: EdgeInsets.only(right: 20.0),
               child: GestureDetector(
                 onTap: () {},
-                child: Icon(Icons.settings),
+                child: Icon(Icons.history),
               )),
         ],
         elevation: 0,
@@ -89,7 +89,7 @@ class _TranslateState extends State<Translate> {
                 height: 15,
               ),
               Container(
-                width: 390,
+                width: 380,
                 height: 200,
                 decoration: BoxDecoration(
                   color: Colors.teal[600],
