@@ -42,13 +42,29 @@ class _TranslateState extends State<Translate> {
     } else if (myController.text == "ขอบัตรประชาชนหน่อย") {
       Get.offAllNamed('/resultschoice');
     } else if (myController.text == "อธิบายเหตุการณ์ว่าเกิดขึ้นได้อย่างไร") {
-      Get.offAllNamed('/resultschoice1');
+      Get.offAllNamed('/translatechoice8');
     } else if (myController.text == "กลางคืนเจ็บจนต้องตื่นมากินยาหรือทายาไหม") {
       Get.offAllNamed('/translatechoice2');
     } else if (myController.text == "เคยเอ็กเรย์ไหม") {
       Get.offAllNamed('/translatechoice3');
     } else if (myController.text == "หลังปวดรักษาอย่างไร") {
       Get.offAllNamed('/translatechoice3');
+    } else if (myController.text == "ตอนปวดทำอะไรอยู่") {
+      Get.offAllNamed('/translatechoice6');
+    } else if (myController.text == "ทำท่าไหนปวดมากที่สุด") {
+      Get.offAllNamed('/mostpain');
+    } else if (myController.text == "ระดับความเจ็บปวดตอนแรก") {
+      Get.offAllNamed('/levelpain');
+    } else if (myController.text == "ตลอดทั้งวันเจ็บไหม") {
+      Get.offAllNamed('/allday');
+    } else if (myController.text == "เคยเกิดอุบัติเหตุไหม") {
+      Get.offAllNamed('/accident');
+    } else if (myController.text == "สูบบุหรี่ไหม") {
+      Get.offAllNamed('/smoke');
+    } else if (myController.text == "ดื่มสุราไหม") {
+      Get.offAllNamed('/wisky');
+    } else if (myController.text == "เริ่มปวดเมื่อไหร่") {
+      Get.offAllNamed('/time');
     }
   }
 
@@ -106,11 +122,14 @@ class _TranslateState extends State<Translate> {
         ),
         actions: <Widget>[
           Padding(
-              padding: EdgeInsets.only(right: 20.0),
-              child: GestureDetector(
-                onTap: () {},
-                child: Icon(Icons.history),
-              )),
+            padding: EdgeInsets.only(right: 20.0),
+            child: IconButton(
+              icon: const Icon(Icons.history),
+              onPressed: () {
+                Get.offAllNamed('/history');
+              },
+            ),
+          ),
         ],
         elevation: 0,
       ),
@@ -278,7 +297,7 @@ class _TranslateState extends State<Translate> {
                     buttonColor: Colors.white,
                     child: RaisedButton(
                       onPressed: () {
-                        Get.offAllNamed('/resultschoice1');
+                        Get.offAllNamed('/translatechoice8');
                       },
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(10),
@@ -345,7 +364,9 @@ class _TranslateState extends State<Translate> {
                     height: 40.0,
                     buttonColor: Colors.white,
                     child: RaisedButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        Get.offAllNamed('/translatechoice6');
+                      },
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(10),
                       ),
@@ -360,12 +381,14 @@ class _TranslateState extends State<Translate> {
                     height: 40.0,
                     buttonColor: Colors.teal[400],
                     child: RaisedButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        Get.offAllNamed('/mostpain');
+                      },
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(10),
                       ),
                       child: Text(
-                        "ตอนไหน",
+                        "ทำท่าไหนปวดมากที่สุด",
                         style: TextStyle(fontSize: 13, color: Colors.white),
                       ),
                     ),
@@ -375,7 +398,9 @@ class _TranslateState extends State<Translate> {
                     height: 40.0,
                     buttonColor: Colors.white,
                     child: RaisedButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        Get.offAllNamed('/levelpain');
+                      },
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(10),
                       ),
@@ -390,7 +415,9 @@ class _TranslateState extends State<Translate> {
                     height: 40.0,
                     buttonColor: Colors.teal[400],
                     child: RaisedButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        Get.offNamed('/translatechoice');
+                      },
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(10),
                       ),
@@ -405,7 +432,9 @@ class _TranslateState extends State<Translate> {
                     height: 40.0,
                     buttonColor: Colors.white,
                     child: RaisedButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        Get.offAllNamed('/allday');
+                      },
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(10),
                       ),
@@ -420,37 +449,9 @@ class _TranslateState extends State<Translate> {
                     height: 40.0,
                     buttonColor: Colors.teal[400],
                     child: RaisedButton(
-                      onPressed: () {},
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                      child: Text(
-                        "กลางคืนเจ็บจนต้องตื่นมากินยาหรือทายาไหม",
-                        style: TextStyle(fontSize: 13, color: Colors.white),
-                      ),
-                    ),
-                  ),
-                  ButtonTheme(
-                    minWidth: 360.0,
-                    height: 40.0,
-                    buttonColor: Colors.white,
-                    child: RaisedButton(
-                      onPressed: () {},
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                      child: Text(
-                        "เคยเอ็กเรย์ไหม",
-                        style: TextStyle(fontSize: 13),
-                      ),
-                    ),
-                  ),
-                  ButtonTheme(
-                    minWidth: 360.0,
-                    height: 40.0,
-                    buttonColor: Colors.teal[400],
-                    child: RaisedButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        Get.offAllNamed('/accident');
+                      },
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(10),
                       ),
@@ -465,7 +466,9 @@ class _TranslateState extends State<Translate> {
                     height: 40.0,
                     buttonColor: Colors.white,
                     child: RaisedButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        Get.offAllNamed('/smoke');
+                      },
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(10),
                       ),
@@ -480,7 +483,9 @@ class _TranslateState extends State<Translate> {
                     height: 40.0,
                     buttonColor: Colors.teal[400],
                     child: RaisedButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        Get.offAllNamed('/wisky');
+                      },
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(10),
                       ),
@@ -495,7 +500,9 @@ class _TranslateState extends State<Translate> {
                     height: 40.0,
                     buttonColor: Colors.white,
                     child: RaisedButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        Get.offAllNamed('/time');
+                      },
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(10),
                       ),
@@ -510,7 +517,9 @@ class _TranslateState extends State<Translate> {
                     height: 40.0,
                     buttonColor: Colors.teal[400],
                     child: RaisedButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        Get.offAllNamed('/resultschoice');
+                      },
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(10),
                       ),
@@ -525,28 +534,15 @@ class _TranslateState extends State<Translate> {
                     height: 40.0,
                     buttonColor: Colors.white,
                     child: RaisedButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        Get.offAllNamed('/fine');
+                      },
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(10),
                       ),
                       child: Text(
                         "ทำท่าที่อยู่แล้วสบายที่สุด",
                         style: TextStyle(fontSize: 13),
-                      ),
-                    ),
-                  ),
-                  ButtonTheme(
-                    minWidth: 360.0,
-                    height: 40.0,
-                    buttonColor: Colors.teal[400],
-                    child: RaisedButton(
-                      onPressed: () {},
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                      child: Text(
-                        "ทำท่าไหนปวดมากที่สุด",
-                        style: TextStyle(fontSize: 13, color: Colors.white),
                       ),
                     ),
                   ),

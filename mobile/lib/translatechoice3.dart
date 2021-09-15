@@ -32,11 +32,14 @@ class _Translatechoice3State extends State<Translatechoice3> {
         ),
         actions: <Widget>[
           Padding(
-              padding: EdgeInsets.only(right: 20.0),
-              child: GestureDetector(
-                onTap: () {},
-                child: Icon(Icons.settings),
-              )),
+            padding: EdgeInsets.only(right: 20.0),
+            child: IconButton(
+              icon: const Icon(Icons.close),
+              onPressed: () {
+                Get.offAllNamed('/translate');
+              },
+            ),
+          ),
         ],
         elevation: 0,
       ),

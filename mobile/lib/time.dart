@@ -32,9 +32,11 @@ class _TimeState extends State<Time> {
         actions: <Widget>[
           Padding(
             padding: EdgeInsets.only(right: 20.0),
-            child: GestureDetector(
-              onTap: () {},
-              child: Icon(Icons.settings),
+            child: IconButton(
+              icon: const Icon(Icons.close),
+              onPressed: () {
+                Get.offAllNamed('/translate');
+              },
             ),
           ),
         ],

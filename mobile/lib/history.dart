@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class History extends StatefulWidget {
   const History({Key? key}) : super(key: key);
@@ -25,9 +26,20 @@ class _HistoryState extends State<History> {
             Text(
               'ภาษากระเหรี่ยงสำหรับกายภาพ',
               style: TextStyle(fontSize: 10, fontWeight: FontWeight.bold),
-            )
+            ),
           ],
         ),
+        actions: <Widget>[
+          Padding(
+            padding: EdgeInsets.only(right: 20.0),
+            child: IconButton(
+              icon: const Icon(Icons.close),
+              onPressed: () {
+                Get.offAllNamed('/translate');
+              },
+            ),
+          ),
+        ],
         elevation: 0,
       ),
       body: ListView(

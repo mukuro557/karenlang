@@ -6,6 +6,7 @@ import 'package:mobile/Translate.dart';
 import 'package:mobile/accident.dart';
 import 'package:mobile/afterwakeup.dart';
 import 'package:mobile/allday.dart';
+import 'package:mobile/fine.dart';
 import 'package:mobile/history.dart';
 import 'package:mobile/home.dart';
 import 'package:mobile/lesspain.dart';
@@ -35,7 +36,7 @@ void main() {
     theme: ThemeData(
       primarySwatch: Colors.teal,
     ),
-    initialRoute: '/translatechoice8',
+    initialRoute: '/translate',
     getPages: [
       GetPage(name: '/home', page: () => Home()),
       GetPage(name: '/translate', page: () => Translate()),
@@ -57,7 +58,9 @@ void main() {
       GetPage(name: "/allday", page: () => Allday()),
       GetPage(name: "/accident", page: () => Accident()),
       GetPage(name: "/smoke", page: () => Smoke()),
-      GetPage(name: "/drink", page: () => Drink()),
+      GetPage(name: "/wisky", page: () => Drink()),
+      GetPage(name: "/history", page: () => History()),
+      GetPage(name: "/fine", page: () => Fine()),
       GetPage(name: "/mostpain", page: () => Actmostpain()),
       GetPage(name: "/lesspain", page: () => Actlesspain()),
     ],

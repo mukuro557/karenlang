@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class Smoke extends StatefulWidget {
-  const Smoke({Key? key}) : super(key: key);
+class Fine extends StatefulWidget {
+  const Fine({Key? key}) : super(key: key);
 
   @override
-  _SmokeState createState() => _SmokeState();
+  _FineState createState() => _FineState();
 }
 
-class _SmokeState extends State<Smoke> {
+class _FineState extends State<Fine> {
   final maxLines = 5;
   @override
   Widget build(BuildContext context) {
@@ -99,7 +99,7 @@ class _SmokeState extends State<Smoke> {
                     width: 350,
                     height: 100,
                     child: Text(
-                      'สูบบุหรี่ไหม',
+                      'ทำท่าที่อยู่แล้วสบายที่สุด',
                       style: TextStyle(color: Colors.white, fontSize: 20),
                     ),
                   ),
@@ -144,82 +144,6 @@ class _SmokeState extends State<Smoke> {
                   ],
                 ),
               ],
-            ),
-          ),
-          SizedBox(
-            height: 20,
-          ),
-          InkWell(
-            onTap: () {},
-            child: Container(
-              width: 350,
-              height: 120,
-              decoration: BoxDecoration(
-                color: Colors.teal[400],
-                border: Border.all(color: Colors.teal),
-                borderRadius: BorderRadius.all(Radius.circular(20)),
-              ),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Spacer(
-                    flex: 2,
-                  ),
-                  Icon(
-                    Icons.check_circle_outline,
-                    size: 100,
-                    color: Colors.white,
-                  ),
-                  Spacer(
-                    flex: 5,
-                  ),
-                  Text(
-                    'สูบ',
-                    style: TextStyle(fontSize: 30, color: Colors.white),
-                  ),
-                  Spacer(
-                    flex: 10,
-                  ),
-                ],
-              ),
-            ),
-          ),
-          SizedBox(
-            height: 20,
-          ),
-          InkWell(
-            onTap: () {},
-            child: Container(
-              width: 350,
-              height: 120,
-              decoration: BoxDecoration(
-                color: Colors.red[900],
-                border: Border.all(color: Colors.red),
-                borderRadius: BorderRadius.all(Radius.circular(20)),
-              ),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Spacer(
-                    flex: 3,
-                  ),
-                  Icon(
-                    Icons.cancel_outlined,
-                    size: 100,
-                    color: Colors.white,
-                  ),
-                  Spacer(
-                    flex: 5,
-                  ),
-                  Text(
-                    'ไม่สูบ',
-                    style: TextStyle(fontSize: 30, color: Colors.white),
-                  ),
-                  Spacer(
-                    flex: 10,
-                  ),
-                ],
-              ),
             ),
           ),
         ],
