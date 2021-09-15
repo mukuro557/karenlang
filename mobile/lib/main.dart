@@ -22,6 +22,7 @@ import 'package:mobile/translatechoice3.dart';
 import 'package:mobile/translatechoice4.dart';
 import 'package:mobile/translatechoice5.dart';
 import 'package:mobile/translatechoice7.dart';
+import 'package:mobile/translatechoice8.dart';
 import 'package:mobile/translatemutichoice.dart';
 import 'package:mobile/wisky.dart';
 import 'package:speech_to_text/speech_to_text.dart' as stt;
@@ -34,7 +35,7 @@ void main() {
     theme: ThemeData(
       primarySwatch: Colors.teal,
     ),
-    initialRoute: '/translatechoice7',
+    initialRoute: '/translatechoice8',
     getPages: [
       GetPage(name: '/home', page: () => Home()),
       GetPage(name: '/translate', page: () => Translate()),
@@ -51,14 +52,14 @@ void main() {
       GetPage(name: '/translatechoice5', page: () => translatechoice5()),
       GetPage(name: '/translatechoice6', page: () => translatechoice5()),
       GetPage(name: '/translatechoice7', page: () => translatechoice7()),
+      GetPage(name: '/translatechoice8', page: () => translatechoice8()),
       GetPage(name: '/afterwakeup', page: () => Afterwakup()),
-      GetPage(name: "/allday", page: ()=> Allday()),
-      GetPage(name: "/accident", page: ()=> Accident()),
-      GetPage(name: "/smoke", page: ()=> Smoke()),
-      GetPage(name: "/drink", page: ()=> Drink()),
-      GetPage(name: "/mostpain", page: ()=> Actmostpain()),
-      GetPage(name: "/lesspain", page: ()=> Actlesspain()),
-
+      GetPage(name: "/allday", page: () => Allday()),
+      GetPage(name: "/accident", page: () => Accident()),
+      GetPage(name: "/smoke", page: () => Smoke()),
+      GetPage(name: "/drink", page: () => Drink()),
+      GetPage(name: "/mostpain", page: () => Actmostpain()),
+      GetPage(name: "/lesspain", page: () => Actlesspain()),
     ],
   ));
 }
