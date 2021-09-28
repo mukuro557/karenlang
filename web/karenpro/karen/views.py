@@ -232,3 +232,9 @@ def get_question(request,word):
     else:
         ques = questions.objects.all()
         return HttpResponse(ques, content_type='application/json')
+
+def get_setanswer(request,id):
+    ques = choice.objects.all().filter(Question_id= id)
+    # print(ques[0].Sound)
+    return HttpResponse(ques, content_type='application/json')
+    
