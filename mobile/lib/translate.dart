@@ -77,7 +77,7 @@ class _TranslateState extends State<Translate> {
       if (available) {
         setState(() => _isListening = true);
         var locales = await _speech.locales();
-        print(locales[110].localeId);
+        print(locales[115].localeId);
 
         var selectedLocale = locales[115];
         _speech.listen(

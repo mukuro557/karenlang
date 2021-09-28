@@ -9,6 +9,25 @@ class TranslateMutiChoice extends StatefulWidget {
 }
 
 class _TranslateMutiChoiceState extends State<TranslateMutiChoice> {
+  var litems = [
+    {'name': 'ปวดไหล่', 'image': 'asset/images/shoulder.png'},
+    {'name': 'ปวดหลังด้านล่าง', 'image': 'asset/images/back.png'},
+    {'name': 'ปวดเข่า', 'image': 'asset/images/knee.png'},
+    {'name': 'ปวดสะโพกร้าวลงขา', 'image': 'asset/images/hip.png'},
+    {'name': 'ปวดข้อศอก', 'image': 'asset/images/elbow.png'},
+    {'name': 'ปวดท้อง', 'image': 'asset/images/abdomen.png'},
+    {'name': 'ปวดหัว', 'image': 'asset/images/head.png'},
+    {'name': 'ปวดคอ', 'image': 'asset/images/neck.png'},
+    {'name': 'ปวดตา', 'image': 'asset/images/eye.png'},
+    {'name': 'ตาพล่ามัว', 'image': 'asset/images/blurry.png'},
+    {'name': 'ปวดมือ', 'image': 'asset/images/wrist.png'}
+  ];
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -21,597 +40,84 @@ class _TranslateMutiChoiceState extends State<TranslateMutiChoice> {
             },
           ),
         ),
-        body: ListView(
+        body: Column(
           children: [
-            Column(
+            Row(
+              mainAxisAlignment: MainAxisAlignment.end,
               children: [
-                Container(
-                  width: 400,
-                  height: 60,
-                  decoration: BoxDecoration(border: Border.all(width: 0.1)),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: [
-                      SizedBox(
-                        width: 20,
-                      ),
-                      Text('อาการที่มาหาหมอคืออะไร'),
-                      SizedBox(
-                        width: 130,
-                      ),
-                      CircleAvatar(
-                        backgroundColor: Colors.teal[600],
-                        radius: 20,
-                        child: IconButton(
-                          padding: EdgeInsets.zero,
-                          icon: Icon(
-                            Icons.volume_up,
-                            size: 15,
-                          ),
-                          color: Colors.white,
-                          onPressed: () {},
-                        ),
-                      ),
-                      SizedBox(
-                        width: 30,
-                      ),
-                    ],
-                  ),
-                ),
                 SizedBox(
-                  height: 25,
+                  width: 20,
                 ),
-                InkWell(
-                  onTap: () {},
-                  child: Container(
-                    width: 370,
-                    height: 220,
-                    decoration: BoxDecoration(
-                        border: Border.all(color: Colors.grey.shade300),
-                        borderRadius: BorderRadius.all(Radius.circular(20))),
-                    child: Column(
-                      children: [
-                        Image.asset(
-                          'asset/images/back.png',
-                          fit: BoxFit.fitWidth,
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(top: 15),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              SizedBox(
-                                width: 130,
-                              ),
-                              Text('ปวดหลังด้านล่าง'),
-                              Spacer(),
-                              CircleAvatar(
-                                backgroundColor: Colors.teal[600],
-                                radius: 15,
-                                child: IconButton(
-                                  padding: EdgeInsets.zero,
-                                  icon: Icon(
-                                    Icons.volume_up,
-                                    size: 15,
-                                  ),
-                                  color: Colors.white,
-                                  onPressed: () {},
-                                ),
-                              ),
-                              SizedBox(
-                                width: 30,
-                              )
-                            ],
-                          ),
-                        )
-                      ],
+                Text('อาการที่มาหาหมอคืออะไร'),
+                SizedBox(
+                  width: 130,
+                ),
+                CircleAvatar(
+                  backgroundColor: Colors.teal[600],
+                  radius: 20,
+                  child: IconButton(
+                    padding: EdgeInsets.zero,
+                    icon: Icon(
+                      Icons.volume_up,
+                      size: 15,
                     ),
+                    color: Colors.white,
+                    onPressed: () {},
                   ),
-                ),
-                SizedBox(
-                  height: 15,
-                ),
-                InkWell(
-                  onTap: () {},
-                  child: Container(
-                    width: 370,
-                    height: 220,
-                    decoration: BoxDecoration(
-                        border: Border.all(color: Colors.grey.shade300),
-                        borderRadius: BorderRadius.all(Radius.circular(20))),
-                    child: Column(
-                      children: [
-                        Image.asset(
-                          'asset/images/shoulder.png',
-                          fit: BoxFit.fill,
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(top: 15),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              SizedBox(
-                                width: 150,
-                              ),
-                              Text('ปวดไหล่'),
-                              Spacer(),
-                              CircleAvatar(
-                                backgroundColor: Colors.teal[600],
-                                radius: 15,
-                                child: IconButton(
-                                  padding: EdgeInsets.zero,
-                                  icon: Icon(
-                                    Icons.volume_up,
-                                    size: 15,
-                                  ),
-                                  color: Colors.white,
-                                  onPressed: () {},
-                                ),
-                              ),
-                              SizedBox(
-                                width: 30,
-                              )
-                            ],
-                          ),
-                        )
-                      ],
-                    ),
-                  ),
-                ),
-                SizedBox(
-                  height: 15,
-                ),
-                InkWell(
-                  onTap: () {},
-                  child: Container(
-                    width: 370,
-                    height: 220,
-                    decoration: BoxDecoration(
-                        border: Border.all(color: Colors.grey.shade300),
-                        borderRadius: BorderRadius.all(Radius.circular(20))),
-                    child: Column(
-                      children: [
-                        Image.asset(
-                          'asset/images/knee.png',
-                          fit: BoxFit.fill,
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(top: 15),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              SizedBox(
-                                width: 160,
-                              ),
-                              Text('ปวดเข่า'),
-                              Spacer(),
-                              CircleAvatar(
-                                backgroundColor: Colors.teal[600],
-                                radius: 15,
-                                child: IconButton(
-                                  padding: EdgeInsets.zero,
-                                  icon: Icon(
-                                    Icons.volume_up,
-                                    size: 15,
-                                  ),
-                                  color: Colors.white,
-                                  onPressed: () {},
-                                ),
-                              ),
-                              SizedBox(
-                                width: 30,
-                              )
-                            ],
-                          ),
-                        )
-                      ],
-                    ),
-                  ),
-                ),
-                SizedBox(
-                  height: 15,
-                ),
-                InkWell(
-                  onTap: () {},
-                  child: Container(
-                    width: 370,
-                    height: 220,
-                    decoration: BoxDecoration(
-                        border: Border.all(color: Colors.grey.shade300),
-                        borderRadius: BorderRadius.all(Radius.circular(20))),
-                    child: Column(
-                      children: [
-                        Image.asset(
-                          'asset/images/hip.png',
-                          fit: BoxFit.fill,
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(top: 15),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              SizedBox(
-                                width: 130,
-                              ),
-                              Text('ปวดสะโพกร้าวลงขา'),
-                              Spacer(),
-                              CircleAvatar(
-                                backgroundColor: Colors.teal[600],
-                                radius: 15,
-                                child: IconButton(
-                                  padding: EdgeInsets.zero,
-                                  icon: Icon(
-                                    Icons.volume_up,
-                                    size: 15,
-                                  ),
-                                  color: Colors.white,
-                                  onPressed: () {},
-                                ),
-                              ),
-                              SizedBox(
-                                width: 30,
-                              )
-                            ],
-                          ),
-                        )
-                      ],
-                    ),
-                  ),
-                ),
-                SizedBox(
-                  height: 15,
-                ),
-                InkWell(
-                  onTap: () {},
-                  child: Container(
-                    width: 370,
-                    height: 220,
-                    decoration: BoxDecoration(
-                        border: Border.all(color: Colors.grey.shade300),
-                        borderRadius: BorderRadius.all(Radius.circular(20))),
-                    child: Column(
-                      children: [
-                        Image.asset(
-                          'asset/images/elbow.png',
-                          fit: BoxFit.fill,
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(top: 15),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              SizedBox(
-                                width: 130,
-                              ),
-                              Text('ปวดข้อศอก'),
-                              Spacer(),
-                              CircleAvatar(
-                                backgroundColor: Colors.teal[600],
-                                radius: 15,
-                                child: IconButton(
-                                  padding: EdgeInsets.zero,
-                                  icon: Icon(
-                                    Icons.volume_up,
-                                    size: 15,
-                                  ),
-                                  color: Colors.white,
-                                  onPressed: () {},
-                                ),
-                              ),
-                              SizedBox(
-                                width: 30,
-                              )
-                            ],
-                          ),
-                        )
-                      ],
-                    ),
-                  ),
-                ),
-                SizedBox(
-                  height: 15,
-                ),
-                InkWell(
-                  onTap: () {},
-                  child: Container(
-                    width: 370,
-                    height: 220,
-                    decoration: BoxDecoration(
-                        border: Border.all(color: Colors.grey.shade300),
-                        borderRadius: BorderRadius.all(Radius.circular(20))),
-                    child: Column(
-                      children: [
-                        Image.asset(
-                          'asset/images/abdomen.png',
-                          fit: BoxFit.fill,
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(top: 15),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              SizedBox(
-                                width: 160,
-                              ),
-                              Text('ปวดท้อง'),
-                              Spacer(),
-                              CircleAvatar(
-                                backgroundColor: Colors.teal[600],
-                                radius: 15,
-                                child: IconButton(
-                                  padding: EdgeInsets.zero,
-                                  icon: Icon(
-                                    Icons.volume_up,
-                                    size: 15,
-                                  ),
-                                  color: Colors.white,
-                                  onPressed: () {},
-                                ),
-                              ),
-                              SizedBox(
-                                width: 30,
-                              )
-                            ],
-                          ),
-                        )
-                      ],
-                    ),
-                  ),
-                ),
-                SizedBox(
-                  height: 15,
-                ),
-                InkWell(
-                  onTap: () {},
-                  child: Container(
-                    width: 370,
-                    height: 220,
-                    decoration: BoxDecoration(
-                        border: Border.all(color: Colors.grey.shade300),
-                        borderRadius: BorderRadius.all(Radius.circular(20))),
-                    child: Column(
-                      children: [
-                        Image.asset(
-                          'asset/images/head.png',
-                          fit: BoxFit.fill,
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(top: 15),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              SizedBox(
-                                width: 160,
-                              ),
-                              Text('ปวดหัว'),
-                              Spacer(),
-                              CircleAvatar(
-                                backgroundColor: Colors.teal[600],
-                                radius: 15,
-                                child: IconButton(
-                                  padding: EdgeInsets.zero,
-                                  icon: Icon(
-                                    Icons.volume_up,
-                                    size: 15,
-                                  ),
-                                  color: Colors.white,
-                                  onPressed: () {},
-                                ),
-                              ),
-                              SizedBox(
-                                width: 30,
-                              )
-                            ],
-                          ),
-                        )
-                      ],
-                    ),
-                  ),
-                ),
-                SizedBox(
-                  height: 15,
-                ),
-                InkWell(
-                  onTap: () {},
-                  child: Container(
-                    width: 370,
-                    height: 220,
-                    decoration: BoxDecoration(
-                        border: Border.all(color: Colors.grey.shade300),
-                        borderRadius: BorderRadius.all(Radius.circular(20))),
-                    child: Column(
-                      children: [
-                        Image.asset(
-                          'asset/images/neck.png',
-                          fit: BoxFit.fill,
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(top: 15),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              SizedBox(
-                                width: 160,
-                              ),
-                              Text('ปวดคอ'),
-                              Spacer(),
-                              CircleAvatar(
-                                backgroundColor: Colors.teal[600],
-                                radius: 15,
-                                child: IconButton(
-                                  padding: EdgeInsets.zero,
-                                  icon: Icon(
-                                    Icons.volume_up,
-                                    size: 15,
-                                  ),
-                                  color: Colors.white,
-                                  onPressed: () {},
-                                ),
-                              ),
-                              SizedBox(
-                                width: 30,
-                              )
-                            ],
-                          ),
-                        )
-                      ],
-                    ),
-                  ),
-                ),
-                SizedBox(
-                  height: 15,
-                ),
-                InkWell(
-                  onTap: () {},
-                  child: Container(
-                    width: 370,
-                    height: 220,
-                    decoration: BoxDecoration(
-                        border: Border.all(color: Colors.grey.shade300),
-                        borderRadius: BorderRadius.all(Radius.circular(20))),
-                    child: Column(
-                      children: [
-                        Image.asset(
-                          'asset/images/eye.png',
-                          fit: BoxFit.fill,
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(top: 15),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              SizedBox(
-                                width: 160,
-                              ),
-                              Text('ปวดตา'),
-                              Spacer(),
-                              CircleAvatar(
-                                backgroundColor: Colors.teal[600],
-                                radius: 15,
-                                child: IconButton(
-                                  padding: EdgeInsets.zero,
-                                  icon: Icon(
-                                    Icons.volume_up,
-                                    size: 15,
-                                  ),
-                                  color: Colors.white,
-                                  onPressed: () {},
-                                ),
-                              ),
-                              SizedBox(
-                                width: 30,
-                              )
-                            ],
-                          ),
-                        )
-                      ],
-                    ),
-                  ),
-                ),
-                SizedBox(
-                  height: 15,
-                ),
-                InkWell(
-                  onTap: () {},
-                  child: Container(
-                    width: 370,
-                    height: 220,
-                    decoration: BoxDecoration(
-                        border: Border.all(color: Colors.grey.shade300),
-                        borderRadius: BorderRadius.all(Radius.circular(20))),
-                    child: Column(
-                      children: [
-                        Image.asset(
-                          'asset/images/blurry.png',
-                          fit: BoxFit.fill,
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(top: 15),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              SizedBox(
-                                width: 130,
-                              ),
-                              Text('ตาพล่ามัว'),
-                              Spacer(),
-                              CircleAvatar(
-                                backgroundColor: Colors.teal[600],
-                                radius: 15,
-                                child: IconButton(
-                                  padding: EdgeInsets.zero,
-                                  icon: Icon(
-                                    Icons.volume_up,
-                                    size: 15,
-                                  ),
-                                  color: Colors.white,
-                                  onPressed: () {},
-                                ),
-                              ),
-                              SizedBox(
-                                width: 30,
-                              )
-                            ],
-                          ),
-                        )
-                      ],
-                    ),
-                  ),
-                ),
-                SizedBox(
-                  height: 15,
-                ),
-                InkWell(
-                  onTap: () {},
-                  child: Container(
-                    width: 370,
-                    height: 220,
-                    decoration: BoxDecoration(
-                        border: Border.all(color: Colors.grey.shade300),
-                        borderRadius: BorderRadius.all(Radius.circular(20))),
-                    child: Column(
-                      children: [
-                        Image.asset(
-                          'asset/images/wrist.png',
-                          fit: BoxFit.fill,
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(top: 15),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              SizedBox(
-                                width: 130,
-                              ),
-                              Text('ปวดมือ'),
-                              Spacer(),
-                              CircleAvatar(
-                                backgroundColor: Colors.teal[600],
-                                radius: 15,
-                                child: IconButton(
-                                  padding: EdgeInsets.zero,
-                                  icon: Icon(
-                                    Icons.volume_up,
-                                    size: 15,
-                                  ),
-                                  color: Colors.white,
-                                  onPressed: () {},
-                                ),
-                              ),
-                              SizedBox(
-                                width: 30,
-                              )
-                            ],
-                          ),
-                        )
-                      ],
-                    ),
-                  ),
-                ),
-                SizedBox(
-                  height: 15,
                 ),
               ],
+            ),
+            SizedBox(
+              height: 25,
+            ),
+            Expanded(
+              child: ListView.builder(
+                  itemCount: litems.length,
+                  itemBuilder: (BuildContext ctxt, int index) {
+                    return new Card(
+                      child: Container(
+                        width: 370,
+                        decoration: BoxDecoration(
+                          border: Border.all(color: Colors.grey.shade300),
+                          // borderRadius: BorderRadius.all(Radius.circular(20))
+                        ),
+                        child: Column(
+                          children: [
+                            Image.asset(
+                              litems[index]['image']!,
+                              fit: BoxFit.fill,
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.only(top: 15),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  SizedBox(
+                                    width: 150,
+                                  ),
+                                  Text(litems[index]['name']!),
+                                  Spacer(),
+                                  CircleAvatar(
+                                    backgroundColor: Colors.teal[600],
+                                    radius: 15,
+                                    child: IconButton(
+                                      padding: EdgeInsets.zero,
+                                      icon: Icon(
+                                        Icons.volume_up,
+                                        size: 15,
+                                      ),
+                                      color: Colors.white,
+                                      onPressed: () {},
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    );
+                  }),
             ),
           ],
         ));

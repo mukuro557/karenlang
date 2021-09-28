@@ -224,3 +224,11 @@ def get_queryset(request,word):
     for j in sound :
         print(j.Sound)
     return HttpResponse(sound[0].Sound, content_type='application/json')
+
+def get_answerset(request,word):
+
+    # proc = word_tokenize(word, engine='newmm')
+    sound = questions.objects.all().filter(Question= word)
+    for j in sound :
+        print(j.Sound)
+    return HttpResponse(sound[0].Sound, content_type='application/json')

@@ -11,6 +11,7 @@ def __str__(self):
 class questions(models.Model):
     Question = models.CharField(max_length = 100)
     Sound = models.CharField(max_length = 100)
+    Type = models.IntegerField()
 
 def __str__(self):
     return self.name
