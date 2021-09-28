@@ -24,6 +24,7 @@ urlpatterns = [
     path('', views.login),
     path('mainpage/', views.mainpage),
     path('cutkum/<str:word>', views.get_queryset, name='cutkum'),
+    path('getquestion/<str:word>', views.get_question, name='cutkum'),
     path('addquestion/', views.addanswer),
     path('username_pass', views.username_pass),
     path('logout/', views.logout),

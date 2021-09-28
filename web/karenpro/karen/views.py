@@ -149,7 +149,7 @@ def addquestion(request, number):
 
         else:
             question_thai = questions.objects.create(
-                Question=word_th, Sound=filenameQ)
+                Question=word_th, Sound=filenameQ,Type ="0")
             question_thai.save()
             data = questions.objects.all()
 
@@ -225,10 +225,10 @@ def get_queryset(request,word):
         print(j.Sound)
     return HttpResponse(sound[0].Sound, content_type='application/json')
 
-def get_answerset(request,word):
-
-    # proc = word_tokenize(word, engine='newmm')
-    sound = questions.objects.all().filter(Question= word)
-    for j in sound :
-        print(j.Sound)
-    return HttpResponse(sound[0].Sound, content_type='application/json')
+def get_question(request,word):
+    if questions.objects.filter(Question= word).exists():
+        ques = questions.objects.all().filter(Question= word)
+        return HttpResponse(ques[0].Type, content_type='application/json')
+    else:
+        ques = questions.objects.all()
+        return HttpResponse(ques, content_type='application/json')
