@@ -189,7 +189,7 @@ class _SpeechScreenState extends State<SpeechScreen> {
   void callpage() async {
     // var url = Uri.parse();
 
-    var url = Uri.parse('http://127.0.0.1:8000/cutkum/ขอบัตรประชาชนหน่อย');
+    var url = Uri.parse('http://192.168.0.11:8000/cutkum/ขอบัตรประชาชนหน่อย');
     Map<String, String> headers = {
       "Content-type": "application/json",
       'authorization': 'Basic c3R1ZHlkb3RlOnN0dWR5ZG90ZTEyMw=='

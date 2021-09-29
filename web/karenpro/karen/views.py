@@ -230,11 +230,18 @@ def get_question(request,word):
         ques = questions.objects.all().filter(Question= word)
         return HttpResponse(ques[0].Type, content_type='application/json')
     else:
-        ques = questions.objects.all()
-        return HttpResponse(ques, content_type='application/json')
+        ques = questions.objects.all().filter()
+        data = []
+        for j in ques :
+            data.append(j.Question)
+        # y = json.loads(ques)
+        
+        list_to_json_array = json.dumps(data)
+        print(list_to_json_array)
+        return HttpResponse(list_to_json_array)
 
 def get_setanswer(request,id):
     ques = choice.objects.all().filter(Question_id= id)
     # print(ques[0].Sound)
-    return HttpResponse(ques, content_type='application/json')
+    return HttpResponse({"ques":ques}, content_type='application/json')
     

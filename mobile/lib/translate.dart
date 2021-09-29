@@ -1,7 +1,10 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:avatar_glow/avatar_glow.dart';
 import 'package:get/get.dart';
 import 'package:mobile/translatechoice.dart';
+import 'package:http/http.dart' as http;
 import 'package:speech_to_text/speech_to_text.dart' as stt;
 
 // import 'package:assets_audio_player/assets_audio_player.dart';
@@ -22,6 +25,8 @@ class _TranslateState extends State<Translate> {
   String _text = 'Press mic button or type to tranlate';
   var info;
   final myController = TextEditingController();
+  var question = '';
+  var testtext;
 
   @override
   void initState() {
@@ -30,41 +35,23 @@ class _TranslateState extends State<Translate> {
     _speech = stt.SpeechToText();
   }
 
-  void jumppage() {
-    if (myController.text == "หลังตื่นแล้วมีอาการไหม") {
-      Get.offNamed('/translatechoice');
-    } else if (myController.text == "อาการที่มาหาหมอคืออะไร") {
-      Get.offAllNamed('/translatemutichoice');
-    } else if (myController.text == "ระดับความเจ็บปวด") {
-      Get.offAllNamed('/levelpain');
-    } else if (myController.text == "เริ่มปวดเมื่อไหร่") {
-      Get.offAllNamed('/time');
-    } else if (myController.text == "ขอบัตรประชาชนหน่อย") {
+  void jumppage() async {
+    var url = Uri.parse('http://192.168.0.106:8000/getquestion/' + question);
+
+    http.Response response = await http.get(url);
+    if (response.body == 0) {
       Get.offAllNamed('/resultschoice');
-    } else if (myController.text == "อธิบายเหตุการณ์ว่าเกิดขึ้นได้อย่างไร") {
-      Get.offAllNamed('/translatechoice8');
-    } else if (myController.text == "กลางคืนเจ็บจนต้องตื่นมากินยาหรือทายาไหม") {
-      Get.offAllNamed('/translatechoice2');
-    } else if (myController.text == "เคยเอ็กเรย์ไหม") {
-      Get.offAllNamed('/translatechoice3');
-    } else if (myController.text == "หลังปวดรักษาอย่างไร") {
-      Get.offAllNamed('/translatechoice3');
-    } else if (myController.text == "ตอนปวดทำอะไรอยู่") {
-      Get.offAllNamed('/translatechoice6');
-    } else if (myController.text == "ทำท่าไหนปวดมากที่สุด") {
-      Get.offAllNamed('/mostpain');
-    } else if (myController.text == "ระดับความเจ็บปวดตอนแรก") {
+    } else if (response.body == 1) {
+      Get.offNamed('/translatechoice');
+    } else if (response.body == 2) {
+      Get.offAllNamed('/translatemutichoice');
+    } else if (response.body == 3) {
       Get.offAllNamed('/levelpain');
-    } else if (myController.text == "ตลอดทั้งวันเจ็บไหม") {
-      Get.offAllNamed('/allday');
-    } else if (myController.text == "เคยเกิดอุบัติเหตุไหม") {
-      Get.offAllNamed('/accident');
-    } else if (myController.text == "สูบบุหรี่ไหม") {
-      Get.offAllNamed('/smoke');
-    } else if (myController.text == "ดื่มสุราไหม") {
-      Get.offAllNamed('/wisky');
-    } else if (myController.text == "เริ่มปวดเมื่อไหร่") {
-      Get.offAllNamed('/time');
+    } else {
+      setState(() {
+        testtext = jsonDecode(response.body);
+        print(testtext[0]);
+      });
     }
   }
 
@@ -246,6 +233,7 @@ class _TranslateState extends State<Translate> {
                             buttonColor: Colors.white,
                             child: RaisedButton(
                               onPressed: () {
+                                question = myController.text;
                                 jumppage();
                                 // print(myController);
                               },
@@ -280,7 +268,8 @@ class _TranslateState extends State<Translate> {
                     buttonColor: Colors.teal[400],
                     child: RaisedButton(
                       onPressed: () {
-                        Get.offAllNamed('/translatemutichoice');
+                        question = "อาการที่มาหาหมอคืออะไร";
+                        jumppage();
                       },
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(10),
@@ -297,7 +286,8 @@ class _TranslateState extends State<Translate> {
                     buttonColor: Colors.white,
                     child: RaisedButton(
                       onPressed: () {
-                        Get.offAllNamed('/translatechoice8');
+                        question = "อธิบายเหตุการณ์ว่าเกิดขึ้นได้อย่างไร";
+                        jumppage();
                       },
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(10),
@@ -314,7 +304,8 @@ class _TranslateState extends State<Translate> {
                     buttonColor: Colors.teal[400],
                     child: RaisedButton(
                       onPressed: () {
-                        Get.offAllNamed('/translatechoice2');
+                        question = "กลางคืนเจ็บจนต้องตื่นมากินยาหรือทายาไหม";
+                        jumppage();
                       },
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(10),
@@ -331,7 +322,8 @@ class _TranslateState extends State<Translate> {
                     buttonColor: Colors.white,
                     child: RaisedButton(
                       onPressed: () {
-                        Get.offAllNamed('/translatechoice3');
+                        question = "เคยเอ็กเรย์ไหม";
+                        jumppage();
                       },
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(10),
@@ -348,7 +340,8 @@ class _TranslateState extends State<Translate> {
                     buttonColor: Colors.teal[400],
                     child: RaisedButton(
                       onPressed: () {
-                        Get.offAllNamed('/translatechoice4');
+                        question = "หลังปวดรักษาอย่างไร";
+                        jumppage();
                       },
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(10),
@@ -365,7 +358,8 @@ class _TranslateState extends State<Translate> {
                     buttonColor: Colors.white,
                     child: RaisedButton(
                       onPressed: () {
-                        Get.offAllNamed('/translatechoice6');
+                        question = "ตอนปวดทำอะไรอยู่";
+                        jumppage();
                       },
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(10),
@@ -382,7 +376,8 @@ class _TranslateState extends State<Translate> {
                     buttonColor: Colors.teal[400],
                     child: RaisedButton(
                       onPressed: () {
-                        Get.offAllNamed('/mostpain');
+                        question = "ทำท่าไหนปวดมากที่สุด";
+                        jumppage();
                       },
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(10),
@@ -399,7 +394,8 @@ class _TranslateState extends State<Translate> {
                     buttonColor: Colors.white,
                     child: RaisedButton(
                       onPressed: () {
-                        Get.offAllNamed('/levelpain');
+                        question = "ระดับความเจ็บปวดตอนแรก";
+                        jumppage();
                       },
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(10),
@@ -416,7 +412,8 @@ class _TranslateState extends State<Translate> {
                     buttonColor: Colors.teal[400],
                     child: RaisedButton(
                       onPressed: () {
-                        Get.offNamed('/translatechoice');
+                        question = "หลังตื่นแล้วมีอาการไหม";
+                        jumppage();
                       },
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(10),
@@ -433,7 +430,8 @@ class _TranslateState extends State<Translate> {
                     buttonColor: Colors.white,
                     child: RaisedButton(
                       onPressed: () {
-                        Get.offAllNamed('/allday');
+                        question = "ตลอดทั้งวันเจ็บไหม";
+                        jumppage();
                       },
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(10),
@@ -450,7 +448,8 @@ class _TranslateState extends State<Translate> {
                     buttonColor: Colors.teal[400],
                     child: RaisedButton(
                       onPressed: () {
-                        Get.offAllNamed('/accident');
+                        question = "เคยเกิดอุบัติเหตุไหม";
+                        jumppage();
                       },
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(10),
@@ -467,7 +466,8 @@ class _TranslateState extends State<Translate> {
                     buttonColor: Colors.white,
                     child: RaisedButton(
                       onPressed: () {
-                        Get.offAllNamed('/smoke');
+                        question = "สูบบุหรี่ไหม";
+                        jumppage();
                       },
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(10),
@@ -484,7 +484,8 @@ class _TranslateState extends State<Translate> {
                     buttonColor: Colors.teal[400],
                     child: RaisedButton(
                       onPressed: () {
-                        Get.offAllNamed('/wisky');
+                        question = "ดื่มสุราไหม";
+                        jumppage();
                       },
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(10),
@@ -501,7 +502,8 @@ class _TranslateState extends State<Translate> {
                     buttonColor: Colors.white,
                     child: RaisedButton(
                       onPressed: () {
-                        Get.offAllNamed('/time');
+                        question = "เริ่มปวดเมื่อไหร่";
+                        jumppage();
                       },
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(10),
@@ -518,7 +520,8 @@ class _TranslateState extends State<Translate> {
                     buttonColor: Colors.teal[400],
                     child: RaisedButton(
                       onPressed: () {
-                        Get.offAllNamed('/resultschoice');
+                        question = "ขอบัตรประชาชนหน่อย";
+                        jumppage();
                       },
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(10),
@@ -535,7 +538,8 @@ class _TranslateState extends State<Translate> {
                     buttonColor: Colors.white,
                     child: RaisedButton(
                       onPressed: () {
-                        Get.offAllNamed('/fine');
+                        question = "ทำท่าที่อยู่แล้วสบายที่สุด";
+                        jumppage();
                       },
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(10),
