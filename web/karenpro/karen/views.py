@@ -231,7 +231,7 @@ def get_question(request,word):
         data = []
         data.append([ques[0].id,ques[0].Type,ques[0].Sound])
         list_to_json_array = json.dumps(data)
-        print(data)
+        
         return HttpResponse(list_to_json_array)
 
     else:
@@ -247,6 +247,11 @@ def get_question(request,word):
 
 def get_setanswer(request,id):
     ques = choice.objects.all().filter(Question_id= id)
-    # print(ques[0].Sound)
-    return HttpResponse({"ques":ques}, content_type='application/json')
+    data = []
+    for j in ques :
+        data.append([j.Choice,j.Icon,j.Sound])
+    # y = json.loads(ques)
+        print(data)
+    list_to_json_array = json.dumps(data)
+    return HttpResponse(list_to_json_array)
     
