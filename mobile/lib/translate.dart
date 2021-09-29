@@ -6,6 +6,8 @@ import 'package:get/get.dart';
 import 'package:mobile/translatechoice.dart';
 import 'package:http/http.dart' as http;
 import 'package:speech_to_text/speech_to_text.dart' as stt;
+import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 
 // import 'package:assets_audio_player/assets_audio_player.dart';
 
@@ -36,24 +38,37 @@ class _TranslateState extends State<Translate> {
   }
 
   void jumppage() async {
+    final box = GetStorage();
     var url = Uri.parse('http://192.168.0.106:8000/getquestion/' + question);
 
     http.Response response = await http.get(url);
-    if (response.body == 0) {
+    testtext = jsonDecode(response.body);
+    var number = testtext[0][1];
+
+    box.write('id', testtext[0][0]);
+    box.write('question', question);
+    
+
+    if (number == 0) {
+      box.write('sound', testtext[0][2]);
       Get.offAllNamed('/resultschoice');
-    } else if (response.body == 1) {
+    } else if (number == 1) {
+      box.write('sound', testtext[0][2]);
       Get.offNamed('/translatechoice');
-    } else if (response.body == 2) {
+    } else if (number == 2) {
+      box.write('sound', testtext[0][2]);
       Get.offAllNamed('/translatemutichoice');
-    } else if (response.body == 3) {
+    } else if (number == 3) {
+      box.write('sound', testtext[0][2]);
       Get.offAllNamed('/levelpain');
     } else {
       setState(() {
-        testtext = jsonDecode(response.body);
-        print(testtext[0]);
+        print(testtext[0][0]);
       });
     }
   }
+
+  void showstatus() {}
 
   void _listen() async {
     if (!_isListening) {

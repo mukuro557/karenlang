@@ -13,7 +13,6 @@ import 'package:mobile/lesspain.dart';
 import 'package:mobile/levelpain.dart';
 import 'package:mobile/mostpain.dart';
 import 'package:mobile/resultschoice.dart';
-import 'package:mobile/resultschoice1.dart';
 import 'package:mobile/smoke.dart';
 import 'package:mobile/time.dart';
 import 'package:mobile/timemonth.dart';
@@ -46,7 +45,6 @@ void main() {
       GetPage(name: '/translatechoice', page: () => Translatechoice()),
       GetPage(name: '/time', page: () => Time()),
       GetPage(name: '/timemonth', page: () => Timemonth()),
-      GetPage(name: '/resultschoice1', page: () => Resultschoice1()),
       GetPage(name: '/translatechoice2', page: () => translatechoice2()),
       GetPage(name: '/translatechoice3', page: () => Translatechoice3()),
       GetPage(name: '/translatechoice4', page: () => Translatechoice4()),

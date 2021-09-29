@@ -228,16 +228,21 @@ def get_queryset(request,word):
 def get_question(request,word):
     if questions.objects.filter(Question= word).exists():
         ques = questions.objects.all().filter(Question= word)
-        return HttpResponse(ques[0].Type, content_type='application/json')
+        data = []
+        data.append([ques[0].id,ques[0].Type,ques[0].Sound])
+        list_to_json_array = json.dumps(data)
+        print(data)
+        return HttpResponse(list_to_json_array)
+
     else:
         ques = questions.objects.all().filter()
         data = []
         for j in ques :
-            data.append(j.Question)
+            data.append([j.id,j.Question])
         # y = json.loads(ques)
         
         list_to_json_array = json.dumps(data)
-        print(list_to_json_array)
+        
         return HttpResponse(list_to_json_array)
 
 def get_setanswer(request,id):
