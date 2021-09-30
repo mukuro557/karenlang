@@ -149,7 +149,7 @@ def addquestion(request, number):
 
         else:
             question_thai = questions.objects.create(
-                Question=word_th, Sound=filenameQ)
+                Question=word_th, Sound=filenameQ,Type ="0")
             question_thai.save()
             data = questions.objects.all()
 
@@ -224,3 +224,34 @@ def get_queryset(request,word):
     for j in sound :
         print(j.Sound)
     return HttpResponse(sound[0].Sound, content_type='application/json')
+
+def get_question(request,word):
+    if questions.objects.filter(Question= word).exists():
+        ques = questions.objects.all().filter(Question= word)
+        data = []
+        data.append([ques[0].id,ques[0].Type,ques[0].Sound])
+        list_to_json_array = json.dumps(data)
+        
+        return HttpResponse(list_to_json_array)
+
+    else:
+        ques = questions.objects.all().filter()
+        data = []
+        for j in ques :
+            data.append([j.id,j.Question])
+        # y = json.loads(ques)
+        
+        list_to_json_array = json.dumps(data)
+        
+        return HttpResponse(list_to_json_array)
+
+def get_setanswer(request,id):
+    ques = choice.objects.all().filter(Question_id= id)
+    data = []
+    for j in ques :
+        data.append([j.Choice,j.Icon,j.Sound])
+    # y = json.loads(ques)
+        print(data)
+    list_to_json_array = json.dumps(data)
+    return HttpResponse(list_to_json_array)
+    

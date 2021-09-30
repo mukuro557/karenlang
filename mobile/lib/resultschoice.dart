@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
+import 'package:audioplayers/audioplayers.dart';
+import 'package:http/http.dart' as http;
 
 class Resultschoice extends StatefulWidget {
   const Resultschoice({Key? key}) : super(key: key);
@@ -10,6 +13,32 @@ class Resultschoice extends StatefulWidget {
 
 class _ResultschoiceState extends State<Resultschoice> {
   final maxLines = 5;
+  var question = "";
+  var _sound;
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    getquestion();
+  }
+
+  void getquestion() {
+    final box = GetStorage();
+    question = box.read('question');
+    _sound = box.read('sound');
+    print(_sound);
+  }
+
+  void playmp3() async {
+    AudioPlayer audioPlayer = AudioPlayer();
+    AudioCache audioCache = new AudioCache();
+    AudioPlayer advancedPlayer = new AudioPlayer();
+    String localFilePath;
+    // audioCache.play('Karen.mp3');
+    int result =
+        await audioPlayer.play('http://192.168.0.106:8000/static/sound/' + _sound);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -99,7 +128,7 @@ class _ResultschoiceState extends State<Resultschoice> {
                     width: 350,
                     height: 100,
                     child: Text(
-                      'ขอบัตรประชาชนหน่อย',
+                      question,
                       style: TextStyle(color: Colors.white, fontSize: 20),
                     ),
                   ),
@@ -114,7 +143,9 @@ class _ResultschoiceState extends State<Resultschoice> {
                         padding: EdgeInsets.zero,
                         icon: Icon(Icons.volume_up),
                         color: Colors.teal[600],
-                        onPressed: () {},
+                        onPressed: () {
+                          playmp3();
+                        },
                       ),
                     ),
                     // SizedBox(
