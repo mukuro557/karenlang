@@ -176,7 +176,7 @@ class _TranslatechoiceState extends State<Translatechoice> {
                                   onPressed: () {
                                     final box = GetStorage();
                                     _sound = box.read('sound');
-                                    playmp3();
+                                    playmp3(_sound);
                                   },
                                 ),
                               ),
