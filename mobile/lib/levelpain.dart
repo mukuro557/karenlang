@@ -1,6 +1,10 @@
+import 'dart:convert';
 import 'dart:ui';
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
+import 'package:get_storage/get_storage.dart';
+import 'package:audioplayers/audioplayers.dart';
+import 'package:http/http.dart' as http;
 
 class Levelpain extends StatefulWidget {
   const Levelpain({Key? key}) : super(key: key);
@@ -10,6 +14,39 @@ class Levelpain extends StatefulWidget {
 }
 
 class _LevelpainState extends State<Levelpain> {
+  var litems = [];
+  final maxLines = 5;
+  var question = "";
+  var _sound;
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    getquestion();
+  }
+
+  void getquestion() async {
+    final box = GetStorage();
+    question = box.read('question');
+    var id = box.read('id').toString();
+    print(id);
+    var url = Uri.parse('http://192.168.0.106:8000/getanswer/' + id);
+    http.Response response = await http.get(url);
+    setState(() {
+      litems = jsonDecode(response.body);
+    });
+  }
+
+  void playmp3(song) async {
+    AudioPlayer audioPlayer = AudioPlayer();
+    AudioCache audioCache = new AudioCache();
+    AudioPlayer advancedPlayer = new AudioPlayer();
+    String localFilePath;
+    // audioCache.play('Karen.mp3');
+    int result = await audioPlayer
+        .play('http://192.168.0.106:8000/static/sound/' + song);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -36,9 +73,9 @@ class _LevelpainState extends State<Levelpain> {
                       SizedBox(
                         width: 20,
                       ),
-                      Text('ระดับความเจ็บปวด'),
+                      Text(question),
                       SizedBox(
-                        width: 190,
+                        width: 100,
                       ),
                       CircleAvatar(
                         backgroundColor: Colors.teal[600],
@@ -50,7 +87,11 @@ class _LevelpainState extends State<Levelpain> {
                             size: 15,
                           ),
                           color: Colors.white,
-                          onPressed: () {},
+                          onPressed: () {
+                            final box = GetStorage();
+                            _sound = box.read('sound');
+                            playmp3(_sound);
+                          },
                         ),
                       ),
                       SizedBox(

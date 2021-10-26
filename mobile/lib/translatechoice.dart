@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
@@ -12,6 +14,7 @@ class Translatechoice extends StatefulWidget {
 }
 
 class _TranslatechoiceState extends State<Translatechoice> {
+  var litems = [];
   final maxLines = 5;
   var question = "";
   var _sound;
@@ -22,21 +25,26 @@ class _TranslatechoiceState extends State<Translatechoice> {
     getquestion();
   }
 
-  void getquestion() {
+  void getquestion() async {
     final box = GetStorage();
     question = box.read('question');
-    _sound = box.read('sound');
-    print(_sound);
+    var id = box.read('id').toString();
+    print(id);
+    var url = Uri.parse('http://192.168.0.106:8000/getanswer/' + id);
+    http.Response response = await http.get(url);
+    setState(() {
+      litems = jsonDecode(response.body);
+    });
   }
 
-  void playmp3() async {
+  void playmp3(song) async {
     AudioPlayer audioPlayer = AudioPlayer();
     AudioCache audioCache = new AudioCache();
     AudioPlayer advancedPlayer = new AudioPlayer();
     String localFilePath;
     // audioCache.play('Karen.mp3');
     int result = await audioPlayer
-        .play('http://192.168.0.106:8000/static/sound/' + _sound);
+        .play('http://192.168.0.106:8000/static/sound/' + song);
   }
 
   @override
@@ -144,7 +152,9 @@ class _TranslatechoiceState extends State<Translatechoice> {
                         icon: Icon(Icons.volume_up),
                         color: Colors.teal[600],
                         onPressed: () {
-                          playmp3();
+                          final box = GetStorage();
+                          _sound = box.read('sound');
+                          playmp3(_sound);
                         },
                       ),
                     ),
@@ -205,7 +215,7 @@ class _TranslatechoiceState extends State<Translatechoice> {
                     flex: 5,
                   ),
                   Text(
-                    'มี',
+                    litems[0][0],
                     style: TextStyle(fontSize: 30, color: Colors.white),
                   ),
                   Spacer(
@@ -243,7 +253,7 @@ class _TranslatechoiceState extends State<Translatechoice> {
                     flex: 5,
                   ),
                   Text(
-                    'ไม่มี',
+                    litems[1][0],
                     style: TextStyle(fontSize: 30, color: Colors.white),
                   ),
                   Spacer(

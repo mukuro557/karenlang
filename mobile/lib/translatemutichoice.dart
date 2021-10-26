@@ -15,17 +15,7 @@ class TranslateMutiChoice extends StatefulWidget {
 
 class _TranslateMutiChoiceState extends State<TranslateMutiChoice> {
   var litems = [
-    // {'name': 'ปวดไหล่', 'image': 'asset/images/shoulder.png'},
-    // {'name': 'ปวดหลังด้านล่าง', 'image': 'asset/images/back.png'},
-    // {'name': 'ปวดเข่า', 'image': 'asset/images/knee.png'},
-    // {'name': 'ปวดสะโพกร้าวลงขา', 'image': 'asset/images/hip.png'},
-    // {'name': 'ปวดข้อศอก', 'image': 'asset/images/elbow.png'},
-    // {'name': 'ปวดท้อง', 'image': 'asset/images/abdomen.png'},
-    // {'name': 'ปวดหัว', 'image': 'asset/images/head.png'},
-    // {'name': 'ปวดคอ', 'image': 'asset/images/neck.png'},
-    // {'name': 'ปวดตา', 'image': 'asset/images/eye.png'},
-    // {'name': 'ตาพล่ามัว', 'image': 'asset/images/blurry.png'},
-    // {'name': 'ปวดมือ', 'image': 'asset/images/wrist.png'}
+   
   ];
   final maxLines = 5;
   var question = "";

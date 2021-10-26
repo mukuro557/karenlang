@@ -229,7 +229,7 @@ def get_question(request,word):
     if questions.objects.filter(Question= word).exists():
         ques = questions.objects.all().filter(Question= word)
         data = []
-        data.append([ques[0].id,ques[0].Type,ques[0].Sound])
+        data.append([ques[0].id,ques[0].Type,ques[0].Sound],)
         list_to_json_array = json.dumps(data)
         
         return HttpResponse(list_to_json_array)
@@ -242,7 +242,7 @@ def get_question(request,word):
         # y = json.loads(ques)
         
         list_to_json_array = json.dumps(data)
-        
+        print(data)
         return HttpResponse(list_to_json_array)
 
 def get_setanswer(request,id):
