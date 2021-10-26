@@ -134,7 +134,7 @@ class _ResultschoiceState extends State<Resultschoice> {
                   ),
                 ),
                 Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     CircleAvatar(
                       backgroundColor: Colors.white,
@@ -148,30 +148,30 @@ class _ResultschoiceState extends State<Resultschoice> {
                         },
                       ),
                     ),
-                    SizedBox(
-                      width: 75,
-                    ),
-                    ButtonTheme(
-                      minWidth: 20.0,
-                      height: 30.0,
-                      buttonColor: Colors.white,
-                      child: RaisedButton(
-                        onPressed: () {
-                          Get.offAllNamed('/home');
-                        },
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                        child: Text(
-                          "ย้อนกลับ",
-                          style:
-                              TextStyle(fontSize: 10, color: Colors.teal[600]),
-                        ),
-                      ),
-                    ),
-                    SizedBox(
-                      width: 20,
-                    )
+                    // SizedBox(
+                    //   width: 75,
+                    // ),
+                    // ButtonTheme(
+                    //   minWidth: 20.0,
+                    //   height: 30.0,
+                    //   buttonColor: Colors.white,
+                    //   child: RaisedButton(
+                    //     onPressed: () {
+                    //       Get.offAllNamed('/home');
+                    //     },
+                    //     shape: RoundedRectangleBorder(
+                    //       borderRadius: BorderRadius.circular(10),
+                    //     ),
+                    //     child: Text(
+                    //       "ย้อนกลับ",
+                    //       style:
+                    //           TextStyle(fontSize: 10, color: Colors.teal[600]),
+                    //     ),
+                    //   ),
+                    // ),
+                    // SizedBox(
+                    //   width: 20,
+                    // )
                   ],
                 )
               ],
