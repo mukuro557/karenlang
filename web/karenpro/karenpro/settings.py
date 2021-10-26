@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-diaxi$@ah_89!z4*kg&6kd$ynl+1a-o7ykwuftlj)n)m$kair+
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1', 'localhost', '127.0.0.1']
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost', '192.168.0.11', '192.168.10.220','192.168.0.106']
 
 
 # Application definition
@@ -111,7 +111,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/3.2/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'th-th'
 
 TIME_ZONE = 'UTC'
 

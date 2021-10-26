@@ -1,13 +1,39 @@
-import 'dart:io';
+// import 'dart:io';
 import 'package:avatar_glow/avatar_glow.dart';
 import 'package:flutter/material.dart';
 import 'package:highlight_text/highlight_text.dart';
+import 'package:mobile/Translate.dart';
+import 'package:mobile/history.dart';
+import 'package:mobile/home.dart';
+import 'package:mobile/levelpain.dart';
+import 'package:mobile/resultschoice.dart';
+import 'package:mobile/time.dart';
+import 'package:mobile/timemonth.dart';
+import 'package:mobile/translatechoice.dart';
+import 'package:mobile/translatemutichoice.dart';
 import 'package:speech_to_text/speech_to_text.dart' as stt;
 import 'package:http/http.dart' as http;
 import 'package:audioplayers/audioplayers.dart';
+import 'package:get/get.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(GetMaterialApp(
+    theme: ThemeData(
+      primarySwatch: Colors.teal,
+    ),
+    initialRoute: '/translatechoice',
+    getPages: [
+      GetPage(name: '/home', page: () => Home()),
+      GetPage(name: '/translate', page: () => Translate()),
+      GetPage(name: '/resultschoice', page: () => Resultschoice()),
+      GetPage(name: '/translatemutichoice', page: () => TranslateMutiChoice()),
+      GetPage(name: '/levelpain', page: () => Levelpain()),
+      GetPage(name: '/translatechoice', page: () => Translatechoice()),
+      GetPage(name: '/time', page: () => Time()),
+      GetPage(name: '/timemonth', page: () => Timemonth()),
+      GetPage(name: "/history", page: () => History()),
+    ],
+  ));
 }
 
 class MyApp extends StatelessWidget {
@@ -31,16 +57,16 @@ class SpeechScreen extends StatefulWidget {
 }
 
 class _SpeechScreenState extends State<SpeechScreen> {
-  main() async {
-    // var server = await HttpServer.bind(InternetAddress.LOOPBACK_IP_V4, 8000);
-    try {
-      var server = await HttpServer.bind(InternetAddress.loopbackIPv4, 8000);
-      uri = server.address.host.toString();
-      print(server.address.host);
-    } catch (e) {
-      print("Something went wrong while creating a server...");
-    }
-  }
+  // main() async {
+  //   // var server = await HttpServer.bind(InternetAddress.LOOPBACK_IP_V4, 8000);
+  //   try {
+  //     var server = await HttpServer.bind(InternetAddress.loopbackIPv4, 8000);
+  //     uri = server.address.host.toString();
+  //     print(server.address.host);
+  //   } catch (e) {
+  //     print("Something went wrong while creating a server...");
+  //   }
+  // }
 
   late String uri;
   late stt.SpeechToText _speech;
@@ -131,14 +157,14 @@ class _SpeechScreenState extends State<SpeechScreen> {
 
   void callpage() async {
     // var url = Uri.parse();
-    
-    var url = Uri.parse('http://127.0.0.1:8000/cutkum/' + _text);
+
+    var url = Uri.parse('http://192.168.0.11:8000/cutkum/ขอบัตรประชาชนหน่อย');
     Map<String, String> headers = {
       "Content-type": "application/json",
       'authorization': 'Basic c3R1ZHlkb3RlOnN0dWR5ZG90ZTEyMw=='
     };
     http.Response response = await http.get(url);
-
+    print(response.body);
     setState(() {
       _sound = response.body;
     });
