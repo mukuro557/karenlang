@@ -35,55 +35,83 @@
   <link rel="stylesheet" href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css">
   <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.2.3/css/responsive.bootstrap4.min.css">
 
-  <!-- icon -->
-
+<link href="{% static 'style.css'%}" rel="stylesheet">
   <title>แปลภาษากะเหรี่ยง</title>
+
 </head>
 
 <body>
-  <header class="navbar navbar-dark sticky-top flex-md-nowrap p-0 shadow" style="background-color: #FFA69E;">
-    <a class="navbar-brand px-3" href="/mainpage" style="background-color: #FFA69E;"><img src="{% static 'image/logo.png'%}"
-        style="width: 60px;" alt="">ภาษากระเหรี่ยงสำหรับกายภาพ </a>
-    <button class="navbar-toggler position-absolute d-md-none collapsed" type="button" data-bs-toggle="collapse"
-      data-bs-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <ul class="navbar-nav px-3">
-      <li class="nav-item text-nowrap">
-        <a class="nav-link" href="/logout" style="color: white;">ออกจากระบบ</a>
-      </li>
-    </ul>
-  </header>
+<div class="wrapper d-flex align-items-stretch">
+			<nav id="sidebar" class="active">
+				<img src="{% static 'image/newlogo.png'%}" style="width: 70px;" alt="" class="center">
+         <h6 style="text-align: center;" class="mt-1"><b>ภาษากระเหรี่ยงสำหรับกายภาพ</b></h6>
+        <ul class="list-unstyled components mb-5">
+          <li>
+            <a href="/dashboad"><span class="fa fa-home"></span> หน้าแรก</a>
+          </li>
+          <li>
+              <a href="/mainpage"><span class="fa fa-file"></span> คำศัพท์</a>
+          </li>
+          <li>
+            <a href="/addquestion"><span class="fa fa-sticky-note"></span> คำถาม-ตอบ</a>
+          </li>
+        </ul>
 
-  <div class="container-fluid">
-    <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse mt-4">
-      <div class="position-sticky pt-3">
-          <ul class="nav flex-column">
-              <li class="nav-item">
-                  <a class="nav-link active" aria-current="page" href="/mainpage">
-                      <span data-feather="file"></span>
-                      คำศัพท์
-                  </a>
-              </li>
-              <li class="nav-item">
-                  <a class="nav-link " aria-current="page" href="/addquestion">
-                      <span data-feather="calendar"></span>
-                      คำถาม-ตอบ
-                  </a>
-              </li>
-          </ul>
+        
+    	</nav>
 
-      </div>
-  </nav>
-    {% block content %}
+        <!-- Page Content  -->
+      <div id="content" class="p-4 p-md-5 ">
+
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+          <div class="container-fluid">
+
+            <button type="button" id="sidebarCollapse" class="btn btn-primary">
+              <i class="fa fa-bars"></i>
+              <span class="sr-only">Toggle Menu</span>
+            </button>
+            <button class="btn btn-dark d-inline-block d-lg-none ml-auto" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <i class="fa fa-bars"></i>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+              <ul class="nav navbar-nav ml-auto">
+                    <a class="nav-link" href="/logout">ออกจากระบบ</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </nav>
+{% block content %}
 
     {% endblock%}
-  </div>
-  </div>
-  </div>
+         </div>
+		</div>
 
+                
 
+         <script>
+         (function($) {
 
+	"use strict";
+
+	var fullHeight = function() {
+
+		$('.js-fullheight').css('height', $(window).height());
+		$(window).resize(function(){
+			$('.js-fullheight').css('height', $(window).height());
+		});
+
+	};
+	fullHeight();
+
+	$('#sidebarCollapse').on('click', function () {
+      $('#sidebar').toggleClass('active');
+  });
+
+})(jQuery);
+
+         </script>  
 </body>
 
 </html>
