@@ -11,7 +11,6 @@ from django.http import JsonResponse
 
 from pythainlp import word_tokenize
 import speech_recognition as sr
-
 import json
 
 dataSet = [
@@ -21,6 +20,9 @@ dataSet = [
 
 def login(request):
     return render(request, 'login.html')
+
+def dashboad(request):
+    return render(request, 'dashboad.html')
 
 
 @login_required(login_url="/")
