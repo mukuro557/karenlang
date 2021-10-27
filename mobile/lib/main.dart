@@ -21,7 +21,7 @@ void main() {
     theme: ThemeData(
       primarySwatch: Colors.teal,
     ),
-    initialRoute: '/translatechoice',
+    initialRoute: '/home',
     getPages: [
       GetPage(name: '/home', page: () => Home()),
       GetPage(name: '/translate', page: () => Translate()),
