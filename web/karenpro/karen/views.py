@@ -25,14 +25,14 @@ def dashboad(request):
     return render(request, 'dashboad.html')
 
 
-@login_required(login_url="/")
+# @login_required(login_url="/")
 def mainpage(request):
     data = word.objects.all()
 
     return render(request, 'mainpage.html', {'allword': data})
 
 
-@login_required(login_url="/")
+# @login_required(login_url="/")
 def addanswer(request):
     dataSet.clear()
     ques = questions.objects.all()
@@ -67,7 +67,7 @@ def username_pass(request):
         return render(request, 'login.html', {'user': 'nouser'})
 
 
-@login_required(login_url="/")
+# @login_required(login_url="/")
 def logout(request):
     auth.logout(request)
     return redirect('/')
