@@ -132,10 +132,10 @@ def editword(request, pk):
         return render(request, 'addanswer.html', {'allword': data})
 
 
-def addquestion(request, number):
-
-    if request.method == 'POST' and request.FILES['myfile'] and request.POST['wordth'] and request.POST['answer1']:
-
+def addquestion(request, number , type):
+    print("enter")
+    if request.method == 'POST' and request.FILES['myfile'] and request.POST['wordth'] :
+        
         word_th = request.POST['wordth']
         mysound = request.FILES['myfile']
         fs = FileSystemStorage()
@@ -150,22 +150,25 @@ def addquestion(request, number):
 
         else:
             question_thai = questions.objects.create(
-                Question=word_th, Sound=filenameQ,Type ="0")
+                Question=word_th, Sound=filenameQ,Type = type)
             question_thai.save()
             data = questions.objects.all()
+            
+            if type != 0:
+                for i in range(1, number+1):
+                    findimg = request.FILES['ansfile%s' % i]
+                    findicon = request.FILES['icon%s' % i]
+                    iconic = fs.save(findicon.name, findicon)
+                    filenameC = fs.save(findimg.name, findimg)
+                    uploaded_file_url = fs.url(filenameC)
+                    choicef = request.POST['answer%s' % i]
+                    choicework = choice.objects.create(
+                        Choice=choicef, Question_id=question_thai.id, Sound=filenameC, Icon=iconic)
+                    choicework.save()
 
-            for i in range(1, number+1):
-                findimg = request.FILES['ansfile%s' % i]
-                findicon = request.FILES['icon%s' % i]
-                iconic = fs.save(findicon.name, findicon)
-                filenameC = fs.save(findimg.name, findimg)
-                uploaded_file_url = fs.url(filenameC)
-                choicef = request.POST['answer%s' % i]
-                choicework = choice.objects.create(
-                    Choice=choicef, Question_id=question_thai.id, Sound=filenameC, Icon=iconic)
-                choicework.save()
-
-            return redirect('/addquestion')
+                return redirect('/addquestion')
+            else: 
+                return redirect('/addquestion')
 
     return redirect('/addquestion')
 

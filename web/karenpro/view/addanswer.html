@@ -126,13 +126,19 @@
                                         <br><br>
                                     </div>
                                 </div>
+                                <select id="anstype">
+                                    <option value="0">ไม่ต้องการคำตอบ</option>
+                                    <option value="1">ระดับ</option>
+                                    <option value="2">คำถาม 2 คำตอบ</option>
+                                    <option value="3">คำถามหลายคำตอบ</option>
+                                </select>
                                 <!-- คำตอบที่ 1 -->
-                                <div class="form-row">
+                                 <div class="form-row " hidden>
                                     <div class="form-group col-md-6">
                                         <label for="inputCity">คำตอบที่ 1</label>
                                         <input type="text" class="form-control" id="inputCity1" name="answer1">
                                     </div>
-                                    <div class="form-group col-md-3">
+                                    <div class="form-group col-md-3" >
                                         <label for="inputState">เสียงคำตอบที่ 1</label>
                                         <div class="custom-file">
                                             <input type="file" name="ansfile1" id="file1" src="../karen/static/sound/ipone.mp3">
@@ -143,9 +149,9 @@
                                         <label for="inputZip">เพิ่มไอคอน/รูปภาพ</label>
                                         <input type="file" name="icon1" id="file2">
                                     </div>
-                                </div>
+                                </div> 
                                 <div id="newanswer"></div>
-                                <button id="addans" type="button" class="btn">เพิ่มคำตอบ</button>
+                                <button id="addans" type="button" class="btn" hidden>เพิ่มคำตอบ</button>
                                 <div id="explain"></div> <br>
                                 <button type="button" class="btn border" style="background-color: white;color: black;"
                                     data-dismiss="modal">ยกเลิก</button>
@@ -164,6 +170,7 @@
                 let num
                 var edit
                 let idall
+                var questyp = 0
                 $("#myTable tbody").on("click", ".btn_edit", function () {
                     
                     idbut = this.id;
@@ -196,13 +203,40 @@
                     $("#recipient-name").val('')
                     $('.custom-file-label').val('')
                     document.getElementById('file1').file = '/static/sound/ipone.mp3'
-                    document.getElementById('formcheck').action = '/addques/' + num
+                    document.getElementById('formcheck').action = '/addques/' + num +"/"+ questyp
                     var container = document.getElementById("newanswer");
                     while (container.hasChildNodes()) {
                         container.removeChild(container.lastChild);
                     }
 
                 });
+
+            $("#anstype").change(function(){
+                   questyp = $("#anstype").val()
+                   let element = document.getElementById("addans");
+                    $('#newanswer').empty()
+                    num = 1
+                    if(questyp == 1){
+                        element.setAttribute("hidden", "hidden");
+                    }
+                    else if(questyp == 2){
+                        $('#newanswer').append('<div class="form-row"><div class="form-group col-md-6"><label for="inputCity'+num+'">คำตอบที่ ' + num + ' </label><input type="text" class="form-control" id="inputCity" name="answer'+num+'"> </div ><div class="form-group col-md-3"><label for="inputState">เสียงคำตอบที่ ' + num + '</label><div class="custom-file"><input type="file" name="ansfile' + num + '" id="file"><br><br></div></div><div class="form-group col-md-3"><label for="inputZip">เพิ่มไอคอน</label><input type="file" name="icon' + num + '" id="file2"></div></div>')
+                        num++
+                        $('#newanswer').append('<div class="form-row"><div class="form-group col-md-6"><label for="inputCity'+num+'">คำตอบที่ ' + num + ' </label><input type="text" class="form-control" id="inputCity" name="answer'+num+'"> </div ><div class="form-group col-md-3"><label for="inputState">เสียงคำตอบที่ ' + num + '</label><div class="custom-file"><input type="file" name="ansfile' + num + '" id="file"><br><br></div></div><div class="form-group col-md-3"><label for="inputZip">เพิ่มไอคอน</label><input type="file" name="icon' + num + '" id="file2"></div></div>')
+                        num ++
+                        element.setAttribute("hidden", "hidden");
+                    }else if(questyp == 3){
+                        for(let i = 0;i<3;i++){
+                            $('#newanswer').append('<div class="form-row"><div class="form-group col-md-6"><label for="inputCity'+num+'">คำตอบที่ ' + num + ' </label><input type="text" class="form-control" id="inputCity" name="answer'+num+'"> </div ><div class="form-group col-md-3"><label for="inputState">เสียงคำตอบที่ ' + num + '</label><div class="custom-file"><input type="file" name="ansfile' + num + '" id="file"><br><br></div></div><div class="form-group col-md-3"><label for="inputZip">เพิ่มไอคอน</label><input type="file" name="icon' + num + '" id="file2"></div></div>')
+                            num++
+                        }
+                        element.removeAttribute("hidden")
+                    }else{
+                        $('#newanswer').empty()
+                        element.setAttribute("hidden", "hidden");
+                    }
+                     document.getElementById('formcheck').action = '/addques/' + num + "/"+ questyp 
+                })
 
                 $(".btn1").on("click", function () {
 
@@ -220,7 +254,7 @@
                     var container = document.getElementById("newanswer");
                     $('#newanswer').append('<div class="form-row"><div class="form-group col-md-6"><label for="inputCity'+num+'">คำตอบที่ ' + num + ' </label><input type="text" class="form-control" id="inputCity" name="answer'+num+'"> </div ><div class="form-group col-md-3"><label for="inputState">เสียงคำตอบที่ ' + num + '</label><div class="custom-file"><input type="file" name="ansfile' + num + '" id="file"><br><br></div></div><div class="form-group col-md-3"><label for="inputZip">เพิ่มไอคอน</label><input type="file" name="icon' + num + '" id="file2"></div></div>')
                     if (edit == 0) {
-                        document.getElementById('formcheck').action = '/addques/' + num
+                        document.getElementById('formcheck').action = '/addques/' + num +"/" + questyp
                     } else {
                         document.getElementById('formcheck').action = '/editques/' + idall +'/'+num
                     }

@@ -32,7 +32,7 @@ urlpatterns = [
     path('delete/<int:pk>', views.delete, name='delete'),
     path('addword', views.addword),
     path('editword/<int:pk>', views.editword, name='editword'),
-    path('addques/<int:number>', views.addquestion, name='addques'),
+    path('addques/<int:number>/<int:type>', views.addquestion, name='addques'),
     path('deleteques/<int:id>', views.deleteques, name='deleteques'),
     path('editques/<int:id>/<int:number>', views.editques, name='editques'),
     path('dashboad', views.dashboad),
