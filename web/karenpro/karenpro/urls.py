@@ -36,6 +36,7 @@ urlpatterns = [
     path('deleteques/<int:id>', views.deleteques, name='deleteques'),
     path('editques/<int:id>/<int:number>', views.editques, name='editques'),
     path('dashboad', views.dashboad),
+    path('allques', views.get_allquestion),
 
 
 

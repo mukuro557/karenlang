@@ -11,7 +11,6 @@
             </div>
 </div>
 <div class="row">
-
                         <!-- Earnings (Monthly) Card Example -->
                         <div class="col-xl-4 col-md-6 mb-4">
                             <div class="card border-left-primary shadow h-100 py-2">
@@ -81,16 +80,11 @@
                                     <h6 class="m-0 font-weight-bold text-primary">ประโยคที่ใช้บ่อย</h6>
                                 </div>
                                 <div class="card-body">
-                                    <p class="text-gray-900 p-3 m-0">1.กลางคืนเจ็บจนต้องตื่นมากินยาหรือทายาไหม</p>
-                                    <p class="text-gray-900 p-3 m-0">2.อธิบายเหตุการณ์ว่าเกิดขึ้นได้อย่างไร</p>
-                                    <p class="text-gray-900 p-3 m-0">3.ตอนปวดทำอะไรอยู่</p>
-                                    <p class="text-gray-900 p-3 m-0">4.ระดับความปวดตอนนี้</p>
-                                    <p class="text-gray-900 p-3 m-0">5.ระดับความปวดตอนแรก</p>
-                                    <p class="text-gray-900 p-3 m-0">6.อธิบายเหตุการณ์ว่าเกิดขึ้นได้อย่างไร</p>
-                                    <p class="text-gray-900 p-3 m-0">7.มีโรคประจำตัวไหม</p>
-                                    <p class="text-gray-900 p-3 m-0">8.นั่งยองๆได้นานหรือเปล่า</p>
-                                    <p class="text-gray-900 p-3 m-0">9.ขออนุญาติตรวจตรงเขาหน่อย</p>
-                                    <p class="text-gray-900 p-3 m-0">10.ท่าที่อยู่แล้วสบายที่สุด</p>
+                                {% for word in allword %}
+                                    {% if word.type == 1 and word.miss == 1 %}
+                                    <p class="text-gray-900 p-3 m-0">{{word.wordque}}</p>
+                                    {% endif %}
+                                {% endfor %}
                                 </div>
                             </div>
 
@@ -106,16 +100,11 @@
                                     </h6>
                                 </div>
                                 <div class="card-body">
-                                    <p class="text-gray-900 p-3 m-0">1.อธิบาย</p>
-                                    <p class="text-gray-900 p-3 m-0">2.ปวด</p>
-                                    <p class="text-gray-900 p-3 m-0">3.โรคประจำตัว</p>
-                                    <p class="text-gray-900 p-3 m-0">4.นั่ง</p>
-                                    <p class="text-gray-900 p-3 m-0">5.นาน</p>
-                                    <p class="text-gray-900 p-3 m-0">6.ประจำ</p>
-                                    <p class="text-gray-900 p-3 m-0">7.กลางคืน</p>
-                                    <p class="text-gray-900 p-3 m-0">8.เจ็บ</p>
-                                    <p class="text-gray-900 p-3 m-0">9.กินยา</p>
-                                    <p class="text-gray-900 p-3 m-0">10.ทายา</p>
+                                    {% for word in allword %}
+                                    {% if word.type == 0 %}
+                                    <p class="text-gray-900 p-3 m-0">{{word.wordque}}</p>
+                                    {% endif %}
+                                {% endfor %}
                                 </div>
                             </div>
 
@@ -127,21 +116,15 @@
                             <!-- Grayscale Utilities -->
                             <div class="card shadow mb-4">
                                 <div class="card-header py-3">
-                                    <h6 class="m-0 font-weight-bold text-primary">คำที่ใช้บ่อยที่ไม่มี
-ในระบบ
+                                    <h6 class="m-0 font-weight-bold text-primary">คำที่ใช้บ่อยที่ไม่มีในระบบ
                                     </h6>
                                 </div>
                                 <div class="card-body">
-                                    <p class="text-gray-900 p-3 m-0">1.เป็นยังไงบ้าง</p>
-                                    <p class="text-gray-900 p-3 m-0">2.สะดวกไหม</p>
-                                    <p class="text-gray-900 p-3 m-0">3.ยัง</p>
-                                    <p class="text-gray-900 p-3 m-0">4.เป็นอะไรมา</p>
-                                    <p class="text-gray-900 p-3 m-0">5.สบายดีไหม</p>
-                                    <p class="text-gray-900 p-3 m-0">6.ข้าว</p>
-                                    <p class="text-gray-900 p-3 m-0">7.น้ำ</p>
-                                    <p class="text-gray-900 p-3 m-0">8.อาหาร</p>
-                                    <p class="text-gray-900 p-3 m-0">9.เหล้า</p>
-                                    <p class="text-gray-900 p-3 m-0">10.เจ็บตรงไหน</p>
+                                    {% for word in allword %}
+                                    {% if word.type == 1 and word.miss == 0 %}
+                                    <p class="text-gray-900 p-3 m-0">{{word.wordque}}</p>
+                                    {% endif %}
+                                {% endfor %}
                                 </div>
                             </div>
                         </div>

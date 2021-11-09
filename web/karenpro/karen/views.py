@@ -8,6 +8,7 @@ from django.contrib.auth.decorators import login_required
 from django.core.files.storage import FileSystemStorage
 from django.http import HttpResponse
 from django.http import JsonResponse
+from django.db.models import Count
 
 from pythainlp import word_tokenize
 import speech_recognition as sr
@@ -21,7 +22,7 @@ def login(request):
     return render(request, 'login.html')
 
 def dashboad(request):
-    data = usedquestion.objects.all()
+    data = usedquestion.objects.all().values('wordque','type','miss').annotate(total=Count('wordque')).order_by('-total')
     return render(request, 'dashboad.html' , {'allword': data})
 
 # @login_required(login_url="/")
@@ -214,30 +215,34 @@ class cutkum(generics.ListCreateAPIView):
 
 def get_queryset(request,word):
 
-    # proc = word_tokenize(word, engine='newmm')
+
     sound = questions.objects.all().filter(Question= word)
     for j in sound :
         print(j.Sound)
     return HttpResponse(sound[0].Sound, content_type='application/json')
 
 def get_question(request,word):
-    print(word)
+    
     if questions.objects.filter(Question= word):
         ques = questions.objects.all().filter(Question= word)
         data = []
         data.append([ques[0].id,ques[0].Type,ques[0].Sound],)
         list_to_json_array = json.dumps(data)
+        quest = usedquestion.objects.create(
+            wordque=word, type=1, miss=0)
+        quest.save()
         print(data)
         return HttpResponse(list_to_json_array)
 
     else:
-        ques = questions.objects.all().filter()
-        data = []
-        for j in ques :
-            data.append([j.id,j.Question])
-        # y = json.loads(ques)
         
+        data = []
+        data.append([''])
+        # y = json.loads(ques)
         list_to_json_array = json.dumps(data)
+        choicework = usedquestion.objects.create(
+            wordque=word, type=1, miss=1)
+        choicework.save()
         print(data)
         return HttpResponse(list_to_json_array)
 
