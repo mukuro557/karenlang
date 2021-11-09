@@ -1,8 +1,8 @@
 from django.shortcuts import render, redirect
-from .models import word
+from .models import word 
 from django.contrib.auth.models import User, auth
 from django.contrib import messages
-from .models import word, questions, choice
+from .models import word, questions, choice, usedquestion
 from django.conf import settings
 from django.contrib.auth.decorators import login_required
 from django.core.files.storage import FileSystemStorage
@@ -17,20 +17,18 @@ dataSet = [
 
 ]
 
-
 def login(request):
     return render(request, 'login.html')
 
 def dashboad(request):
-    return render(request, 'dashboad.html')
-
+    data = usedquestion.objects.all()
+    return render(request, 'dashboad.html' , {'allword': data})
 
 # @login_required(login_url="/")
 def mainpage(request):
     data = word.objects.all()
 
     return render(request, 'mainpage.html', {'allword': data})
-
 
 # @login_required(login_url="/")
 def addanswer(request):
@@ -51,7 +49,6 @@ def addanswer(request):
                         'Sound': i.Sound, 'choice': allchoice})
     return render(request, 'addanswer.html', {'allword': dataSet})
 
-
 def username_pass(request):
     username = request.POST['username']
     password = request.POST['password']
@@ -66,12 +63,10 @@ def username_pass(request):
     else:
         return render(request, 'login.html', {'user': 'nouser'})
 
-
 # @login_required(login_url="/")
 def logout(request):
     auth.logout(request)
     return redirect('/')
-
 
 def adduser(request):
     username = 'admin'
@@ -83,12 +78,10 @@ def adduser(request):
     user.save()
     return render(request, 'test.html')
 
-
 def delete(request, pk):
     word.objects.filter(pk=pk).delete()
     data = word.objects.all()
     return render(request, 'mainpage.html', {'allword': data})
-
 
 def addword(request):
     data = word.objects.all()
@@ -112,7 +105,6 @@ def addword(request):
         data = word.objects.all()
         return render(request, 'mainpage.html', {'allword': data})
 
-
 def editword(request, pk):
 
     if request.method == 'POST' and request.FILES['myfile'] and request.POST['wordth'] and request.POST['answer'] and request.FILES['ansfile1']:
@@ -130,7 +122,6 @@ def editword(request, pk):
     else:
         data = word.objects.all()
         return render(request, 'addanswer.html', {'allword': data})
-
 
 def addquestion(request, number , type):
     print("enter")
@@ -172,13 +163,11 @@ def addquestion(request, number , type):
 
     return redirect('/addquestion')
 
-
 def deleteques(request, id):
     questions.objects.filter(pk=id).delete()
     choice.objects.filter(Question_id=id).delete()
 
     return redirect('/addquestion')
-
 
 def editques(request, id, number):
     if request.method == 'POST':
@@ -206,7 +195,9 @@ from rest_framework.response import Response
 from rest_framework.decorators import api_view
 from rest_framework import status , generics, filters
 from .serializer import getquestion
+import spacy
 
+spacy.prefer_gpu()
 class cutkum(generics.ListCreateAPIView):
     
     search_field =['Question']
@@ -230,12 +221,13 @@ def get_queryset(request,word):
     return HttpResponse(sound[0].Sound, content_type='application/json')
 
 def get_question(request,word):
-    if questions.objects.filter(Question= word).exists():
+    print(word)
+    if questions.objects.filter(Question= word):
         ques = questions.objects.all().filter(Question= word)
         data = []
         data.append([ques[0].id,ques[0].Type,ques[0].Sound],)
         list_to_json_array = json.dumps(data)
-        
+        print(data)
         return HttpResponse(list_to_json_array)
 
     else:
@@ -249,13 +241,22 @@ def get_question(request,word):
         print(data)
         return HttpResponse(list_to_json_array)
 
+def get_allquestion(request):
+
+    ques = questions.objects.all()
+    data = []
+    for j in ques :
+        data.append([j.Question])
+    print(data)
+    list_to_json_array = json.dumps(data)
+    return HttpResponse(list_to_json_array)
+
 def get_setanswer(request,id):
     ques = choice.objects.all().filter(Question_id= id)
     data = []
     for j in ques :
         data.append([j.Choice,j.Icon,j.Sound])
     # y = json.loads(ques)
-        print(data)
+    
     list_to_json_array = json.dumps(data)
     return HttpResponse(list_to_json_array)
-    
