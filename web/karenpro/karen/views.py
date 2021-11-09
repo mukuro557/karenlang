@@ -22,8 +22,14 @@ def login(request):
     return render(request, 'login.html')
 
 def dashboad(request):
+    alldata = []
     data = usedquestion.objects.all().values('wordque','type','miss').annotate(total=Count('wordque')).order_by('-total')
-    return render(request, 'dashboad.html' , {'allword': data})
+    countword = word.objects.all().values("Word_th").annotate(totals=Count('Word_th')).order_by('totals')
+    countques = questions.objects.all().values("Question").annotate(totalss=Count('Question')).order_by('totalss')
+    for i in data:
+        alldata.append([i,countword,countques])
+    
+    return render(request, 'dashboad.html' , {'allword': alldata})
 
 # @login_required(login_url="/")
 def mainpage(request):
@@ -265,3 +271,15 @@ def get_setanswer(request,id):
     
     list_to_json_array = json.dumps(data)
     return HttpResponse(list_to_json_array)
+
+def get_recommen(request):
+    questt = usedquestion.objects.all().filter(miss= 0).values('wordque','type','miss').annotate(total=Count('wordque')).order_by('-total')
+    data = []
+    for j in questt :
+        data.append(j)
+    # y = json.loads(ques)
+    
+    list_to_json_array = json.dumps(data)
+    print(list_to_json_array)
+    return HttpResponse(list_to_json_array)
+

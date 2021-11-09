@@ -37,6 +37,7 @@ urlpatterns = [
     path('editques/<int:id>/<int:number>', views.editques, name='editques'),
     path('dashboad', views.dashboad),
     path('allques', views.get_allquestion),
+    path('recom', views.get_recommen),
 
 
 

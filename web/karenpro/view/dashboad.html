@@ -19,7 +19,14 @@
                                         <div class="col mr-2">
                                             <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
                                                 คำศัพท์ทั้งหมด</div>
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800">100</div>
+                                                {% for word in allword %}
+                                                    {% for ch in word %}        
+                                                        
+                                                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{ch.Word_th}}</div>
+                                                        
+                                                    {% endfor %}
+                                                {% endfor %}
+                                            
                                         </div>
                                     </div>
                                 </div>
@@ -81,9 +88,11 @@
                                 </div>
                                 <div class="card-body">
                                 {% for word in allword %}
-                                    {% if word.type == 1 and word.miss == 1 %}
-                                    <p class="text-gray-900 p-3 m-0">{{word.wordque}}</p>
-                                    {% endif %}
+                                    {% for ch in word %}        
+                                            {% if ch.type == 1 and ch.miss == 0 %}
+                                            <p class="text-gray-900 p-3 m-0">{{ch.wordque}}</p>
+                                            {% endif %}
+                                        {% endfor %}
                                 {% endfor %}
                                 </div>
                             </div>
@@ -101,9 +110,11 @@
                                 </div>
                                 <div class="card-body">
                                     {% for word in allword %}
-                                    {% if word.type == 0 %}
-                                    <p class="text-gray-900 p-3 m-0">{{word.wordque}}</p>
-                                    {% endif %}
+                                    {% for ch in word %}    
+                                            {% if ch.type == 0 %}
+                                            <p class="text-gray-900 p-3 m-0">{{ch.wordque}}</p>
+                                            {% endif %}
+                                        {% endfor %}
                                 {% endfor %}
                                 </div>
                             </div>
@@ -120,11 +131,15 @@
                                     </h6>
                                 </div>
                                 <div class="card-body">
+                                
                                     {% for word in allword %}
-                                    {% if word.type == 1 and word.miss == 0 %}
-                                    <p class="text-gray-900 p-3 m-0">{{word.wordque}}</p>
-                                    {% endif %}
-                                {% endfor %}
+                                        {% for ch in word %}
+                                            
+                                            {% if ch.type == 1 and ch.miss == 1 %}
+                                            <p class="text-gray-900 p-3 m-0">{{ch.wordque}}</p>
+                                            {% endif %}
+                                        {% endfor %}
+                                    {% endfor %}
                                 </div>
                             </div>
                         </div>

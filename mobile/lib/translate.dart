@@ -8,7 +8,6 @@ import 'package:http/http.dart' as http;
 import 'package:speech_to_text/speech_to_text.dart' as stt;
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
-// import 'package:simple_autocomplete_formfield/simple_autocomplete_formfield.dart';
 import 'package:flutter_typeahead/flutter_typeahead.dart';
 
 // import 'package:assets_audio_player/assets_audio_player.dart';
@@ -19,7 +18,9 @@ class Translate extends StatefulWidget {
   @override
   _TranslateState createState() => _TranslateState();
 }
- List<String> autocompltequ = <String>[];
+
+List<String> autocompltequ = <String>[];
+
 class _TranslateState extends State<Translate> {
   final maxLines = 5;
   late String uri;
@@ -31,8 +32,8 @@ class _TranslateState extends State<Translate> {
   final myController = TextEditingController();
   var question = '';
   var testtext;
-  final items = ['item1', 'item2', 'item3', 'item4', 'item5'];
- 
+  var items = ['item1', 'item2', 'item3', 'item4', 'item5'];
+
   String? value;
 
   @override
@@ -41,18 +42,34 @@ class _TranslateState extends State<Translate> {
     super.initState();
     _speech = stt.SpeechToText();
     allques();
+    rec();
   }
-
-  
 
   void allques() async {
     var url = Uri.parse('http://192.168.1.228:8000/allques');
     http.Response response = await http.get(url);
     testtext = jsonDecode(response.body);
+    autocompltequ = [];
     for (var i = 0; i < testtext.length; i++) {
       autocompltequ.add(testtext[i][0]);
     }
-    print(autocompltequ[0]);
+  }
+
+  void rec() async {
+    var url = Uri.parse('http://192.168.1.228:8000/recom');
+    http.Response response = await http.get(url);
+    testtext = jsonDecode(response.body);
+    items = [];
+    print(testtext[0]['wordque']);
+    for (var i = 0; i < testtext.length; i++) {
+      setState(() {
+        if(testtext[i]['type'] == 1){
+          items.add(testtext[i]['wordque']);
+        }
+        
+      });
+      
+    }
   }
 
   void jumppage() async {
@@ -70,13 +87,13 @@ class _TranslateState extends State<Translate> {
       Get.offAllNamed('/resultschoice');
     } else if (number == 1) {
       box.write('sound', testtext[0][2]);
-      Get.offNamed('/translatechoice');
+      Get.offAllNamed('/levelpain');
     } else if (number == 2) {
       box.write('sound', testtext[0][2]);
-      Get.offAllNamed('/translatemutichoice');
+      Get.offNamed('/translatechoice');
     } else if (number == 3) {
       box.write('sound', testtext[0][2]);
-      Get.offAllNamed('/levelpain');
+      Get.offAllNamed('/translatemutichoice');
     } else {
       setState(() {
         print(testtext[0][0]);
@@ -230,33 +247,32 @@ class _TranslateState extends State<Translate> {
                           padding: const EdgeInsets.only(
                               left: 30, top: 10, right: 25),
                           child: TypeAheadFormField(
-          textFieldConfiguration: TextFieldConfiguration(
-            controller: this.myController,
-            decoration: InputDecoration(
-              labelText: 'City'
-            )
-          ),          
-          suggestionsCallback: (pattern) {
-            return CitiesService.getSuggestions(pattern);
-          },
-          itemBuilder: (context, suggestion) {
-            return ListTile(
-              title: Text(suggestion.toString()),
-            );
-          },
-          transitionBuilder: (context, suggestionsBox, controller) {
-            return suggestionsBox;
-          },
-          onSuggestionSelected: (suggestion) {
-            this.myController.text = suggestion.toString();
-          },
-          validator: (value) {
-            if (value!.isEmpty) {
-              return 'Please select a city';
-            }
-          },
-          onSaved: (value) => this.myController.text = value.toString(),
-        ),
+                            textFieldConfiguration: TextFieldConfiguration(
+                                controller: this.myController,
+                                decoration: InputDecoration(labelText: 'City')),
+                            suggestionsCallback: (pattern) {
+                              return CitiesService.getSuggestions(pattern);
+                            },
+                            itemBuilder: (context, suggestion) {
+                              return ListTile(
+                                title: Text(suggestion.toString()),
+                              );
+                            },
+                            transitionBuilder:
+                                (context, suggestionsBox, controller) {
+                              return suggestionsBox;
+                            },
+                            onSuggestionSelected: (suggestion) {
+                              this.myController.text = suggestion.toString();
+                            },
+                            validator: (value) {
+                              if (value!.isEmpty) {
+                                return 'Please select a city';
+                              }
+                            },
+                            onSaved: (value) =>
+                                this.myController.text = value.toString(),
+                          ),
                         ),
 
                         // Icon(Icons.cancel),
@@ -371,8 +387,8 @@ class _TranslateState extends State<Translate> {
         ),
       );
 }
-class CitiesService {
 
+class CitiesService {
   static List<String> getSuggestions(String query) {
     List<String> matches = [];
     matches.addAll(autocompltequ);
