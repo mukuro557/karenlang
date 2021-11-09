@@ -60,15 +60,12 @@ class _TranslateState extends State<Translate> {
     http.Response response = await http.get(url);
     testtext = jsonDecode(response.body);
     items = [];
-    print(testtext[0]['wordque']);
     for (var i = 0; i < testtext.length; i++) {
       setState(() {
-        if(testtext[i]['type'] == 1){
+        if (testtext[i]['type'] == 1) {
           items.add(testtext[i]['wordque']);
         }
-        
       });
-      
     }
   }
 
@@ -359,8 +356,11 @@ class _TranslateState extends State<Translate> {
                         ),
                         isExpanded: true,
                         items: items.map(buildMenuItem).toList(),
-                        onChanged: (value) =>
-                            setState(() => this.value = value),
+                        onChanged: (value) {
+                          setState(() => this.value = value);
+                          question = value.toString();
+                          jumppage();
+                        },
                       ),
                     ),
                   )
