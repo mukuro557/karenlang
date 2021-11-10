@@ -46,7 +46,7 @@ class _TranslateState extends State<Translate> {
   }
 
   void allques() async {
-    var url = Uri.parse('http://192.168.1.228:8000/allques');
+    var url = Uri.parse('http://192.168.10.139:8000/allques');
     http.Response response = await http.get(url);
     testtext = jsonDecode(response.body);
     autocompltequ = [];
@@ -56,7 +56,7 @@ class _TranslateState extends State<Translate> {
   }
 
   void rec() async {
-    var url = Uri.parse('http://192.168.1.228:8000/recom');
+    var url = Uri.parse('http://192.168.10.139:8000/recom');
     http.Response response = await http.get(url);
     testtext = jsonDecode(response.body);
     items = [];
@@ -71,14 +71,14 @@ class _TranslateState extends State<Translate> {
 
   void jumppage() async {
     final box = GetStorage();
-    var url = Uri.parse('http://192.168.1.228:8000/getquestion/' + question);
+    var url = Uri.parse('http://192.168.10.139:8000/getquestion/' + question);
 
     http.Response response = await http.get(url);
     testtext = jsonDecode(response.body);
     var number = testtext[0][1];
     box.write('id', testtext[0][0]);
     box.write('question', question);
-
+    print(number);
     if (number == 0) {
       box.write('sound', testtext[0][2]);
       Get.offAllNamed('/resultschoice');
@@ -234,8 +234,8 @@ class _TranslateState extends State<Translate> {
                     width: 380,
                     height: 200,
                     decoration: BoxDecoration(
-                      color: Colors.teal[700],
-                      border: Border.all(color: Colors.teal),
+                      color: Colors.white,
+                      border: Border.all(color: Colors.grey),
                       borderRadius: BorderRadius.all(Radius.circular(20)),
                     ),
                     child: Column(
@@ -246,7 +246,8 @@ class _TranslateState extends State<Translate> {
                           child: TypeAheadFormField(
                             textFieldConfiguration: TextFieldConfiguration(
                                 controller: this.myController,
-                                decoration: InputDecoration(labelText: 'City')),
+                                maxLines: maxLines,
+                                decoration: InputDecoration(labelText: 'แตะเพื่อพิมพ์',border: InputBorder.none,)),
                             suggestionsCallback: (pattern) {
                               return CitiesService.getSuggestions(pattern);
                             },
@@ -279,7 +280,7 @@ class _TranslateState extends State<Translate> {
                             children: [
                               AvatarGlow(
                                 animate: _isListening,
-                                glowColor: Theme.of(context).primaryColor,
+                                glowColor: _isListening ? Colors.white : Colors.teal,
                                 endRadius: 20.0,
                                 duration: const Duration(milliseconds: 2000),
                                 repeatPauseDuration:
@@ -298,7 +299,7 @@ class _TranslateState extends State<Translate> {
                               ),
                               Text(
                                 'กดเพื่อพูด',
-                                style: TextStyle(color: Colors.white),
+                                style: TextStyle(color: Colors.black),
                               ),
                               SizedBox(
                                 width: 150,
@@ -306,7 +307,7 @@ class _TranslateState extends State<Translate> {
                               ButtonTheme(
                                 minWidth: 20.0,
                                 height: 30.0,
-                                buttonColor: Colors.white,
+                                buttonColor: Colors.teal[400],
                                 child: RaisedButton(
                                   onPressed: () {
                                     question = myController.text;
@@ -319,7 +320,7 @@ class _TranslateState extends State<Translate> {
                                   child: Text(
                                     "แปลภาษา",
                                     style: TextStyle(
-                                        fontSize: 10, color: Colors.teal[600]),
+                                        fontSize: 10, color: Colors.white),
                                   ),
                                 ),
                               ),

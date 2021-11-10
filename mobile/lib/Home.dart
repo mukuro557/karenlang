@@ -45,7 +45,7 @@ class _HomeState extends State<Home> {
               scale: 4.0,
             ),
             Padding(
-              padding: const EdgeInsets.only(top: 200),
+              padding: const EdgeInsets.only(top: 100),
               child: Text(
                 'ภาษากระเหรี่ยงสำหรับกายภาพ',
                 style: TextStyle(

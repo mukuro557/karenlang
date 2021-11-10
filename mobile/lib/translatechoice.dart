@@ -18,6 +18,8 @@ class _TranslatechoiceState extends State<Translatechoice> {
   final maxLines = 5;
   var question = "";
   var _sound;
+  var first = "";
+  var second = '';
   @override
   void initState() {
     // TODO: implement initState
@@ -29,11 +31,13 @@ class _TranslatechoiceState extends State<Translatechoice> {
     final box = GetStorage();
     question = box.read('question');
     var id = box.read('id').toString();
-    print(id);
-    var url = Uri.parse('http://192.168.0.106:8000/getanswer/' + id);
+    var url = Uri.parse('http://192.168.10.139:8000/getanswer/' + id);
     http.Response response = await http.get(url);
     setState(() {
       litems = jsonDecode(response.body);
+      print(litems[0][0]);
+      first = litems[0][0];
+      second = litems[1][0];
     });
   }
 
@@ -44,7 +48,7 @@ class _TranslatechoiceState extends State<Translatechoice> {
     String localFilePath;
     // audioCache.play('Karen.mp3');
     int result = await audioPlayer
-        .play('http://192.168.0.106:8000/static/sound/' + song);
+        .play('http://192.168.10.139:8000/static/sound/' + song);
   }
 
   @override
@@ -98,44 +102,44 @@ class _TranslatechoiceState extends State<Translatechoice> {
                   ],
                 ),
                 Container(
-                    width: 380,
-                    height: 40,
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      border: Border.all(color: Colors.white),
-                      borderRadius: BorderRadius.all(Radius.circular(5)),
-                    ),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(
-                          'ไทย',
-                          style: TextStyle(
-                              fontSize: 10,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.teal[700]),
-                        ),
-                        SizedBox(
-                          width: 70,
-                        ),
-                        Icon(
-                          Icons.arrow_forward,
-                          color: Colors.teal[700],
-                          size: 20,
-                        ),
-                        SizedBox(
-                          width: 70,
-                        ),
-                        Text(
-                          'กระเหรี่ยง',
-                          style: TextStyle(
-                              fontSize: 10,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.teal[700]),
-                        )
-                      ],
-                    ),
+                  width: 380,
+                  height: 40,
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    border: Border.all(color: Colors.white),
+                    borderRadius: BorderRadius.all(Radius.circular(5)),
                   ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        'ไทย',
+                        style: TextStyle(
+                            fontSize: 10,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.teal[700]),
+                      ),
+                      SizedBox(
+                        width: 70,
+                      ),
+                      Icon(
+                        Icons.arrow_forward,
+                        color: Colors.teal[700],
+                        size: 20,
+                      ),
+                      SizedBox(
+                        width: 70,
+                      ),
+                      Text(
+                        'กระเหรี่ยง',
+                        style: TextStyle(
+                            fontSize: 10,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.teal[700]),
+                      )
+                    ],
+                  ),
+                ),
                 SizedBox(
                   height: 15,
                 ),
@@ -213,7 +217,7 @@ class _TranslatechoiceState extends State<Translatechoice> {
                               flex: 5,
                             ),
                             Text(
-                              'มี',
+                              first,
                               style:
                                   TextStyle(fontSize: 30, color: Colors.white),
                             ),
@@ -252,7 +256,7 @@ class _TranslatechoiceState extends State<Translatechoice> {
                               flex: 5,
                             ),
                             Text(
-                              'ไม่มี',
+                              second,
                               style:
                                   TextStyle(fontSize: 30, color: Colors.white),
                             ),
