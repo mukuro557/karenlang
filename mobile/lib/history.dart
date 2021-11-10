@@ -1,5 +1,8 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:http/http.dart' as http;
 
 class History extends StatefulWidget {
   const History({Key? key}) : super(key: key);
@@ -9,6 +12,30 @@ class History extends StatefulWidget {
 }
 
 class _HistoryState extends State<History> {
+  var testtext;
+  var items = [];
+
+  void rec() async {
+    var url = Uri.parse('http://192.168.43.228:8000/history');
+    http.Response response = await http.get(url);
+    testtext = jsonDecode(response.body);
+    items = [];
+    for (var i = 0; i < testtext.length; i++) {
+      setState(() {
+        if (testtext[i]['type'] == 1) {
+          items.add(testtext[i]['wordque']);
+        }
+      });
+    }
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    rec();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -42,184 +69,36 @@ class _HistoryState extends State<History> {
         ],
         elevation: 0,
       ),
-      body: ListView(
+      body: Column(
         children: [
-          Column(
-            children: [
-              Padding(
-                padding: const EdgeInsets.only(right: 250, top: 10, bottom: 10),
-                child: Text(
-                  'ประวัติการแปล',
-                  style: TextStyle(fontSize: 15),
-                ),
-              ),
-              ButtonTheme(
-                minWidth: 360.0,
-                height: 40.0,
-                buttonColor: Colors.white,
-                child: RaisedButton(
-                  onPressed: () {},
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  child: Text(
-                    "กลางคืนเจ็บจนต้องตื่นมากินยาหรือทายาไหม",
-                    style: TextStyle(fontSize: 13, color: Colors.black),
-                  ),
-                ),
-              ),
-              ButtonTheme(
-                minWidth: 360.0,
-                height: 40.0,
-                buttonColor: Colors.white,
-                child: RaisedButton(
-                  onPressed: () {},
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  child: Text(
-                    "อาการที่มาหาหมอคืออะไร",
-                    style: TextStyle(fontSize: 13, color: Colors.black),
-                  ),
-                ),
-              ),
-              ButtonTheme(
-                minWidth: 360.0,
-                height: 40.0,
-                buttonColor: Colors.white,
-                child: RaisedButton(
-                  onPressed: () {},
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  child: Text(
-                    "อธิบายเหตุการณ์ว่าเกิดขึ้นได้อย่างไร",
-                    style: TextStyle(fontSize: 13, color: Colors.black),
-                  ),
-                ),
-              ),
-              ButtonTheme(
-                minWidth: 360.0,
-                height: 40.0,
-                buttonColor: Colors.white,
-                child: RaisedButton(
-                  onPressed: () {},
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  child: Text(
-                    "อธิบายเหตุการณ์ว่าเกิดขึ้นได้อย่างไร",
-                    style: TextStyle(fontSize: 13, color: Colors.black),
-                  ),
-                ),
-              ),
-              ButtonTheme(
-                minWidth: 360.0,
-                height: 40.0,
-                buttonColor: Colors.white,
-                child: RaisedButton(
-                  onPressed: () {},
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  child: Text(
-                    "หลังปวดรักษาอย่างไร",
-                    style: TextStyle(fontSize: 13, color: Colors.black),
-                  ),
-                ),
-              ),
-              ButtonTheme(
-                minWidth: 360.0,
-                height: 40.0,
-                buttonColor: Colors.white,
-                child: RaisedButton(
-                  onPressed: () {},
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  child: Text(
-                    "ตอนปวดทำอะไรอยู่",
-                    style: TextStyle(fontSize: 13, color: Colors.black),
-                  ),
-                ),
-              ),
-              ButtonTheme(
-                minWidth: 360.0,
-                height: 40.0,
-                buttonColor: Colors.white,
-                child: RaisedButton(
-                  onPressed: () {},
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  child: Text(
-                    "ตอนไหน",
-                    style: TextStyle(fontSize: 13, color: Colors.black),
-                  ),
-                ),
-              ),
-              ButtonTheme(
-                minWidth: 360.0,
-                height: 40.0,
-                buttonColor: Colors.white,
-                child: RaisedButton(
-                  onPressed: () {},
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  child: Text(
-                    "ระดับความเจ็บปวดตอนแรก",
-                    style: TextStyle(fontSize: 13, color: Colors.black),
-                  ),
-                ),
-              ),
-              ButtonTheme(
-                minWidth: 360.0,
-                height: 40.0,
-                buttonColor: Colors.white,
-                child: RaisedButton(
-                  onPressed: () {},
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  child: Text(
-                    "หลังตื่นแล้วมีอาการไหม",
-                    style: TextStyle(fontSize: 13, color: Colors.black),
-                  ),
-                ),
-              ),
-              ButtonTheme(
-                minWidth: 360.0,
-                height: 40.0,
-                buttonColor: Colors.white,
-                child: RaisedButton(
-                  onPressed: () {},
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  child: Text(
-                    "ตลอดทั้งวันเจ็บไหม",
-                    style: TextStyle(fontSize: 13, color: Colors.black),
-                  ),
-                ),
-              ),
-              ButtonTheme(
-                minWidth: 360.0,
-                height: 40.0,
-                buttonColor: Colors.white,
-                child: RaisedButton(
-                  onPressed: () {},
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  child: Text(
-                    "เคยเอ็กเรย์ไหม",
-                    style: TextStyle(fontSize: 13, color: Colors.black),
-                  ),
-                ),
-              ),
-            ],
-          )
+          Padding(
+            padding: const EdgeInsets.only(right: 250, top: 10, bottom: 10),
+            child: Text(
+              'ประวัติการแปล',
+              style: TextStyle(fontSize: 15),
+            ),
+          ),
+          Flexible(
+            child: ListView.builder(
+                itemCount: items.length,
+                itemBuilder: (context, index) {
+                  return ButtonTheme(
+                    minWidth: 360.0,
+                    height: 40.0,
+                    buttonColor: Colors.white,
+                    child: RaisedButton(
+                      onPressed: () {},
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      child: Text(
+                        items[index],
+                        style: TextStyle(fontSize: 13, color: Colors.black),
+                      ),
+                    ),
+                  );
+                }),
+          ),
         ],
       ),
     );

@@ -38,6 +38,7 @@ urlpatterns = [
     path('dashboad', views.dashboad),
     path('allques', views.get_allquestion),
     path('recom', views.get_recommen),
+    path('history', views.get_history),
 
 
 

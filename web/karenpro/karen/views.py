@@ -53,7 +53,8 @@ def addanswer(request):
             else:
                 allchoice = allchoice+'/'+j.Choice
         dataSet.append({'id': i.pk, 'question': i.Question,
-                        'Sound': i.Sound, 'choice': allchoice})
+                        'Sound': i.Sound, 'choice': allchoice, 'type': i.Type})
+        print(dataSet)
     return render(request, 'addanswer.html', {'allword': dataSet})
 
 def username_pass(request):
@@ -131,7 +132,7 @@ def editword(request, pk):
         return render(request, 'addanswer.html', {'allword': data})
 
 def addquestion(request, number , type):
-    print("enter")
+    
     if request.method == 'POST' and request.FILES['myfile'] and request.POST['wordth'] :
         
         word_th = request.POST['wordth']
@@ -152,7 +153,7 @@ def addquestion(request, number , type):
             question_thai.save()
             data = questions.objects.all()
             
-            if type != 0:
+            if type == 3 :
                 for i in range(1, number+1):
                     findimg = request.FILES['ansfile%s' % i]
                     findicon = request.FILES['icon%s' % i]
@@ -165,9 +166,22 @@ def addquestion(request, number , type):
                     choicework.save()
 
                 return redirect('/addquestion')
-            else: 
+            elif type == 2: 
+                choicef = request.POST['answer%s' % 1]
+                findimg = request.FILES['ansfile%s' % 1]
+                filenameC = fs.save(findimg.name, findimg)
+                choicework = choice.objects.create(
+                        Choice=choicef, Question_id=question_thai.id, Sound=filenameC)
+                choicework.save()
+                choicef = request.POST['answer%s' % 2]
+                findimg = request.FILES['ansfile%s' % 2]
+                filenameC = fs.save(findimg.name, findimg)
+                choicework = choice.objects.create(
+                        Choice=choicef, Question_id=question_thai.id, Sound=filenameC)
+                choicework.save()
                 return redirect('/addquestion')
-
+            else:
+                return redirect('/addquestion')
     return redirect('/addquestion')
 
 def deleteques(request, id):
@@ -283,3 +297,13 @@ def get_recommen(request):
     print(list_to_json_array)
     return HttpResponse(list_to_json_array)
 
+def get_history(request):
+    questt = usedquestion.objects.all().filter(miss= 0).values('wordque','type','miss','id').distinct().order_by('-id')
+    data = []
+    for j in questt :
+        data.append(j)
+    # y = json.loads(ques)
+    
+    list_to_json_array = json.dumps(data)
+    print(list_to_json_array)
+    return HttpResponse(list_to_json_array)
