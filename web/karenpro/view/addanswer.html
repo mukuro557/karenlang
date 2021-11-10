@@ -21,9 +21,12 @@
         </div>
 
         <!-- table -->
-{% if uploaded_file_url %}
+ {% if uploaded_file_url %}
         <script>
     alert('{{ uploaded_file_url }}');
+</script>
+        
+        {% endif %}
 
         <div class="card-body">
             <table id="myTable" class="table table-striped table-bordered" style="width: 100%">
