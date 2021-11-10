@@ -122,7 +122,7 @@
                                 <div class="form-group">
                                     <label for="message-text" class="col-form-label">อัพโหลดเสียง</label>
                                     <div class="custom-file">
-                                        <input type="file" name="myfile" id="file">
+                                        <input type="file" name="myfile" id="file"  accept=".mp3">
                                         <br><br>
                                     </div>
                                 </div>
@@ -193,7 +193,7 @@
                     }else{
                         num = choice.length
                         for(let i =1;i <= choice.length; i++){
-                        $('#newanswer').append('<div class="form-row"><div class="form-group col-md-6"><label for="inputCity">คำตอบที่ ' + i + ' </label><input type="text" class="form-control" id="inputCity'+i+'" name="answer'+i+'"> </div ><div class="form-group col-md-3"><label for="inputState">เสียงคำตอบที่ ' + i + '</label><div class="custom-file"><input type="file" name="ansfile' + i + '" id="file"><br><br></div></div><div class="form-group col-md-3"><label for="inputZip">เพิ่มไอคอน</label><input type="file" name="icon' + i + '" id="file2"></div></div>')
+                        $('#newanswer').append('<div class="form-row"><div class="form-group col-md-6"><label for="inputCity">คำตอบที่ ' + i + ' </label><input type="text" class="form-control" id="inputCity'+i+'" name="answer'+i+'"> </div ><div class="form-group col-md-3"><label for="inputState">เสียงคำตอบที่ ' + i + '</label><div class="custom-file"><input type="file" name="ansfile' + i + '" id="file"  accept=".mp3"><br><br></div></div><div class="form-group col-md-3"><label for="inputZip">เพิ่มไอคอน</label><input type="file" name="icon' + i + '" id="file2" accept="image/*"></div></div>')
                         $('#inputCity'+i).val(choice[i-1])
                     }
                     }
@@ -234,16 +234,16 @@
                     }
                     else if(questyp == 2){
                         num++
-                        $('#newanswer').append('<div class="form-row"><div class="form-group col-md-6"><label for="inputCity'+num+'">คำตอบที่ ' + num + ' </label><input type="text" class="form-control" id="inputCity" name="answer'+num+'"> </div ><div class="form-group col-md-3"><label for="inputState">เสียงคำตอบที่ ' + num + '</label><div class="custom-file"><input type="file" name="ansfile' + num + '" id="file"><br><br></div></div><div class="form-group col-md-3"><img src="http://192.168.43.228:8000/static/image/true.png" style="width:45px;height:45px;"></div></div>')
+                        $('#newanswer').append('<div class="form-row"><div class="form-group col-md-6"><label for="inputCity'+num+'">คำตอบที่ ' + num + ' </label><input type="text" class="form-control" id="inputCity" name="answer'+num+'"> </div ><div class="form-group col-md-3"><label for="inputState">เสียงคำตอบที่ ' + num + '</label><div class="custom-file"><input type="file" name="ansfile' + num + '" id="file" accept=".mp3"><br><br></div></div><div class="form-group col-md-3"><img src="http://192.168.43.228:8000/static/image/true.png" style="width:45px;height:45px;"></div></div>')
                         num++
-                        $('#newanswer').append('<div class="form-row"><div class="form-group col-md-6"><label for="inputCity'+num+'">คำตอบที่ ' + num + ' </label><input type="text" class="form-control" id="inputCity" name="answer'+num+'"> </div ><div class="form-group col-md-3"><label for="inputState">เสียงคำตอบที่ ' + num + '</label><div class="custom-file"><input type="file" name="ansfile' + num + '" id="file"><br><br></div></div><div class="form-group col-md-3"><img src="http://192.168.43.228:8000/static/image/false.png" style="width:45px;height:45px;"></div></div>')
+                        $('#newanswer').append('<div class="form-row"><div class="form-group col-md-6"><label for="inputCity'+num+'">คำตอบที่ ' + num + ' </label><input type="text" class="form-control" id="inputCity" name="answer'+num+'"> </div ><div class="form-group col-md-3"><label for="inputState">เสียงคำตอบที่ ' + num + '</label><div class="custom-file"><input type="file" name="ansfile' + num + '" id="file" accept=".mp3"><br><br></div></div><div class="form-group col-md-3"><img src="http://192.168.43.228:8000/static/image/false.png" style="width:45px;height:45px;"></div></div>')
                         
                         element.setAttribute("hidden", "hidden");
                         
                     }else if(questyp == 3){
                         for(let i = 0;i<3;i++){
                             num++
-                            $('#newanswer').append('<div class="form-row"><div class="form-group col-md-6"><label for="inputCity'+num+'">คำตอบที่ ' + num + ' </label><input type="text" class="form-control" id="inputCity" name="answer'+num+'"> </div ><div class="form-group col-md-3"><label for="inputState">เสียงคำตอบที่ ' + num + '</label><div class="custom-file"><input type="file" name="ansfile' + num + '" id="file"><br><br></div></div><div class="form-group col-md-3"><label for="inputZip">เพิ่มไอคอน</label><input type="file" name="icon' + num + '" id="file2"></div></div>')
+                            $('#newanswer').append('<div class="form-row"><div class="form-group col-md-6"><label for="inputCity'+num+'">คำตอบที่ ' + num + ' </label><input type="text" class="form-control" id="inputCity" name="answer'+num+'"> </div ><div class="form-group col-md-3"><label for="inputState">เสียงคำตอบที่ ' + num + '</label><div class="custom-file"><input type="file" name="ansfile' + num + '" id="file"  accept=".mp3"><br><br></div></div><div class="form-group col-md-3"><label for="inputZip">เพิ่มไอคอน</label><input type="file" name="icon' + num + '" id="file2"  accept="image/*"></div></div>')
                             
                         }
                         element.removeAttribute("hidden")
@@ -269,7 +269,7 @@
                 $('#addans').on('click', function () {
                     num++;
                     var container = document.getElementById("newanswer");
-                    $('#newanswer').append('<div class="form-row"><div class="form-group col-md-6"><label for="inputCity'+num+'">คำตอบที่ ' + num + ' </label><input type="text" class="form-control" id="inputCity" name="answer'+num+'"> </div ><div class="form-group col-md-3"><label for="inputState">เสียงคำตอบที่ ' + num + '</label><div class="custom-file"><input type="file" name="ansfile' + num + '" id="file"><br><br></div></div><div class="form-group col-md-3"><label for="inputZip">เพิ่มไอคอน</label><input type="file" name="icon' + num + '" id="file2"></div></div>')
+                    $('#newanswer').append('<div class="form-row"><div class="form-group col-md-6"><label for="inputCity'+num+'">คำตอบที่ ' + num + ' </label><input type="text" class="form-control" id="inputCity" name="answer'+num+'"> </div ><div class="form-group col-md-3"><label for="inputState">เสียงคำตอบที่ ' + num + '</label><div class="custom-file"><input type="file" name="ansfile' + num + '" id="file" accept=".mp3"><br><br></div></div><div class="form-group col-md-3"><label for="inputZip">เพิ่มไอคอน</label><input type="file" name="icon' + num + '" id="file2"  accept="image/*"></div></div>')
                     if (edit == 0) {
                         document.getElementById('formcheck').action = '/addques/' + num +"/" + questyp
                     } else {
