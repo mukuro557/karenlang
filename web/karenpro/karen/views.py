@@ -13,6 +13,7 @@ from django.core.files.storage import FileSystemStorage
 from django.http import HttpResponse
 from django.http import JsonResponse
 from django.db.models import Count
+from django.contrib import messages
 
 from pythainlp import word_tokenize
 import speech_recognition as sr
@@ -112,6 +113,7 @@ def delete(request, pk):
 
 def addword(request):
     data = word.objects.all()
+    
     if request.method == 'POST' and request.FILES['myfile'] and request.POST['wordth']:
         word_th = request.POST['wordth']
         myfile = request.FILES['myfile']
@@ -120,6 +122,7 @@ def addword(request):
         uploaded_file_url = fs.url(filename)
 
         if word.objects.filter(Word_th=word_th).exists():
+            messages.info(request, 'Hello!')
             return render(request, 'mainpage.html', {
                 'uploaded_file_url': 'มีคำนี้แล้ว', 'allword': data
             })
