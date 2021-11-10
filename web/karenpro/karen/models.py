@@ -10,7 +10,7 @@ def __str__(self):
 
 class questions(models.Model):
     Question = models.CharField(max_length = 100,null=True)
-    Sound = models.CharField(max_length = 100,null=True)
+    Sound = models.CharField(max_length = 200,null=True)
     Type = models.IntegerField(null=True)
 
 def __str__(self):

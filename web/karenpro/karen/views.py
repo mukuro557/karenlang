@@ -1,9 +1,5 @@
-from rest_framework import status, generics, filters
-from rest_framework.response import Response
-from .serializer import getquestion
-from rest_framework.decorators import api_view
 from django.shortcuts import render, redirect
-from .models import word
+from .models import word 
 from django.contrib.auth.models import User, auth
 from django.contrib import messages
 from .models import word, questions, choice, usedquestion
@@ -13,7 +9,6 @@ from django.core.files.storage import FileSystemStorage
 from django.http import HttpResponse
 from django.http import JsonResponse
 from django.db.models import Count
-from django.contrib import messages
 
 from pythainlp import word_tokenize
 import speech_recognition as sr
@@ -23,41 +18,32 @@ dataSet = [
 
 ]
 
-
 def login(request):
     return render(request, 'login.html')
 
-
 def dashboad(request):
     alldata = []
-    data = usedquestion.objects.all().values('wordque', 'type', 'miss').annotate(
-        total=Count('wordque')).order_by('-total')
-    countword = word.objects.all().values("Word_th").annotate(
-        totals=Count('Word_th')).order_by('totals')
-    countques = questions.objects.all().values("Question").annotate(
-        totalss=Count('Question')).order_by('totalss')
+    data = usedquestion.objects.all().values('wordque','type','miss').annotate(total=Count('wordque')).order_by('-total')
+    countword = word.objects.all().values("Word_th").annotate(totals=Count('Word_th')).order_by('totals')
+    countques = questions.objects.all().values("Question").annotate(totalss=Count('Question')).order_by('totalss')
     for i in data:
-        alldata.append([i, countword, countques])
-
-    return render(request, 'dashboad.html', {'allword': alldata})
+        alldata.append([i,countword,countques])
+    
+    return render(request, 'dashboad.html' , {'allword': alldata})
 
 # @login_required(login_url="/")
-
-
 def mainpage(request):
     data = word.objects.all()
 
     return render(request, 'mainpage.html', {'allword': data})
 
 # @login_required(login_url="/")
-
-
 def addanswer(request):
     dataSet.clear()
     ques = questions.objects.all()
     for i in ques:
         num = 0
-        cho = choice.objects.all().filter(Question_id=i.pk)
+        cho = choice.objects.all().filter(Question_id = i.pk)
         allchoice = ''
         for j in cho:
 
@@ -70,7 +56,6 @@ def addanswer(request):
                         'Sound': i.Sound, 'choice': allchoice, 'type': i.Type})
         print(dataSet)
     return render(request, 'addanswer.html', {'allword': dataSet})
-
 
 def username_pass(request):
     username = request.POST['username']
@@ -87,12 +72,9 @@ def username_pass(request):
         return render(request, 'login.html', {'user': 'nouser'})
 
 # @login_required(login_url="/")
-
-
 def logout(request):
     auth.logout(request)
     return redirect('/')
-
 
 def adduser(request):
     username = 'admin'
@@ -103,7 +85,6 @@ def adduser(request):
     )
     user.save()
     return render(request, 'test.html')
-
 
 def delete(request, pk):
     word.objects.filter(pk=pk).delete()
@@ -155,10 +136,10 @@ def editword(request, pk):
         return render(request, 'mainpage.html', {'allword': data})
 
 
-def addquestion(request, number, type):
-
-    if request.method == 'POST' and request.FILES['myfile'] and request.POST['wordth']:
-
+def addquestion(request, number , type):
+    
+    if request.method == 'POST' and request.FILES['myfile'] and request.POST['wordth'] :
+        
         word_th = request.POST['wordth']
         mysound = request.FILES['myfile']
         fs = FileSystemStorage()
@@ -167,17 +148,31 @@ def addquestion(request, number, type):
         uploaded_file_url = fs.url(filenameQ)
 
         if questions.objects.filter(Question=word_th).exists():
+            dataSet.clear()
+            ques = questions.objects.all()
+            for i in ques:
+                num = 0
+                cho = choice.objects.all().filter(Question_id = i.pk)
+                allchoice = ''
+                for j in cho:
+
+                    if num == 0:
+                        allchoice = j.Choice
+                        num = 1
+                    else:
+                        allchoice = allchoice+'/'+j.Choice
+                dataSet.append({'id': i.pk, 'question': i.Question,'Sound': i.Sound, 'choice': allchoice, 'type': i.Type})
             return render(request, 'addanswer.html', {
-                'uploaded_file_url': 'มีคำนี้แล้ว', 'allword': dataSet
+                'uploaded_file_url': 'มีประโยคนี้แล้ว', 'allword': dataSet
             })
 
         else:
             question_thai = questions.objects.create(
-                Question=word_th, Sound=filenameQ, Type=type)
+                Question=word_th, Sound=uploaded_file_url,Type = type)
             question_thai.save()
             data = questions.objects.all()
-
-            if type == 3:
+            
+            if type == 3 :
                 for i in range(1, number+1):
                     findimg = request.FILES['ansfile%s' % i]
                     findicon = request.FILES['icon%s' % i]
@@ -190,23 +185,25 @@ def addquestion(request, number, type):
                     choicework.save()
 
                 return redirect('/addquestion')
-            elif type == 2:
+            elif type == 2: 
                 choicef = request.POST['answer%s' % 1]
                 findimg = request.FILES['ansfile%s' % 1]
                 filenameC = fs.save(findimg.name, findimg)
                 choicework = choice.objects.create(
-                    Choice=choicef, Question_id=question_thai.id, Sound=filenameC)
+                        Choice=choicef, Question_id=question_thai.id, Sound=filenameC)
                 choicework.save()
                 choicef = request.POST['answer%s' % 2]
                 findimg = request.FILES['ansfile%s' % 2]
                 filenameC = fs.save(findimg.name, findimg)
                 choicework = choice.objects.create(
-                    Choice=choicef, Question_id=question_thai.id, Sound=filenameC)
+                        Choice=choicef, Question_id=question_thai.id, Sound=filenameC)
                 choicework.save()
                 return redirect('/addquestion')
             else:
                 return redirect('/addquestion')
     return redirect('/addquestion')
+
+
 
 
 def deleteques(request, id):
@@ -237,6 +234,11 @@ def editques(request, id, number):
             choicework.save()
 
     return redirect('/addquestion')
+
+from rest_framework.response import Response
+from rest_framework.decorators import api_view
+from rest_framework import status , generics, filters
+from .serializer import getquestion
 
 
 class cutkum(generics.ListCreateAPIView):
