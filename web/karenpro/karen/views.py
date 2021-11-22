@@ -9,6 +9,7 @@ from django.core.files.storage import FileSystemStorage
 from django.http import HttpResponse
 from django.http import JsonResponse
 from django.db.models import Count
+import difflib
 
 from pythainlp import word_tokenize
 import speech_recognition as sr
@@ -270,7 +271,7 @@ def get_question(request, word):
     if questions.objects.filter(Question=word):
         ques = questions.objects.all().filter(Question=word)
         data = []
-        data.append([ques[0].id, ques[0].Type, ques[0].Sound],)
+        data.append([ques[0].id, ques[0].Type, ques[0].Sound, ques[0].Question],)
         list_to_json_array = json.dumps(data)
         quest = usedquestion.objects.create(
             wordque=word, type=1, miss=0)
@@ -281,7 +282,15 @@ def get_question(request, word):
     else:
 
         data = []
-        data.append([''])
+        all_athletes = questions.objects.all()
+        count = 0
+        for j in all_athletes:
+            temp = difflib.SequenceMatcher(None,word,j.Question)
+            if temp.ratio()>0.69:
+                count+=1
+                data.append([j.id, j.Type, j.Sound,j.Question],)
+        if count ==0 :
+            data.append([''])
         # y = json.loads(ques)
         list_to_json_array = json.dumps(data)
         choicework = usedquestion.objects.create(

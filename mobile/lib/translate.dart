@@ -46,7 +46,7 @@ class _TranslateState extends State<Translate> {
   }
 
   void allques() async {
-    var url = Uri.parse('http://192.168.10.139:8000/allques');
+    var url = Uri.parse('http://192.168.0.34:8000/allques');
     http.Response response = await http.get(url);
     testtext = jsonDecode(response.body);
     autocompltequ = [];
@@ -56,7 +56,7 @@ class _TranslateState extends State<Translate> {
   }
 
   void rec() async {
-    var url = Uri.parse('http://192.168.10.139:8000/recom');
+    var url = Uri.parse('http://192.168.0.34:8000/recom');
     http.Response response = await http.get(url);
     testtext = jsonDecode(response.body);
     items = [];
@@ -71,24 +71,28 @@ class _TranslateState extends State<Translate> {
 
   void jumppage() async {
     final box = GetStorage();
-    var url = Uri.parse('http://192.168.10.139:8000/getquestion/' + question);
+    var url = Uri.parse('http://192.168.0.34:8000/getquestion/' + question);
 
     http.Response response = await http.get(url);
     testtext = jsonDecode(response.body);
     var number = testtext[0][1];
     box.write('id', testtext[0][0]);
-    box.write('question', question);
+    
     print(number);
     if (number == 0) {
+      box.write('question', testtext[0][3]);
       box.write('sound', testtext[0][2]);
       Get.offAllNamed('/resultschoice');
     } else if (number == 1) {
+      box.write('question', testtext[0][3]);
       box.write('sound', testtext[0][2]);
       Get.offAllNamed('/levelpain');
     } else if (number == 2) {
+      box.write('question', testtext[0][3]);
       box.write('sound', testtext[0][2]);
       Get.offNamed('/translatechoice');
     } else if (number == 3) {
+      box.write('question', testtext[0][3]);
       box.write('sound', testtext[0][2]);
       Get.offAllNamed('/translatemutichoice');
     } else {

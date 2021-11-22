@@ -36,7 +36,7 @@ class _ResultschoiceState extends State<Resultschoice> {
     String localFilePath;
     // audioCache.play('Karen.mp3');
     int result =
-        await audioPlayer.play('http://192.168.0.106:8000/static/sound/' + _sound);
+        await audioPlayer.play('http://192.168.0.34:8000/static/sound/' + _sound);
   }
 
   @override

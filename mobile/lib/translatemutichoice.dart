@@ -30,7 +30,7 @@ class _TranslateMutiChoiceState extends State<TranslateMutiChoice> {
     question = box.read('question');
     var id = box.read('id').toString();
     print(id);
-    var url = Uri.parse('http://192.168.10.139:8000/getanswer/' + id);
+    var url = Uri.parse('http://192.168.0.34:8000/getanswer/' + id);
     http.Response response = await http.get(url);
     setState(() {
       litems = jsonDecode(response.body);
@@ -45,7 +45,7 @@ class _TranslateMutiChoiceState extends State<TranslateMutiChoice> {
     String localFilePath;
     // audioCache.play('Karen.mp3');
     int result = await audioPlayer
-        .play('http://192.168.10.139:8000/static/sound/' + song);
+        .play('http://192.168.0.34:8000/static/sound/' + song);
   }
 
   @override
@@ -107,7 +107,7 @@ class _TranslateMutiChoiceState extends State<TranslateMutiChoice> {
                         ),
                         child: Column(
                           children: [
-                            Image.network('http://192.168.10.139:8000/static/sound/' + litems[index][1]!),
+                            Image.network('http://192.168.0.34:8000/static/sound/' + litems[index][1]!),
                             Padding(
                               padding: const EdgeInsets.only(top: 15),
                               child: Row(

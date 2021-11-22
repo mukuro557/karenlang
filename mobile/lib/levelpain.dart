@@ -30,7 +30,7 @@ class _LevelpainState extends State<Levelpain> {
     question = box.read('question');
     var id = box.read('id').toString();
     print(id);
-    var url = Uri.parse('http://192.168.0.106:8000/getanswer/' + id);
+    var url = Uri.parse('http://192.168.0.34:8000/getanswer/' + id);
     http.Response response = await http.get(url);
     setState(() {
       litems = jsonDecode(response.body);
@@ -44,7 +44,7 @@ class _LevelpainState extends State<Levelpain> {
     String localFilePath;
     // audioCache.play('Karen.mp3');
     int result = await audioPlayer
-        .play('http://192.168.0.106:8000/static/sound/' + song);
+        .play('http://192.168.0.34:8000/static/sound/' + song);
   }
 
   @override
