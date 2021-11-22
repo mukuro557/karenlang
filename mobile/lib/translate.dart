@@ -54,6 +54,8 @@ class _TranslateState extends State<Translate> {
       autocompltequ.add(testtext[i][0]);
     }
   }
+  
+  
 
   void rec() async {
     var url = Uri.parse('http://192.168.0.34:8000/recom');
@@ -96,8 +98,19 @@ class _TranslateState extends State<Translate> {
       box.write('sound', testtext[0][2]);
       Get.offAllNamed('/translatemutichoice');
     } else {
+      
       setState(() {
-        print(testtext[0][0]);
+        Get.snackbar(
+               "ไม่มีข้อมูล", // title
+               "ประโยคที่คุณค้นหาไม่มีในระบบ ลองใช้คำอื่น", // message
+              icon: Icon(Icons.not_interested_rounded), 
+              shouldIconPulse: true,
+              barBlur: 20,
+              isDismissible: true,
+              duration: Duration(seconds: 3),
+            );
+
+        print("hear");
       });
     }
   }
@@ -135,6 +148,7 @@ class _TranslateState extends State<Translate> {
     myController.dispose();
     super.dispose();
   }
+
 
   @override
   Widget build(BuildContext context) {
@@ -236,7 +250,7 @@ class _TranslateState extends State<Translate> {
                   ),
                   Container(
                     width: 380,
-                    height: 200,
+                    height: 300,
                     decoration: BoxDecoration(
                       color: Colors.white,
                       border: Border.all(color: Colors.grey),
@@ -251,7 +265,10 @@ class _TranslateState extends State<Translate> {
                             textFieldConfiguration: TextFieldConfiguration(
                                 controller: this.myController,
                                 maxLines: maxLines,
-                                decoration: InputDecoration(labelText: 'แตะเพื่อพิมพ์',border: InputBorder.none,)),
+                                decoration: InputDecoration(
+                                  labelText: 'แตะเพื่อพิมพ์',
+                                  border: InputBorder.none,
+                                )),
                             suggestionsCallback: (pattern) {
                               return CitiesService.getSuggestions(pattern);
                             },
@@ -284,7 +301,8 @@ class _TranslateState extends State<Translate> {
                             children: [
                               AvatarGlow(
                                 animate: _isListening,
-                                glowColor: _isListening ? Colors.white : Colors.teal,
+                                glowColor:
+                                    _isListening ? Colors.white : Colors.teal,
                                 endRadius: 20.0,
                                 duration: const Duration(milliseconds: 2000),
                                 repeatPauseDuration:
@@ -391,6 +409,8 @@ class _TranslateState extends State<Translate> {
           ),
         ),
       );
+
+      
 }
 
 class CitiesService {
@@ -402,3 +422,4 @@ class CitiesService {
     return matches;
   }
 }
+

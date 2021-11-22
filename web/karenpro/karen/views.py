@@ -290,7 +290,7 @@ def get_question(request, word):
                 count+=1
                 data.append([j.id, j.Type, j.Sound,j.Question],)
         if count ==0 :
-            data.append([''])
+            data.append(['',5])
         # y = json.loads(ques)
         list_to_json_array = json.dumps(data)
         choicework = usedquestion.objects.create(
