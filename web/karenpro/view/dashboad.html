@@ -19,13 +19,14 @@
                                         <div class="col mr-2">
                                             <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
                                                 คำศัพท์ทั้งหมด</div>
-                                                {% for word in allword %}
+                                                <div class="h5 mb-0 font-weight-bold text-gray-800">{{allword.0.1}}</div>
+                                                {% comment %} {% for word in allword %}
                                                     {% for ch in word %}        
                                                         
                                                             <div class="h5 mb-0 font-weight-bold text-gray-800">{{ch.Word_th}}</div>
                                                         
                                                     {% endfor %}
-                                                {% endfor %}
+                                                {% endfor %} {% endcomment %}
                                             
                                         </div>
                                     </div>
@@ -41,7 +42,7 @@
                                         <div class="col mr-2">
                                             <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
                                                 จำนวนประโยคถาม-ตอบ</div>
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800">20</div>
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{allword.0.2}}</div>
                                         </div>
                                         <div class="col-auto">
                                             <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
@@ -57,10 +58,10 @@
                                 <div class="card-body">
                                     <div class="row no-gutters align-items-center">
                                         <div class="col mr-2">
-                                            <div class="text-xs font-weight-bold text-info text-uppercase mb-1">จำนวนเสียงทั้งหมด
+                                            <div class="text-xs font-weight-bold text-info text-uppercase mb-1">จำนวนครั้งที่หาไม่เจอ
                                             </div>
                                             <div class="row no-gutters align-items-center">
-                                                <div class="h5 mb-0 font-weight-bold text-gray-800">100</div>
+                                                <div class="h5 mb-0 font-weight-bold text-gray-800">{{allword.0.3}}</div>
                                             <div class="col-auto">
                                             <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
                                         </div>    

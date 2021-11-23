@@ -25,10 +25,10 @@ def login(request):
 def dashboad(request):
     alldata = []
     data = usedquestion.objects.all().values('wordque','type','miss').annotate(total=Count('wordque')).order_by('-total')
-    countword = word.objects.all().values("Word_th").annotate(totals=Count('Word_th')).order_by('totals')
-    countques = questions.objects.all().values("Question").annotate(totalss=Count('Question')).order_by('totalss')
+    countword = word.objects.all().values('id','Word_th')
+    countques = questions.objects.all().values("Question")
     for i in data:
-        alldata.append([i,countword,countques])
+        alldata.append([i,len(countword),len(countques),len(data)])
     
     return render(request, 'dashboad.html' , {'allword': alldata})
 
