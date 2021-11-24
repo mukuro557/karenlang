@@ -3,7 +3,11 @@
 {% block content %}
 {% load static %}
 
+<script src="https://cdn.anychart.com/releases/8.10.0/js/anychart-core.min.js"></script>
+<script src="https://cdn.anychart.com/releases/8.10.0/js/anychart-pie.min.js"></script>
+<script src="https://cdn.anychart.com/releases/8.10.0/js/anychart-base.min.js"></script>
 <link href="{% static 'stylehome.css'%}" rel="stylesheet">
+
 
 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
             <h1 class="h2">หน้าหลัก</h1>
@@ -104,7 +108,7 @@
                         <div class="col-lg-4">
 
                             <!-- Background Gradient Utilities -->
-                            <div class="card shadow mb-4">
+                            {% comment %} <div class="card shadow mb-4">
                                 <div class="card-header py-3">
                                     <h6 class="m-0 font-weight-bold text-primary">คำที่ใช้บ่อย
                                     </h6>
@@ -118,8 +122,14 @@
                                         {% endfor %}
                                 {% endfor %}
                                 </div>
-                            </div>
-
+                            </div> {% endcomment %}
+                            <div class="card-header py-3">
+                                    <h6 class="m-0 font-weight-bold text-primary">คำที่ใช้บ่อย
+                                    </h6>
+                                </div>
+                                <div class="card-body">
+                                </div>
+                                <div id="container"></div>
                         </div>
 
                         <!-- Third Column -->
@@ -146,6 +156,38 @@
                         </div>
 
                     </div>
+<script>
+anychart.onDocumentReady(function () {
 
+    // create data
+    var data = [
+      {x: "คำที่ใช้บ่อยที่ไม่มีในระบบ", value: 60},
+      {x: "ประโยคที่ใช้บ่อย", value: 90},
+    ];
+
+    // create a pie chart and set the data
+    var chart = anychart.pie(data);
+
+    /* set the inner radius
+    (to turn the pie chart into a doughnut chart)*/
+    chart.innerRadius("30%");
+
+
+    // set the container id
+    chart.container("container");
+
+    // initiate drawing the chart
+    chart.draw();
+});
+</script>
+
+<style>
+html, body, #container {
+    width: 100%;
+    height: 30%;
+    margin: 0;
+    padding: 0;
+}
+</style>
 {% endblock%}
 
