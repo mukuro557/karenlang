@@ -65,7 +65,7 @@
                                             <div class="text-xs font-weight-bold text-info text-uppercase mb-1">จำนวนครั้งที่หาไม่เจอ
                                             </div>
                                             <div class="row no-gutters align-items-center">
-                                                <div class="h5 mb-0 font-weight-bold text-gray-800">{{allword.0.3}}</div>
+                                                <div class="h5 mb-0 font-weight-bold text-gray-800" id="notfound" value = "{{allword.0.3}}">{{allword.0.3}}</div>
                                             <div class="col-auto">
                                             <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
                                         </div>    
@@ -157,12 +157,13 @@
 
                     </div>
 <script>
-anychart.onDocumentReady(function () {
 
+anychart.onDocumentReady(function () {
+   
     // create data
     var data = [
-      {x: "คำที่ใช้บ่อยที่ไม่มีในระบบ", value: 60},
-      {x: "ประโยคที่ใช้บ่อย", value: 90},
+      {x: "คำที่ใช้บ่อยที่ไม่มีในระบบ", value: {{allword.0.3}}},
+      {x: "ประโยคที่ใช้บ่อย", value: {{allword.0.4}}},
     ];
 
     // create a pie chart and set the data

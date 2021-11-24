@@ -27,8 +27,11 @@ def dashboad(request):
     data = usedquestion.objects.all().values('wordque','type','miss').annotate(total=Count('wordque')).order_by('-total')
     countword = word.objects.all().values('id','Word_th')
     countques = questions.objects.all().values("Question")
+    countnotfound = usedquestion.objects.all().values('wordque','type','miss').filter(miss=1).count()
+    ata = usedquestion.objects.all().values('wordque','type','miss').filter(miss = 0).count()
+    print(countnotfound)
     for i in data:
-        alldata.append([i,len(countword),len(countques),len(data)])
+        alldata.append([i,len(countword),len(countques),countnotfound,ata])
     
     return render(request, 'dashboad.html' , {'allword': alldata})
 
