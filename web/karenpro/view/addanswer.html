@@ -3,7 +3,32 @@
 {% block content %}
 {% load static %}
 <link href="{% static 'addanswersty.css'%}" rel="stylesheet">
+<style>
 
+.column {
+    text-align: center;
+    float: left;
+    width: 35%;
+    padding: 10px;
+}
+.btn_delete {
+    width:70px;
+}
+.btn_edit {
+    width:70px;
+}
+.fixwidth {
+    width: 250px;
+}
+@media only screen and (max-width: 400px) {
+.column {
+    text-align: center;
+    float: left;
+    width: 135%;
+    padding: 10px;
+}
+}
+</style>
 <div class="row">
 
 
@@ -12,7 +37,7 @@
             class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
             <h1 class="h2">คำถาม-ตอบ</h1>
             <div class="btn-toolbar mb-2 mb-md-0">
-                <button id="add_but" type="button" class="btn btn-sm btn-outline-secondary" data-toggle="modal"
+                <button id="add_but" type="button" class="btn btn_edit" data-toggle="modal" style='background-color: #469D89;color:white'
                     data-target=".modal">
                     <span data-feather="plus"></span>
                     เพิ่ม
@@ -48,9 +73,15 @@
                         </audio>
                     </td>
                     <td>{{word.choice}}</td>
-                    <td> <button id="{{word.id}}" class='btn btn_edit' style='background-color: #A8DADC;color:white'
-                            target="{{word.question}}" data="{{word.choice}}"  data-toggle="modal" data-target=".modal" datatype = "{{word.type}}">แก้ไข</button>
-                        <form class="" action="/deleteques/{{word.id}}" method="POST">
+                    <td class = "fixwidth">
+                    <div class="row">
+                        <div class="column">
+                            <button id="{{word.id}}" class='btn btn_edit' style='background-color: #469D89;color:white'
+                                target="{{word.question}}" data="{{word.choice}}"  data-toggle="modal" data-target=".modal" datatype = "{{word.type}}">แก้ไข
+                                </button>
+                        </div>
+                        <div class="column">
+                            <form class="" action="/deleteques/{{word.id}}" method="POST">
                             {% csrf_token %}
                             <script LANGUAGE="JavaScript">
 
@@ -65,9 +96,11 @@
                             </script>
 
                             <button type="submit" id="deletebut" class='btn btn_delete' name="submit"
-                                style='background-color: #FFA69E;color:white' value="{{word.pk}}"
+                                style='background-color: #DC143C;color:white' value="{{word.pk}}"
                                 onclick="return confirmSubmit('{{word.Word_th}}')">ลบ</button>
                         </form>
+                        </div>
+                        </div>
                     </td>
 
                 </tr>
