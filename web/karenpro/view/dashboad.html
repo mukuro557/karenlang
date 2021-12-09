@@ -7,10 +7,15 @@
 <script src="https://cdn.anychart.com/releases/8.10.0/js/anychart-pie.min.js"></script>
 <script src="https://cdn.anychart.com/releases/8.10.0/js/anychart-base.min.js"></script>
 <link href="{% static 'stylehome.css'%}" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.gstatic.com">
+	<link rel="shortcut icon" href="img/icons/icon-48x48.png" />
+
+	<link rel="canonical" href="https://demo-basic.adminkit.io/" />
 
 
 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-            <h1 class="h2">หน้าหลัก</h1>
+            <h1 class="h2">แดชบอร์ด</h1>
             <div class="btn-toolbar mb-2 mb-md-0">
             </div>
 </div>
@@ -80,11 +85,34 @@
                         </div>
                     </div>
 
+                    <div class="row">
+                        <div class="col-md-8">
+                         <div class="card shadow mb-4">
+                            <div class="card-header py-3">
+                                <h6 class="m-0 font-weight-bold text-primary">คำที่ใช้บ่อย</h6>
+                            </div>
+                            <div class="card-body">
+                          <div id="chartdiv"></div>
+                          </div>  
+                        </div>   
+                        </div>
+                        <div class="col-md-4">
+                            <div class="card shadow mb-4">
+                                <div class="card-header py-3">
+                                    <h6 class="m-0 font-weight-bold text-primary">ภาพรวม</h6>
+                                </div>
+                                <div class="card-body">
+                                <div id="container"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                  <!-- Content Row -->
                     <div class="row">
 
                         <!-- First Column -->
-                        <div class="col-lg-4">
+                        <div class="col-lg-6">
 
                             <!-- Custom Text Color Utilities -->
                             <div class="card shadow mb-4">
@@ -104,19 +132,8 @@
 
                         </div>
 
-                        <!-- Second Column -->
-                        <div class="col-lg-4">
-                            <div class="card-header py-3">
-                                    <h6 class="m-0 font-weight-bold text-primary">ภาพรวม
-                                    </h6>
-                                </div>
-                                <div class="card-body">
-                                </div>
-                                <div id="container"></div>
-                        </div>
-
                         <!-- Third Column -->
-                        <div class="col-lg-4">
+                        <div class="col-lg-6">
 
                             <!-- Grayscale Utilities -->
                             <div class="card shadow mb-4">
@@ -168,10 +185,151 @@ anychart.onDocumentReady(function () {
 <style>
 html, body, #container {
     width: 100%;
-    height: 30%;
+    height: 500px;
     margin: 0;
     padding: 0;
 }
+
 </style>
+<style>
+    #chartdiv {
+      width: 100%;
+      height: 500px;
+    }
+    </style>
+    
+    <!-- Resources -->
+    <script src="https://cdn.amcharts.com/lib/5/index.js"></script>
+    <script src="https://cdn.amcharts.com/lib/5/xy.js"></script>
+    <script src="https://cdn.amcharts.com/lib/5/themes/Animated.js"></script>
+    
+    <!-- Chart code -->
+    <script>
+    am5.ready(function() {
+    
+    // Create root element
+    // https://www.amcharts.com/docs/v5/getting-started/#Root_element
+    var root = am5.Root.new("chartdiv");
+    
+    
+    // Set themes
+    // https://www.amcharts.com/docs/v5/concepts/themes/
+    root.setThemes([
+      am5themes_Animated.new(root)
+    ]);
+    
+    
+    // Create chart
+    // https://www.amcharts.com/docs/v5/charts/xy-chart/
+    var chart = root.container.children.push(am5xy.XYChart.new(root, {
+      panX: true,
+      panY: true,
+      wheelX: "panX",
+      wheelY: "zoomX"
+    }));
+    
+    // Add cursor
+    // https://www.amcharts.com/docs/v5/charts/xy-chart/cursor/
+    var cursor = chart.set("cursor", am5xy.XYCursor.new(root, {}));
+    cursor.lineY.set("visible", false);
+    
+    
+    // Create axes
+    // https://www.amcharts.com/docs/v5/charts/xy-chart/axes/
+    var xRenderer = am5xy.AxisRendererX.new(root, { minGridDistance: 30 });
+    xRenderer.labels.template.setAll({
+      rotation: -90,
+      centerY: am5.p50,
+      centerX: am5.p100,
+      paddingRight: 15
+    });
+    
+    var xAxis = chart.xAxes.push(am5xy.CategoryAxis.new(root, {
+      maxDeviation: 0.3,
+      categoryField: "country",
+      renderer: xRenderer,
+      tooltip: am5.Tooltip.new(root, {})
+    }));
+    
+    var yAxis = chart.yAxes.push(am5xy.ValueAxis.new(root, {
+      maxDeviation: 0.3,
+      renderer: am5xy.AxisRendererY.new(root, {})
+    }));
+    
+    
+    // Create series
+    // https://www.amcharts.com/docs/v5/charts/xy-chart/series/
+    var series = chart.series.push(am5xy.ColumnSeries.new(root, {
+      name: "Series 1",
+      xAxis: xAxis,
+      yAxis: yAxis,
+      valueYField: "value",
+      sequencedInterpolation: true,
+      categoryXField: "country",
+      tooltip: am5.Tooltip.new(root, {
+        labelText:"{valueY}"
+      })
+    }));
+    
+    series.columns.template.setAll({ cornerRadiusTL: 5, cornerRadiusTR: 5 });
+    series.columns.template.adapters.add("fill", (fill, target) => {
+      return chart.get("colors").getIndex(series.columns.indexOf(target));
+    });
+    
+    series.columns.template.adapters.add("stroke", (stroke, target) => {
+      return chart.get("colors").getIndex(series.columns.indexOf(target));
+    });
+    
+    
+    // Set data
+    var data = [{
+      country: "เป็นไรมา",
+      value: 10
+    }, {
+      country: "ระดับ",
+      value: 20
+    }, {
+      country: "อาการที่มาหาหมอ",
+      value: 40
+    }, {
+      country: "ทำไหม",
+      value: 30
+    }, {
+      country: "ขอบัตรประชาชน",
+      value: 60
+    }, {
+      country: "ระด",
+      value: 50
+    }, {
+      country: "ปวดมือมั้ย",
+      value: 70
+    }, {
+      country: "เจ็บ",
+      value: 80
+    }, {
+      country: "ปวดคอ",
+      value: 90
+    }, {
+      country: "เล่นอะไร",
+      value: 100
+    }, {
+      country: "ขอดูขาหน่อย",
+      value: 65
+    }, {
+      country: "เจ็บป่",
+      value: 43
+    }];
+    
+    xAxis.data.setAll(data);
+    series.data.setAll(data);
+    
+    
+    // Make stuff animate on load
+    // https://www.amcharts.com/docs/v5/concepts/animations/
+    series.appear(100);
+    chart.appear(100, 10);
+    
+    }); // end am5.ready()
+    </script>
 {% endblock%}
 
