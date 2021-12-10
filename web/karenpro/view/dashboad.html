@@ -142,15 +142,14 @@
                                     </h6>
                                 </div>
                                 <div class="card-body">
-                                
                                     {% for word in allword %}
                                         {% for ch in word %}
-                                            
                                             {% if ch.type == 1 and ch.miss == 1 %}
                                             <p class="text-gray-900 p-3 m-0">{{ch.wordque}}</p>
                                             {% endif %}
                                         {% endfor %}
                                     {% endfor %}
+
                                 </div>
                             </div>
                         </div>
@@ -255,6 +254,7 @@ html, body, #container {
       maxDeviation: 0.3,
       renderer: am5xy.AxisRendererY.new(root, {})
     }));
+    //var test = {{allword}}
     
     
     // Create series
@@ -280,45 +280,21 @@ html, body, #container {
       return chart.get("colors").getIndex(series.columns.indexOf(target));
     });
     
-    
     // Set data
-    var data = [{
-      country: "เป็นไรมา",
-      value: 10
-    }, {
-      country: "ระดับ",
-      value: 20
-    }, {
-      country: "อาการที่มาหาหมอ",
-      value: 40
-    }, {
-      country: "ทำไหม",
-      value: 30
-    }, {
-      country: "ขอบัตรประชาชน",
-      value: 60
-    }, {
-      country: "ระด",
-      value: 50
-    }, {
-      country: "ปวดมือมั้ย",
-      value: 70
-    }, {
-      country: "เจ็บ",
-      value: 80
-    }, {
-      country: "ปวดคอ",
-      value: 90
-    }, {
-      country: "เล่นอะไร",
-      value: 100
-    }, {
-      country: "ขอดูขาหน่อย",
-      value: 65
-    }, {
-      country: "เจ็บป่",
-      value: 43
-    }];
+    var data = [];
+    var number = 0;
+    {% for word in allword %}
+        {% for ch in word %}
+          {% if ch.type == 1 and ch.miss == 1 %}
+            
+            number++
+            if (number <11){
+              data.push({country: "{{ch.wordque}}",value:{{ch.total}}})
+              
+              }
+          {% endif %}
+        {% endfor %}
+    {% endfor %}
     
     xAxis.data.setAll(data);
     series.data.setAll(data);
