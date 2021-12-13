@@ -25,14 +25,14 @@ class _TranslatechoiceState extends State<Translatechoice> {
     // TODO: implement initState
     super.initState();
     getquestion();
-    playstart();
+    
   }
 
   void getquestion() async {
     final box = GetStorage();
     question = box.read('question');
     var id = box.read('id').toString();
-    var url = Uri.parse('http://192.168.0.34:8000/getanswer/' + id);
+    var url = Uri.parse('http://192.168.1.228:8000/getanswer/' + id);
     http.Response response = await http.get(url);
     setState(() {
       litems = jsonDecode(response.body);
@@ -49,7 +49,12 @@ class _TranslatechoiceState extends State<Translatechoice> {
     String localFilePath;
     // audioCache.play('Karen.mp3');
     int result = await audioPlayer
-        .play('http://192.168.0.34:8000/static/sound/' + song);
+        .play('http://192.168.1.228:8000/static/sound/' + song);
+        playstart();
+     audioPlayer.onPlayerCompletion.listen((event) {
+    playstart();
+
+  });
   }
 
   void playstart() async {
@@ -59,7 +64,7 @@ class _TranslatechoiceState extends State<Translatechoice> {
     String localFilePath;
     // audioCache.play('Karen.mp3');
     int result = await audioPlayer
-        .play('http://192.168.0.34:8000/static/sound/karen.mp3');
+        .play('http://192.168.1.228:8000/static/sound/karen.mp3');
   }
 
   @override

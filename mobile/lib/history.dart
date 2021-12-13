@@ -16,7 +16,7 @@ class _HistoryState extends State<History> {
   var items = [];
 
   void rec() async {
-    var url = Uri.parse('http://192.168.0.34:8000/history');
+    var url = Uri.parse('http://192.168.1.228:8000/history');
     http.Response response = await http.get(url);
     testtext = jsonDecode(response.body);
     items = [];

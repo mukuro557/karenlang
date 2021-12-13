@@ -20,7 +20,7 @@ class _ResultschoiceState extends State<Resultschoice> {
     // TODO: implement initState
     super.initState();
     getquestion();
-    playstart();
+    // playstart();
   }
 
   void getquestion() {
@@ -37,7 +37,15 @@ class _ResultschoiceState extends State<Resultschoice> {
     String localFilePath;
     // audioCache.play('Karen.mp3');
     int result = await audioPlayer
-        .play('http://192.168.0.34:8000/static/sound/' + _sound);
+        .play('http://192.168.1.228:8000/static/sound/' + _sound);
+    audioPlayer.onPlayerCompletion.listen((event) {
+    playstart();
+
+  });
+//         if(result == 1){
+// 
+//         }
+        
   }
 
   void playstart() async {
@@ -47,7 +55,7 @@ class _ResultschoiceState extends State<Resultschoice> {
     String localFilePath;
     // audioCache.play('Karen.mp3');
     int result = await audioPlayer
-        .play('http://192.168.0.34:8000/static/sound/karen.mp3');
+        .play('http://192.168.1.228:8000/static/sound/health.mp3');
   }
 
   @override

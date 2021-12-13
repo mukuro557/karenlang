@@ -46,7 +46,7 @@ class _TranslateState extends State<Translate> {
   }
 
   void allques() async {
-    var url = Uri.parse('http://192.168.10.139:8000/allques');
+    var url = Uri.parse('http://192.168.1.228:8000/allques');
     http.Response response = await http.get(url);
     testtext = jsonDecode(response.body);
     autocompltequ = [];
@@ -54,11 +54,9 @@ class _TranslateState extends State<Translate> {
       autocompltequ.add(testtext[i][0]);
     }
   }
-  
-  
 
   void rec() async {
-    var url = Uri.parse('http://192.168.10.139:8000/recom');
+    var url = Uri.parse('http://192.168.1.228:8000/recom');
     http.Response response = await http.get(url);
     testtext = jsonDecode(response.body);
     items = [];
@@ -73,44 +71,73 @@ class _TranslateState extends State<Translate> {
 
   void jumppage() async {
     final box = GetStorage();
-    var url = Uri.parse('http://192.168.10.139:8000/getquestion/' + question);
+    var url = Uri.parse('http://192.168.1.228:8000/getquestion/' + question);
 
     http.Response response = await http.get(url);
     testtext = jsonDecode(response.body);
     var number = testtext[0][1];
     box.write('id', testtext[0][0]);
-    
-    print(number);
-    if (number == 0) {
-      box.write('question', testtext[0][3]);
-      box.write('sound', testtext[0][2]);
-      Get.offAllNamed('/resultschoice');
-    } else if (number == 1) {
-      box.write('question', testtext[0][3]);
-      box.write('sound', testtext[0][2]);
-      Get.offAllNamed('/levelpain');
-    } else if (number == 2) {
-      box.write('question', testtext[0][3]);
-      box.write('sound', testtext[0][2]);
-      Get.offNamed('/translatechoice');
-    } else if (number == 3) {
-      box.write('question', testtext[0][3]);
-      box.write('sound', testtext[0][2]);
-      Get.offAllNamed('/translatemutichoice');
-    } else {
-      
+    var find = testtext[0][4];
+    if (find == 1) {
+      if (number == 0) {
+        box.write('question', testtext[0][3]);
+        box.write('sound', testtext[0][2]);
+        Get.offAllNamed('/resultschoice');
+      } else if (number == 1) {
+        box.write('question', testtext[0][3]);
+        box.write('sound', testtext[0][2]);
+        Get.offAllNamed('/levelpain');
+      } else if (number == 2) {
+        box.write('question', testtext[0][3]);
+        box.write('sound', testtext[0][2]);
+        Get.offNamed('/translatechoice');
+      } else if (number == 3) {
+        box.write('question', testtext[0][3]);
+        box.write('sound', testtext[0][2]);
+        Get.offAllNamed('/translatemutichoice');
+      }
+    } else if (find == 0) {
       setState(() {
         Get.snackbar(
-               "ไม่มีข้อมูล", // title
-               "ประโยคที่คุณค้นหาไม่มีในระบบ ลองใช้คำอื่น", // message
-              icon: Icon(Icons.not_interested_rounded), 
-              shouldIconPulse: true,
-              barBlur: 20,
-              isDismissible: true,
-              duration: Duration(seconds: 3),
-            );
-
-        print("hear");
+          "กดเพื่อค้นหา", // title
+          "กดเพื่อค้นหาคำว่า ${testtext[0][3]}? แทน", // message
+          icon: Icon(Icons.not_interested_rounded),
+          shouldIconPulse: true,
+          barBlur: 20,
+          isDismissible: true,
+          onTap: (snack) {
+            if (number == 0) {
+              box.write('question', testtext[0][3]);
+              box.write('sound', testtext[0][2]);
+              Get.offAllNamed('/resultschoice');
+            } else if (number == 1) {
+              box.write('question', testtext[0][3]);
+              box.write('sound', testtext[0][2]);
+              Get.offAllNamed('/levelpain');
+            } else if (number == 2) {
+              box.write('question', testtext[0][3]);
+              box.write('sound', testtext[0][2]);
+              Get.offNamed('/translatechoice');
+            } else if (number == 3) {
+              box.write('question', testtext[0][3]);
+              box.write('sound', testtext[0][2]);
+              Get.offAllNamed('/translatemutichoice');
+            }
+          },
+          duration: Duration(seconds: 5),
+        );
+      });
+    } else {
+      setState(() {
+        Get.snackbar(
+          "ไม่มีข้อมูล", // title
+          "ประโยคที่คุณค้นหาไม่มีในระบบ ลองใช้คำอื่น", // message
+          icon: Icon(Icons.not_interested_rounded),
+          shouldIconPulse: true,
+          barBlur: 20,
+          isDismissible: true,
+          duration: Duration(seconds: 3),
+        );
       });
     }
   }
@@ -149,14 +176,13 @@ class _TranslateState extends State<Translate> {
     super.dispose();
   }
 
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         // floatingActionButtonLocation: FloatingActionButtonLocation,
         body: SingleChildScrollView(
-          child: Stack(
-              children: <Widget>[
+      child: Stack(
+        children: <Widget>[
           Container(
             // First child (child 1)
             width: 580,
@@ -249,7 +275,6 @@ class _TranslateState extends State<Translate> {
                     SizedBox(
                       height: 15,
                     ),
-                    
                     Container(
                       width: 380,
                       decoration: BoxDecoration(
@@ -294,7 +319,6 @@ class _TranslateState extends State<Translate> {
                                   this.myController.text = value.toString(),
                             ),
                           ),
-                    
                           Icon(Icons.cancel),
                           Padding(
                             padding: const EdgeInsets.only(left: 15),
@@ -358,7 +382,8 @@ class _TranslateState extends State<Translate> {
                       child: Text(
                         'คำที่ใช้บ่อย',
                         style: TextStyle(
-                            fontWeight: FontWeight.bold, color: Colors.teal[700]),
+                            fontWeight: FontWeight.bold,
+                            color: Colors.teal[700]),
                       ),
                     ),
                     SizedBox(
@@ -393,9 +418,9 @@ class _TranslateState extends State<Translate> {
               ],
             ),
           ),
-              ],
-            ),
-        ));
+        ],
+      ),
+    ));
   }
 
   DropdownMenuItem<String> buildMenuItem(String item) => DropdownMenuItem(
@@ -411,8 +436,6 @@ class _TranslateState extends State<Translate> {
           ),
         ),
       );
-
-      
 }
 
 class CitiesService {
@@ -424,4 +447,3 @@ class CitiesService {
     return matches;
   }
 }
-

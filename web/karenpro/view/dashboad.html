@@ -285,7 +285,7 @@ html, body, #container {
     var number = 0;
     {% for word in allword %}
         {% for ch in word %}
-          {% if ch.type == 1 and ch.miss == 1 %}
+          {% if ch.type == 1 and ch.miss == 0 %}
             
             number++
             if (number <11){
