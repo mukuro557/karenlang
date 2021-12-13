@@ -20,6 +20,7 @@ class _ResultschoiceState extends State<Resultschoice> {
     // TODO: implement initState
     super.initState();
     getquestion();
+    playstart();
   }
 
   void getquestion() {
@@ -35,8 +36,18 @@ class _ResultschoiceState extends State<Resultschoice> {
     AudioPlayer advancedPlayer = new AudioPlayer();
     String localFilePath;
     // audioCache.play('Karen.mp3');
-    int result =
-        await audioPlayer.play('http://192.168.0.34:8000/static/sound/' + _sound);
+    int result = await audioPlayer
+        .play('http://192.168.0.34:8000/static/sound/' + _sound);
+  }
+
+  void playstart() async {
+    AudioPlayer audioPlayer = AudioPlayer();
+    AudioCache audioCache = new AudioCache();
+    AudioPlayer advancedPlayer = new AudioPlayer();
+    String localFilePath;
+    // audioCache.play('Karen.mp3');
+    int result = await audioPlayer
+        .play('http://192.168.0.34:8000/static/sound/karen.mp3');
   }
 
   @override
@@ -90,96 +101,96 @@ class _ResultschoiceState extends State<Resultschoice> {
                   ],
                 ),
                 Column(
-              children: [
-                Container(
-                    width: 380,
-                    height: 40,
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      border: Border.all(color: Colors.white),
-                      borderRadius: BorderRadius.all(Radius.circular(5)),
-                    ),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(
-                          'ไทย',
-                          style: TextStyle(
-                              fontSize: 10,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.teal[700]),
-                        ),
-                        SizedBox(
-                          width: 70,
-                        ),
-                        Icon(
-                          Icons.arrow_forward,
-                          color: Colors.teal[700],
-                          size: 20,
-                        ),
-                        SizedBox(
-                          width: 70,
-                        ),
-                        Text(
-                          'กระเหรี่ยง',
-                          style: TextStyle(
-                              fontSize: 10,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.teal[700]),
-                        )
-                      ],
-                    ),
-                  ),
-                SizedBox(
-                  height: 15,
-                ),
-                Container(
-                  width: 390,
-                  height: 200,
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    border: Border.all(color: Colors.white),
-                    borderRadius: BorderRadius.all(Radius.circular(20)),
-                  ),
-                  child: Column(
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.only(top: 30, left: 20),
-                        child: Container(
-                          width: 350,
-                          height: 100,
-                          child: Text(
-                            question,
-                            style: TextStyle(color: Colors.teal[700], fontSize: 20),
-                          ),
-                        ),
+                  children: [
+                    Container(
+                      width: 380,
+                      height: 40,
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        border: Border.all(color: Colors.white),
+                        borderRadius: BorderRadius.all(Radius.circular(5)),
                       ),
-                      Row(
+                      child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          CircleAvatar(
-                            backgroundColor: Colors.teal[700],
-                            radius: 20,
-                            child: IconButton(
-                              padding: EdgeInsets.zero,
-                              icon: Icon(Icons.volume_up),
-                              color: Colors.white,
-                              onPressed: () {
-                                playmp3();
-                              },
+                          Text(
+                            'ไทย',
+                            style: TextStyle(
+                                fontSize: 10,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.teal[700]),
+                          ),
+                          SizedBox(
+                            width: 70,
+                          ),
+                          Icon(
+                            Icons.arrow_forward,
+                            color: Colors.teal[700],
+                            size: 20,
+                          ),
+                          SizedBox(
+                            width: 70,
+                          ),
+                          Text(
+                            'กระเหรี่ยง',
+                            style: TextStyle(
+                                fontSize: 10,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.teal[700]),
+                          )
+                        ],
+                      ),
+                    ),
+                    SizedBox(
+                      height: 15,
+                    ),
+                    Container(
+                      width: 390,
+                      height: 200,
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        border: Border.all(color: Colors.white),
+                        borderRadius: BorderRadius.all(Radius.circular(20)),
+                      ),
+                      child: Column(
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.only(top: 30, left: 20),
+                            child: Container(
+                              width: 350,
+                              height: 100,
+                              child: Text(
+                                question,
+                                style: TextStyle(
+                                    color: Colors.teal[700], fontSize: 20),
+                              ),
                             ),
                           ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              CircleAvatar(
+                                backgroundColor: Colors.teal[700],
+                                radius: 20,
+                                child: IconButton(
+                                  padding: EdgeInsets.zero,
+                                  icon: Icon(Icons.volume_up),
+                                  color: Colors.white,
+                                  onPressed: () {
+                                    playmp3();
+                                  },
+                                ),
+                              ),
+                            ],
+                          )
                         ],
-                      )
-                    ],
-                  ),
+                      ),
+                    ),
+                  ],
                 ),
-              ],
-            ),
               ],
             ),
           ),
-          
         ],
       ),
     );

@@ -25,6 +25,7 @@ class _TranslatechoiceState extends State<Translatechoice> {
     // TODO: implement initState
     super.initState();
     getquestion();
+    playstart();
   }
 
   void getquestion() async {
@@ -49,6 +50,16 @@ class _TranslatechoiceState extends State<Translatechoice> {
     // audioCache.play('Karen.mp3');
     int result = await audioPlayer
         .play('http://192.168.0.34:8000/static/sound/' + song);
+  }
+
+  void playstart() async {
+    AudioPlayer audioPlayer = AudioPlayer();
+    AudioCache audioCache = new AudioCache();
+    AudioPlayer advancedPlayer = new AudioPlayer();
+    String localFilePath;
+    // audioCache.play('Karen.mp3');
+    int result = await audioPlayer
+        .play('http://192.168.0.34:8000/static/sound/karen.mp3');
   }
 
   @override
