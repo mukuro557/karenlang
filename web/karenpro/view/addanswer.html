@@ -320,7 +320,7 @@
                     var y = document.getElementById(this.id).getAttribute("data-target");
                     var audio = document.getElementById(y);
                     audio.currentTime = 0;
-                    alert(y)
+                
                     $('#sound').remove();
                     document.getElementById(y).innerHTML += '<source id="sound" src="/static/sound/' + y + '" type="audio/mpeg">';
                     audio.play();
