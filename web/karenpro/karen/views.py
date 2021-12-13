@@ -172,7 +172,7 @@ def addquestion(request, number , type):
 
         else:
             question_thai = questions.objects.create(
-                Question=word_th, Sound=uploaded_file_url,Type = type)
+                Question=word_th, Sound=filenameQ,Type = type)
             question_thai.save()
             data = questions.objects.all()
             
