@@ -39,6 +39,7 @@ urlpatterns = [
     path('allques', views.get_allquestion),
     path('recom', views.get_recommen),
     path('history', views.get_history),
+    path('adduser',views.adduser)
 
 
 

@@ -22,6 +22,7 @@ dataSet = [
 def login(request):
     return render(request, 'login.html')
 
+@login_required(login_url="/")
 def dashboad(request):
     alldata = []
     data = usedquestion.objects.all().values('wordque','type','miss').annotate(total=Count('wordque')).order_by('-total')
@@ -35,13 +36,13 @@ def dashboad(request):
     
     return render(request, 'dashboad.html' , {'allword': alldata})
 
-# @login_required(login_url="/")
+@login_required(login_url="/")
 def mainpage(request):
     data = word.objects.all()
 
     return render(request, 'mainpage.html', {'allword': data})
 
-# @login_required(login_url="/")
+@login_required(login_url="/")
 def addanswer(request):
     dataSet.clear()
     ques = questions.objects.all()
@@ -64,7 +65,7 @@ def addanswer(request):
 def username_pass(request):
     username = request.POST['username']
     password = request.POST['password']
-
+    print(username)
     user = auth.authenticate(username=username, password=password)
 
     if user is not None:

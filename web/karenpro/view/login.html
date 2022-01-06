@@ -70,27 +70,26 @@
                                     <img src="{% static 'image/login.png'%}" style="width: 90px;" alt="" class="center">
                                         <h1 class="h4 text-gray-900 mb-4">ภาษากระเหรี่ยงสำหรับกายภาพ</h1>
                                     </div>
-                                    <form class="user" >
+                                    <form action="username_pass" method="POST">
+                                        {% csrf_token %}
                                         <div class="form-group">
-                                            <input type="email" class="form-control form-control-user"
-                                                id="exampleInputEmail" aria-describedby="emailHelp"
-                                                placeholder="Enter Email Address...">
+                                            <input type="text" class="form-control form-control-user"
+                                                id="exampleInputEmail" 
+                                                placeholder="ชื่อผู้ใช้" name="username">
                                         </div>
                                         <div class="form-group">
                                             <input type="password" class="form-control form-control-user"
-                                                id="exampleInputPassword" placeholder="Password">
+                                                id="exampleInputPassword" placeholder="รหัสผ่าน" name="password">
                                         </div>
                                         <div class="form-group">
-                                            <div class="custom-control custom-checkbox small">
-                                                <input type="checkbox" class="custom-control-input" id="customCheck">
-                                                <label class="custom-control-label" for="customCheck">Remember
-                                                    Me</label>
-                                            </div>
+                                            
                                         </div>
-                                        <a href="/dashboad" class="btn btn-user btn-block" style="background-color:#26A69A">
-                                            Login
-                                        </a>
-                                        
+                                        <input type="submit" class="btn btn-block" style="background-color:#26A69A;color:white" value="เข้าสู่ระบบ">
+                                            
+                                    </input>
+                                    {% if user == 'nouser'%}
+                                        <h3 class="h3 mb-3 fw-normal">ไม่พบผู้ใช้</h4>
+                                    {%endif%}
                                     </form>
                                     
                                 </div>
